@@ -2,22 +2,17 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Web;
+using Gopher.Model.Domain;
 
 namespace Gopher.Models
 {
-    public class UserItem
-    {
-        public string Name { get; set; }
-        public string Id { get; set; }
-    }
-
     public class UserListViewModel
     {
-        public IEnumerable<UserItem> Users { get; set; }
+        public IEnumerable<User> Users { get; set; }
 
         public UserListViewModel()
         {
-            Users = new List<UserItem>();
+            Users = new List<User>();
         }
     }
 }

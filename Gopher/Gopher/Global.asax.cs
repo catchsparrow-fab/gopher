@@ -5,6 +5,7 @@ using System.Web;
 using System.Web.Mvc;
 using System.Web.Optimization;
 using System.Web.Routing;
+using Gopher.Model.Tools;
 using Gopher.Tools;
 
 namespace Gopher
@@ -19,7 +20,7 @@ namespace Gopher
             BundleConfig.RegisterBundles(BundleTable.Bundles);
 
             NinjectDependencyResolver resolver = new NinjectDependencyResolver();
-            resolver.Load(new DefaultGopherModule());
+            resolver.Load(new DefaultGopherModule(), new GopherModelModule());
             DependencyResolver.SetResolver(resolver);
 
         }

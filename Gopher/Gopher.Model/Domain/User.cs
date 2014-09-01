@@ -10,6 +10,8 @@ namespace Gopher.Model.Domain
 {
     public class User : IPersistent
     {
+        public string Name { get; set; }
+
         public void Init(IDataReader reader)
         {
         }

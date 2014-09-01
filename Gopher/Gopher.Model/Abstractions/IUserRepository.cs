@@ -1,6 +1,9 @@
-﻿namespace Gopher.Model.Abstractions
+﻿using Gopher.Model.Abstractions.Core;
+using Gopher.Model.Domain;
+
+namespace Gopher.Model.Abstractions
 {
-    public interface IUserRepository
+    public interface IUserRepository : IRepository<User>
     {
     }
 }
