@@ -1,0 +1,12 @@
+﻿
+@{
+    ViewBag.Title = "Users";
+}
+@model Gopher.Models.UserListViewModel
+<h1 class="page-header">@ViewBag.Title</h1>
+
+@if (Model.Users.Any()) {
+    @Html.Partial("_UserListPartial", Model.Users)
+} else {
+    <p>No users in the system.</p>
+}

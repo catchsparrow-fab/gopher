@@ -22,11 +22,11 @@
                 @if (User.Identity.IsAuthenticated)
                 {
                     <ul class="nav navbar-nav">
-                        <li>@Html.ActionLink("Customer search", "Index", "Home")</li>
-                        <li>@Html.ActionLink("Reports", "Reports", "Home")</li>
-                        <li>@Html.ActionLink("Import", "Import", "Home")</li>
+                        <li>@Html.ActionLink("Customer search", "Index", "Home", new { area = string.Empty }, null)</li>
+                        <li>@Html.ActionLink("Reports", "Reports", "Home", new { area = string.Empty }, null)</li>
+                        <li>@Html.ActionLink("Import", "Import", "Home", new { area = string.Empty }, null)</li>
                         @if (User.IsInRole("Admin")) {
-                            <li>@Html.ActionLink("Setup", "Users", "Admin")</li>
+                            <li>@Html.ActionLink("Setup", "Index", "Users", new { area = "Admin" }, null)</li>
                         }
                     </ul>
                 }

@@ -1,0 +1,23 @@
+﻿@{
+    ViewBag.Title = "System administration";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<div class="row">
+    <div class="col-sm-3 col-md-2 sidebar">
+        <ul class="nav nav-sidebar">
+            <li class="@(ViewBag.ActiveTab == "users" ? "active" : string.Empty)">
+                @Html.ActionLink("Users", "Index", "Users")
+            </li>
+            <li class="@(ViewBag.ActiveTab == "codes" ? "active" : string.Empty)">
+                @Html.ActionLink("Codes", "Index", "Codes")
+            </li>
+        </ul>
+    </div>
+    <div class="col-sm-9 col-sm-offset-3 col-md-10 col-md-offset-2 main">
+        <div>
+            @RenderBody()
+        </div>
+    </div>
+</div>
+
