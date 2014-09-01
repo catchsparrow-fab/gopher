@@ -21,7 +21,15 @@ namespace Gopher.Controllers
                               Name = user.UserName
                           };
 
+            ViewBag.ActiveTab = "users";
+
             return View(model);
+        }
+
+        public ActionResult Codes()
+        {
+            ViewBag.ActiveTab = "codes";
+            return View();
         }
     }
 }

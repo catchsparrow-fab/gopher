@@ -25,7 +25,9 @@
                         <li>@Html.ActionLink("Customer search", "Index", "Home")</li>
                         <li>@Html.ActionLink("Reports", "Reports", "Home")</li>
                         <li>@Html.ActionLink("Import", "Import", "Home")</li>
-                        <li>@Html.ActionLink("Setup", "Users", "Admin")</li>
+                        @if (User.IsInRole("Admin")) {
+                            <li>@Html.ActionLink("Setup", "Users", "Admin")</li>
+                        }
                     </ul>
                 }
                 @Html.Partial("_LoginPartial")
