@@ -171,6 +171,10 @@
     <Compile Include="Models\IdentityModels.cs" />
     <Compile Include="Models\UserListViewModel.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Repositories\Core\IListRepository.cs" />
+    <Compile Include="Repositories\Core\IRepository.cs" />
+    <Compile Include="Repositories\Core\ISingleItemRepository.cs" />
+    <Compile Include="Repositories\IUserRepository.cs" />
     <Compile Include="Startup.cs" />
     <Compile Include="Tools\DefaultGopherModule.cs" />
     <Compile Include="Tools\NinjectDependencyResolver.cs" />
@@ -232,7 +236,6 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
-    <Folder Include="Repositories\" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="fonts\glyphicons-halflings-regular.woff" />
