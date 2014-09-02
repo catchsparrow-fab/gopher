@@ -23,18 +23,34 @@ namespace Gopher.Model.Repositories
             throw new NotImplementedException();
         }
 
-        public void Delete(int id)
+        public void Delete(string id)
         {
             throw new NotImplementedException();
         }
 
+        public User GetSingle(string id)
+        {
+            var user = context.Users.SingleOrDefault(i => i.Id == id);
+            if (user == null) return null;
+
+            return FromEntityFramework(user);
+        }
+
+        private static User FromEntityFramework(ApplicationUser user)
+        {
+            return new User()
+            {
+                Name = user.UserName,
+                IsAdmin = user.Roles.Any(item => item.Role.Name.ToLower() == "admin"),
+                Id = user.Id
+            };
+        }
+
         public IEnumerable<User> GetAll()
         {
-            return from user in context.Users
-                   select new User()
-                   {
-                       Name = user.UserName
-                   };
+            var collection = context.Users.ToList();
+            return from user in collection
+                   select FromEntityFramework(user);
         }
     }
 }

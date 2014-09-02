@@ -12,7 +12,7 @@
             {
                 <tr>
                     <td>
-                        @item.Name
+                        @Html.ActionLink(item.Name, "Edit", "Users", new { id = item.Id }, null)
                     </td>
                 </tr>
             }

@@ -1,6 +1,7 @@
 ﻿namespace Gopher.Model.Abstractions.Core
 {
-    public interface IRepository<T> : ISingleItemRepository<T>, IListRepository<T>
+    public interface IRepository<TItem, TKey> : 
+        ISingleItemRepository<TItem, TKey>, IListRepository<TItem>
     {
     }
 }

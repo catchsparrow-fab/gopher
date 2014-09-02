@@ -1,0 +1,35 @@
+﻿@model Gopher.Model.Domain.User
+
+@{
+    ViewBag.Title = "Details";
+}
+
+<h1 class="page-header">Edit user @Model.Name</h1>
+
+@using (Html.BeginForm())
+{
+    <div>
+        <dl class="dl-horizontal">
+            <dt>
+                @Html.DisplayNameFor(model => model.Name)
+            </dt>
+
+            <dd>
+                @Html.EditorFor(model => model.Name)
+            </dd>
+
+            <dt>
+                @Html.DisplayNameFor(model => model.IsAdmin)
+            </dt>
+
+            <dd>
+                @Html.EditorFor(model => model.IsAdmin)
+            </dd>
+
+        </dl>
+    </div>
+    <p>
+        <input type="submit" name="submit" value="Save" class="btn btn-primary" />
+        @Html.ActionLink("Back", "Index", null, new { @class = "btn btn-default" })
+    </p>
+}

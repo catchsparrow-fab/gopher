@@ -1,9 +1,10 @@
 ﻿namespace Gopher.Model.Abstractions.Core
 {
-    public interface ISingleItemRepository<T>
+    public interface ISingleItemRepository<TItem, TKey>
     {
-        int Add(T item);
-        void Update(T item);
-        void Delete(int id);
+        int Add(TItem item);
+        void Update(TItem item);
+        void Delete(TKey id);
+        TItem GetSingle(TKey id);
     }
 }

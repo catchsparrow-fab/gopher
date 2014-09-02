@@ -26,13 +26,6 @@ namespace Gopher.Areas.Admin.Controllers
         }
 
         //
-        // GET: /AdminUsers/Details/5
-        public ActionResult Details(int id)
-        {
-            return View();
-        }
-
-        //
         // GET: /AdminUsers/Create
         public ActionResult Create()
         {
@@ -58,9 +51,14 @@ namespace Gopher.Areas.Admin.Controllers
 
         //
         // GET: /AdminUsers/Edit/5
-        public ActionResult Edit(int id)
+        public ActionResult Edit(string id)
         {
-            return View();
+            var model = userRepository.GetSingle(id);
+
+            if (model == null)
+                return new HttpNotFoundResult("User not found.");
+
+            return View(model);
         }
 
         //
