@@ -2,7 +2,7 @@
 {
     public interface ISingleItemRepository<TItem, TKey>
     {
-        int Add(TItem item);
+        TKey Add(TItem item);
         void Update(TItem item);
         void Delete(TKey id);
         TItem GetSingle(TKey id);

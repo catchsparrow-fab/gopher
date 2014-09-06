@@ -2,6 +2,7 @@
 
 namespace Gopher.Areas.Admin.Controllers
 {
+    [Authorize(Roles = "Admin")]
     public class CodesController : Controller
     {
         //

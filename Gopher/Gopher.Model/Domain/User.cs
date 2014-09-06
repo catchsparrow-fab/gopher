@@ -19,6 +19,10 @@ namespace Gopher.Model.Domain
 
         public string Id { get; set; }
 
+        [Required]
+        [EmailAddress]
+        public string Email { get; set; }
+
         public void Init(IDataReader reader)
         {
         }

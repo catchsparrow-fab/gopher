@@ -1,9 +1,13 @@
-﻿using System.Web.Mvc;
+﻿using System;
+using System.Web.Mvc;
 using Gopher.Model.Abstractions;
+using Gopher.Model.Domain;
 using Gopher.Models;
+using Gopher.Tools;
 
 namespace Gopher.Areas.Admin.Controllers
 {
+    [Authorize(Roles = "Admin")]
     public class UsersController : Controller
     {
         private readonly IUserRepository userRepository;
@@ -29,23 +33,29 @@ namespace Gopher.Areas.Admin.Controllers
         // GET: /AdminUsers/Create
         public ActionResult Create()
         {
-            return View();
+            return View("Edit");
         }
 
         //
         // POST: /AdminUsers/Create
         [HttpPost]
-        public ActionResult Create(FormCollection collection)
+        public ActionResult Create(User user)
         {
             try
             {
-                // TODO: Add insert logic here
+                if (ModelState.IsValid)
+                {
+                    userRepository.Add(user);
 
-                return RedirectToAction("Index");
+                    return RedirectToAction("Index");
+                }
+
+                return View("Edit");
             }
-            catch
+            catch (Exception ex)
             {
-                return View();
+                ModelState.AddModelError("FatalError", Helper.ErrorMessage(ex));
+                return View("Edit");
             }
         }
 
@@ -64,41 +74,43 @@ namespace Gopher.Areas.Admin.Controllers
         //
         // POST: /AdminUsers/Edit/5
         [HttpPost]
-        public ActionResult Edit(int id, FormCollection collection)
+        public ActionResult Edit(User user)
         {
             try
             {
-                // TODO: Add update logic here
+                if (ModelState.IsValid)
+                {
+                    userRepository.Update(user);
 
-                return RedirectToAction("Index");
+                    return RedirectToAction("Index");
+                }
+
+                return View(user);
             }
-            catch
+            catch (Exception ex)
             {
-                return View();
+                ModelState.AddModelError("FatalError", Helper.ErrorMessage(ex));
+                return View(user);
             }
-        }
-
-        //
-        // GET: /AdminUsers/Delete/5
-        public ActionResult Delete(int id)
-        {
-            return View();
         }
 
         //
         // POST: /AdminUsers/Delete/5
         [HttpPost]
-        public ActionResult Delete(int id, FormCollection collection)
+        public ActionResult Delete(string id)
         {
             try
             {
-                // TODO: Add delete logic here
-
+                userRepository.Delete(id);
                 return RedirectToAction("Index");
             }
-            catch
+            catch (Exception ex)
             {
-                return View();
+                ModelState.AddModelError("Fatal error", Helper.ErrorMessage(ex));
+                var user = userRepository.GetSingle(id);
+                if (user != null)
+                    return View("Edit", user);
+                return View("Edit");
             }
         }
     }

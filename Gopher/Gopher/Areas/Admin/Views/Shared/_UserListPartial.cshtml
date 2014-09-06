@@ -5,6 +5,8 @@
         <thead>
             <tr>
                 <th>Name</th>
+                <th>Email</th>
+                <th>Admin</th>
             </tr>
         </thead>
         <tbody>
@@ -12,7 +14,13 @@
             {
                 <tr>
                     <td>
-                        @Html.ActionLink(item.Name, "Edit", "Users", new { id = item.Id }, null)
+                        <a href="@Url.Action("Edit", "Users", new { id = item.Id })">@item.Name</a>
+                    </td>
+                    <td>
+                        @item.Email
+                    </td>
+                    <td>
+                        @Html.CheckBox("IsAdmin", @item.IsAdmin, new { disabled = "disabled" })
                     </td>
                 </tr>
             }
