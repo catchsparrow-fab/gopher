@@ -21,21 +21,18 @@ namespace Gopher.Model.Tools
 
             List<T> list = new List<T>();
 
-            //using (dataAccess)
-            //{
-                dataAccess.SetCommand(commandText, commandType, parameters);
+            dataAccess.SetCommand(commandText, commandType, parameters);
 
-                using (var reader = dataAccess.ExecuteReader())
+            using (var reader = dataAccess.ExecuteReader())
+            {
+                while (reader.Read())
                 {
-                    while (reader.Read())
-                    {
-                        T item = new T();
-                        item.Init(reader);
+                    T item = new T();
+                    item.Init(reader);
 
-                        list.Add(item);
-                    }
+                    list.Add(item);
                 }
-            //}
+            }
 
             return list;
         }
@@ -55,17 +52,17 @@ namespace Gopher.Model.Tools
 
             //using (dataAccess)
             //{
-                dataAccess.SetCommand(commandText, commandType, parameters);
+            dataAccess.SetCommand(commandText, commandType, parameters);
 
-                using (var reader = dataAccess.ExecuteReader())
+            using (var reader = dataAccess.ExecuteReader())
+            {
+                if (reader.Read())
                 {
-                    if (reader.Read())
-                    {
-                        T item = new T();
-                        item.Init(reader);
-                        return item;
-                    }
+                    T item = new T();
+                    item.Init(reader);
+                    return item;
                 }
+            }
             //}
             return default(T);
         }
@@ -75,7 +72,7 @@ namespace Gopher.Model.Tools
             return ExecuteNonQuery(null, commandText, commandType, parameters);
         }
 
-        public static int ExecuteNonQuery(DataAccess dataAccess, string commandText, CommandType commandType, 
+        public static int ExecuteNonQuery(DataAccess dataAccess, string commandText, CommandType commandType,
             params DbParameter[] parameters)
         {
             if (dataAccess == null)
@@ -83,8 +80,8 @@ namespace Gopher.Model.Tools
 
             //using (dataAccess)
             //{
-                dataAccess.SetCommand(commandText, commandType, parameters);
-                return dataAccess.ExecuteNonQuery();
+            dataAccess.SetCommand(commandText, commandType, parameters);
+            return dataAccess.ExecuteNonQuery();
             //}
         }
 
@@ -92,8 +89,8 @@ namespace Gopher.Model.Tools
         {
             return ExecuteReader(null, commandText, commandType, parameters);
         }
-        
-        public static DataReader ExecuteReader(DataAccess dataAccess, string commandText, CommandType commandType, 
+
+        public static DataReader ExecuteReader(DataAccess dataAccess, string commandText, CommandType commandType,
             params DbParameter[] parameters)
         {
             if (dataAccess == null)
@@ -121,7 +118,7 @@ namespace Gopher.Model.Tools
         {
             if (obj == null || obj == DBNull.Value) return default(T);
 
-            return (T) Convert.ChangeType(obj, typeof (T));
+            return (T)Convert.ChangeType(obj, typeof(T));
         }
     }
 }

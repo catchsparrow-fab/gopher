@@ -26,9 +26,11 @@ namespace Gopher.Model.Repositories
         public void Update(User item)
         {
             var userManager = GetUserManager();
-            var user = ToEntityFramework(item);
+            var user = ToEntityFramework(item, userManager);
             if (item.IsAdmin)
                 userManager.AddToRole(user.Id, "Admin");
+            else
+                userManager.RemoveFromRole(user.Id, "Admin");
             userManager.Update(user);
         }
 
@@ -61,12 +63,14 @@ namespace Gopher.Model.Repositories
 
         private static UserManager<ApplicationUser> GetUserManager()
         {
-            return new UserManager<ApplicationUser>(new UserStore<ApplicationUser>(new ApplicationDbContext()));
+            var store = new UserStore<ApplicationUser>(new ApplicationDbContext());
+            store.AutoSaveChanges = true;
+            return new UserManager<ApplicationUser>(store);
         }
 
-        private static ApplicationUser ToEntityFramework(User user)
+        private static ApplicationUser ToEntityFramework(User user, UserManager<ApplicationUser> userManager)
         {
-            var applicationUser = GetUserManager().FindById(user.Id);
+            var applicationUser = userManager.FindById(user.Id);
             applicationUser.UserName = user.Name;
             applicationUser.Email = user.Email;
             return applicationUser;

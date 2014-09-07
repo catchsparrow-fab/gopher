@@ -4,6 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using Gopher.Model.Abstractions;
+using Gopher.Model.Tools;
 
 namespace Gopher.Model.Repositories
 {
@@ -17,6 +18,7 @@ namespace Gopher.Model.Repositories
         public IEnumerable<string> GetAll(string lang)
         {
             throw new NotImplementedException();
+            //return DbHelper.GetList<
         }
     }
 }

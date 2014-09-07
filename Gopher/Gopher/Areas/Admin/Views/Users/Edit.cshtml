@@ -12,8 +12,15 @@
     using (Html.BeginForm("Delete", "Users", new { id = Model.Id }, FormMethod.Post, null))
     {
         <div class="form-group">
-        <input type="submit" class="btn-xs btn-danger" value="Delete this user" />
+        <input type="submit" id="btn-delete" class="btn-xs btn-danger" value="Delete this user" />
         </div>
+        <script>
+            $(function () {
+                $("#btn-delete").click(function () {
+                    return confirm("This will delete user @Model.Name. Are you sure you want to continue?");
+                });
+            });
+        </script>
     }
 }
 @Html.ValidationSummary()
