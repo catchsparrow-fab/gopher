@@ -61,6 +61,7 @@
     <Compile Include="Abstractions\IPersistent.cs" />
     <Compile Include="Abstractions\ITranslationRepository.cs" />
     <Compile Include="Domain\IdentityModels.cs" />
+    <Compile Include="Domain\Language.cs" />
     <Compile Include="Domain\Translation.cs" />
     <Compile Include="Domain\User.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

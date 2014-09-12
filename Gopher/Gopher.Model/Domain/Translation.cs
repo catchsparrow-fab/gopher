@@ -11,13 +11,13 @@ namespace Gopher.Model.Domain
     public class Translation : IPersistent
     {
         public int Id { get; set; }
-        public string Lang { get; set; }
+        public int LanguageId { get; set; }
         public string Label { get; set; }
 
         public void Init(IDataReader reader)
         {
             Id = reader.GetInt32("TranslationId");
-            Lang = reader.GetString("Lang");
+            LanguageId = reader.GetInt32("LanguageId");
             Label = reader.GetString("Label");
         }
     }
