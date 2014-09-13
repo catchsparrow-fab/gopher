@@ -13,5 +13,6 @@ namespace Gopher.Model.Abstractions
         Translation GetSingle(string label, int languageId);
         Translation GetSingle(int pageLabelId, int languageId);
         IEnumerable<Translation> GetAll(int languageId);
+        void Update(Translation translation);
     }
 }

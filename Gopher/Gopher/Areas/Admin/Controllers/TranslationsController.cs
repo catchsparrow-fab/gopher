@@ -34,5 +34,16 @@ namespace Gopher.Areas.Admin.Controllers
 
             return View(model);
         }
+
+        [HttpPost]
+        public ActionResult Edit(Translation translation)
+        {
+            var existingTranslation = translationRepository.GetSingle(translation.PageLabelId, translation.LanguageId);
+            if (existingTranslation == null)
+                return new HttpNotFoundResult();
+            existingTranslation.Text = translation.Text;
+            translationRepository.Update(existingTranslation);
+            return RedirectToAction("Index");
+        }
     }
 }

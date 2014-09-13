@@ -32,18 +32,8 @@ namespace Gopher.Model.Tools
         public static T GetItem<T>(string commandText, CommandType commandType, params DbParameter[] parameters)
             where T : IPersistent, new()
         {
-            return GetItem<T>(null, commandText, commandType, parameters);
-        }
+            var dataAccess = DataAccess.Create();
 
-        public static T GetItem<T>(DataAccess dataAccess, string commandText, CommandType commandType,
-            params DbParameter[] parameters)
-            where T : IPersistent, new()
-        {
-            if (dataAccess == null)
-                dataAccess = DataAccess.Create();
-
-            //using (dataAccess)
-            //{
             dataAccess.SetCommand(commandText, commandType, parameters);
 
             using (var reader = dataAccess.ExecuteReader())
@@ -55,13 +45,26 @@ namespace Gopher.Model.Tools
                     return item;
                 }
             }
-            //}
             return default(T);
         }
 
         public static int ExecuteNonQuery(string commandText, CommandType commandType, params DbParameter[] parameters)
         {
             return ExecuteNonQuery(null, commandText, commandType, parameters);
+        }
+
+        /// <summary>
+        /// Equivalent to calling ExecuteNonQuery() and checking the result; if result != 1 (no rows were 
+        /// affected or more than one row affected), throws an exception.
+        /// </summary>
+        /// <param name="commandText"></param>
+        /// <param name="commandType"></param>
+        /// <param name="parameters"></param>
+        public static void UpdateSingle(string commandText, CommandType commandType, params DbParameter[] parameters)
+        {
+            var rowsAffected = ExecuteNonQuery(commandText, commandType, parameters);
+            if (rowsAffected != 1)
+                throw new ApplicationException("Update operation was supposed to affect a single row but affected multiple or zero rows.");
         }
 
         public static int ExecuteNonQuery(DataAccess dataAccess, string commandText, CommandType commandType,

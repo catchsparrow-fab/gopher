@@ -33,5 +33,14 @@ namespace Gopher.Model.Repositories
                 CommandType.DynamicSql,
                 new DbParameter("languageId", languageId));
         }
+
+        public void Update(Translation translation)
+        {
+            DbHelper.UpdateSingle("UPDATE Translations SET Translation = @translation WHERE PageLabelId = @pageLabelId AND LanguageId = @languageId",
+                CommandType.DynamicSql,
+                new DbParameter("pageLabelId", translation.PageLabelId),
+                new DbParameter("languageId", translation.LanguageId),
+                new DbParameter("translation", translation.Text));
+        }
     }
 }
