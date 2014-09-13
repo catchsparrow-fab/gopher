@@ -8,22 +8,24 @@ using Gopher.Model.Domain;
 
 namespace Gopher.Areas.Admin.Controllers
 {
-    public class LanguagesController : Controller
+    [Authorize(Roles = "Admin")]
+    public class TranslationsController : Controller
     {
         private readonly ITranslationRepository translationRepository;
 
-        public LanguagesController(ITranslationRepository translationRepository)
+        public TranslationsController(ITranslationRepository translationRepository)
         {
             this.translationRepository = translationRepository;
         }
 
-        public IEnumerable<Translation> GetAll(int? lang = null)
+        public ActionResult Index(int? lang = null)
         {
             int languageId = (int)Language.Default;
             if (lang != null)
                 languageId = (int)lang;
 
-            return translationRepository.GetAll(languageId);
+            var model = translationRepository.GetAll(languageId);
+            return View(model);
         }
     }
 }

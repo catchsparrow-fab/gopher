@@ -13,12 +13,14 @@ namespace Gopher.Model.Domain
         public int Id { get; set; }
         public int LanguageId { get; set; }
         public string Label { get; set; }
+        public string Text { get; set; }
 
         public void Init(IDataReader reader)
         {
-            Id = reader.GetInt32("TranslationId");
+            Id = reader.GetInt32("PageLabelId");
             LanguageId = reader.GetInt32("LanguageId");
-            Label = reader.GetString("Label");
+            Label = reader.GetString("LabelName");
+            Text = reader.GetString("Translation");
         }
     }
 }

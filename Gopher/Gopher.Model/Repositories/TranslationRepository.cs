@@ -13,13 +13,17 @@ namespace Gopher.Model.Repositories
     {
         public Translation GetSingle(string label, int languageId)
         {
-            throw new NotImplementedException();
+            return DbHelper.GetItem<Translation>("SELECT p.PageLabelId, p.LabelName, @languageId as LanguageId, t.Translation FROM Translations t INNER JOIN PageLabels p ON p.PageLabelId = t.PageLabelId WHERE p.LabelName = @labelName AND t.LanguageId = @languageId",
+                CommandType.DynamicSql,
+                new DbParameter("languageId", languageId),
+                new DbParameter("labelName", label));
         }
 
         public IEnumerable<Translation> GetAll(int languageId)
         {
-            throw new NotImplementedException();
-            //return DbHelper.GetList<
+            return DbHelper.GetList<Translation>("SELECT p.PageLabelId, p.LabelName, @languageId as LanguageId, t.Translation FROM PageLabels p INNER JOIN Translations t ON t.PageLabelId = p.PageLabelId WHERE t.LanguageId = @languageId",
+                CommandType.DynamicSql,
+                new DbParameter("languageId", languageId));
         }
     }
 }

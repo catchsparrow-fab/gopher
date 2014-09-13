@@ -9,15 +9,7 @@ namespace Gopher.Model.Tools
         public static IEnumerable<T> GetList<T>(string commandText, CommandType commandType, params DbParameter[] parameters)
             where T : IPersistent, new()
         {
-            return GetList<T>(null, commandText, commandType, parameters);
-        }
-
-        public static IEnumerable<T> GetList<T>(DataAccess dataAccess, string commandText, CommandType commandType,
-            params DbParameter[] parameters)
-            where T : IPersistent, new()
-        {
-            if (dataAccess == null)
-                dataAccess = DataAccess.Create();
+            var dataAccess = DataAccess.Create();
 
             List<T> list = new List<T>();
 

@@ -17,6 +17,7 @@ namespace Gopher.Model.Tools
         public override void Load()
         {
             Bind<IUserRepository>().To<UserRepository>();
+            Bind<ITranslationRepository>().To<TranslationRepository>();
         }
     }
 }
