@@ -5,25 +5,31 @@
     ViewBag.Title = "Details";
 }
 
-<h1 class="page-header">Edit user
-</h1> 
-@if (Model != null && User.Identity.GetUserId() != Model.Id)
-{
-    using (Html.BeginForm("Delete", "Users", new { id = Model.Id }, FormMethod.Post, null))
-    {
-        <div class="form-group">
-        <input type="submit" id="btn-delete" class="btn-xs btn-danger" value="Delete this user" />
-        </div>
-        <script>
-            $(function () {
-                $("#btn-delete").click(function () {
-                    return confirm("This will delete user @Model.Name. Are you sure you want to continue?");
-                });
-            });
-        </script>
-    }
-}
+<h1 class="page-header">
+    Edit user
+</h1>
 @Html.ValidationSummary()
+@if (Model != null)
+{
+    <h4>@Model.Name</h4>
+    if (User.Identity.GetUserId() != Model.Id)
+    {
+        using (Html.BeginForm("Delete", "Users", new { id = Model.Id }, FormMethod.Post, null))
+        {
+            <div class="form-group">
+                <input type="submit" id="btn-delete" class="btn-xs btn-danger" value="Delete this user" />
+            </div>
+            <script>
+                $(function () {
+                    $("#btn-delete").click(function () {
+                        return confirm("This will delete user @Model.Name. Are you sure you want to continue?");
+                    });
+                });
+            </script>
+        }
+    }
+    <hr />
+}
 @using (Html.BeginForm())
 {
     <div class="form-group">
@@ -34,12 +40,19 @@
         <label for="email">@Html.DisplayNameFor(model => model.Email)</label>
         @Html.TextBoxFor(model => model.Email, new { @class = "form-control" })
     </div>
-    <div class="checkbox">
-        <label>
-            @Html.CheckBoxFor(model => model.IsAdmin)
+    if (Model == null || User.Identity.GetUserId() != Model.Id)
+    {
+        <div class="checkbox">
+            <label>
+                @Html.CheckBoxFor(model => model.IsAdmin)
+                @Html.DisplayNameFor(model => model.IsAdmin)
+            </label>
+        </div>
+    } else {
+        <div class="form-group">
             @Html.DisplayNameFor(model => model.IsAdmin)
-        </label>
-    </div>
+        </div>
+    }
     <p>
         <input type="submit" name="submit" value="Save" class="btn btn-primary" />
         @Html.ActionLink("Back", "Index", null, new { @class = "btn btn-default" })

@@ -11,6 +11,7 @@ namespace Gopher.Model.Abstractions
     public interface ITranslationRepository
     {
         Translation GetSingle(string label, int languageId);
+        Translation GetSingle(int pageLabelId, int languageId);
         IEnumerable<Translation> GetAll(int languageId);
     }
 }

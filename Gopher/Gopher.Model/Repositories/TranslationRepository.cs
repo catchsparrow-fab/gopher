@@ -19,6 +19,14 @@ namespace Gopher.Model.Repositories
                 new DbParameter("labelName", label));
         }
 
+        public Translation GetSingle(int pageLabelId, int languageId)
+        {
+            return DbHelper.GetItem<Translation>("SELECT p.PageLabelId, p.LabelName, @languageId as LanguageId, t.Translation FROM Translations t INNER JOIN PageLabels p ON p.PageLabelId = t.PageLabelId WHERE p.PageLabelId = @pageLabelId AND t.LanguageId = @languageId",
+                CommandType.DynamicSql,
+                new DbParameter("languageId", languageId),
+                new DbParameter("pageLabelId", pageLabelId));
+        }
+
         public IEnumerable<Translation> GetAll(int languageId)
         {
             return DbHelper.GetList<Translation>("SELECT p.PageLabelId, p.LabelName, @languageId as LanguageId, t.Translation FROM PageLabels p INNER JOIN Translations t ON t.PageLabelId = p.PageLabelId WHERE t.LanguageId = @languageId",

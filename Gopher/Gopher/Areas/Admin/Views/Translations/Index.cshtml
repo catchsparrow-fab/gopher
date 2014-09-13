@@ -9,7 +9,7 @@
 <table class="table">
     <tr>
         <th>
-            @Html.DisplayNameFor(model => model.Label)
+            @Html.DisplayNameFor(model => model.LabelName)
         </th>
         <th>
             @Html.DisplayNameFor(model => model.Text)
@@ -19,10 +19,14 @@
 @foreach (var item in Model) {
     <tr>
         <td>
-            @Html.DisplayFor(modelItem => item.Label)
+            <a href="@Url.Action("Edit", "Translations", new { label = @item.PageLabelId, lang = @item.LanguageId })">
+                @Html.DisplayFor(modelItem => item.LabelName)
+            </a>
         </td>
         <td>
-            @Html.DisplayFor(modelItem => item.Text)
+            <a href="@Url.Action("Edit", "Translations", new { label = @item.PageLabelId, lang = @item.LanguageId })">
+                @Html.DisplayFor(modelItem => item.Text)
+            </a>
         </td>
     </tr>
 }

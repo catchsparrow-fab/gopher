@@ -27,5 +27,12 @@ namespace Gopher.Areas.Admin.Controllers
             var model = translationRepository.GetAll(languageId);
             return View(model);
         }
+
+        public ActionResult Edit(int label, int lang)
+        {
+            var model = translationRepository.GetSingle(label, lang);
+
+            return View(model);
+        }
     }
 }

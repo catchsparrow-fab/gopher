@@ -1,0 +1,43 @@
+﻿@model Gopher.Model.Domain.Translation
+
+@{
+    ViewBag.Title = "Edit";
+}
+
+<h1 class="page-header">Edit translation</h1>
+<h4>@Model.LabelName</h4>
+<hr />
+
+@using (Html.BeginForm())
+{
+    @Html.AntiForgeryToken()
+
+    @Html.ValidationSummary(true)
+    <div class="form-group">
+        @Html.LabelFor(model => model.LanguageId)
+        <div class="col-md-10">
+            @Html.EditorFor(model => model.LanguageId)
+            @Html.ValidationMessageFor(model => model.LanguageId)
+        </div>
+    </div>
+
+    <div class="form-group">
+        @Html.LabelFor(model => model.LabelName)
+        <div class="col-md-10">
+            @Html.DisplayFor(model => model.LabelName)
+        </div>
+    </div>
+
+    <div class="form-group">
+        @Html.LabelFor(model => model.Text)
+        <div class="col-md-10">
+            @Html.TextBoxFor(model => model.Text, new { @class = "form-control" })
+            @Html.ValidationMessageFor(model => model.Text)
+        </div>
+    </div>
+    <p>
+        <input type="submit" name="submit" value="Save" class="btn btn-primary" />
+        @Html.ActionLink("Back", "Index", null, new { @class = "btn btn-default" })
+    </p>
+}
+
