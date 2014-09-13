@@ -14,6 +14,7 @@ namespace Gopher
             routes.IgnoreRoute("{resource}.axd/{*pathInfo}");
 
             routes.LowercaseUrls = true;
+            routes.AppendTrailingSlash = true;
 
             routes.MapRoute(
                 name: "Default",
