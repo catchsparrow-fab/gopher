@@ -6,6 +6,20 @@
 
 <h1 class="page-header">@ViewBag.Title</h1>
 
+@using (Html.BeginForm())
+{
+    <div class="form-group">
+        <input type="submit" value="Clear cache" class="btn btn-sm btn-primary" />
+    </div>
+    if (ViewBag.CacheCleared == true)
+    {
+        <div class="alert alert-success alert-dismissable">
+            <button type="button" class="close" data-dismiss="alert"><span aria-hidden="true">&times;</span><span class="sr-only"></span></button>
+            Cache successfully cleared
+        </div>
+    }
+}
+
 <table class="table">
     <tr>
         <th>

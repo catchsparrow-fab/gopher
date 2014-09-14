@@ -5,6 +5,7 @@ using System.Web;
 using System.Web.Mvc;
 using Gopher.Model.Abstractions;
 using Gopher.Model.Domain;
+using Gopher.Model.Tools;
 
 namespace Gopher.Areas.Admin.Controllers
 {
@@ -26,6 +27,16 @@ namespace Gopher.Areas.Admin.Controllers
 
             var model = translationRepository.GetAll(languageId);
             return View(model);
+        }
+
+        [HttpPost]
+        [ActionName("Index")]
+        public ActionResult ClearCache(int? lang = null)
+        {
+            TranslationHelper.ClearCache();
+            ViewBag.CacheCleared = true;
+
+            return Index(lang);
         }
 
         public ActionResult Edit(int label, int lang)
