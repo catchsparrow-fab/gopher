@@ -27,10 +27,18 @@
                                 @Html.Translation("Header_CustomerSearch")
                             </a>
                         </li>
-                        <li>@Html.ActionLink("Reports", "Reports", "Home", new { area = string.Empty }, null)</li>
-                        <li>@Html.ActionLink("Import", "Import", "Home", new { area = string.Empty }, null)</li>
-                        @if (User.IsInRole("Admin")) {
-                            <li>@Html.ActionLink("Setup", "Index", "Users", new { area = "Admin" }, null)</li>
+                        <li>
+                            <a href="@Url.Action("Import", "Home", new { area = string.Empty })">
+                                @Html.Translation("Header_Import")
+                            </a>
+                        </li>
+                        @if (User.IsInRole("Admin"))
+                        {
+                            <li>
+                                <a href="@Url.Action("Index", "Users", new { area = "Admin" })">
+                                    @Html.Translation("Header_Administration")
+                                </a>
+                            </li>
                         }
                     </ul>
                 }
