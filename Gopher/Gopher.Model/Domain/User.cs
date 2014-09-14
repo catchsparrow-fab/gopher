@@ -19,6 +19,8 @@ namespace Gopher.Model.Domain
 
         public string Id { get; set; }
 
+        public int LanguageId { get; set; }
+
         [Required]
         [EmailAddress]
         public string Email { get; set; }

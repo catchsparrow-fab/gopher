@@ -40,6 +40,11 @@
         <label for="email">@Html.DisplayNameFor(model => model.Email)</label>
         @Html.TextBoxFor(model => model.Email, new { @class = "form-control" })
     </div>
+    <div class="form-group">
+        <label for="LanguageId">@Html.DisplayNameFor(model => model.LanguageId)</label>
+
+        @Html.Partial("LanguageSelect", Model != null ? (int?)Model.LanguageId : null)
+    </div>
     if (Model == null || User.Identity.GetUserId() != Model.Id)
     {
         <div class="checkbox">

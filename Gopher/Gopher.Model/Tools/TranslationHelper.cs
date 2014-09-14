@@ -5,6 +5,7 @@ using System.Web.Mvc;
 using Gopher.Model.Abstractions;
 using Gopher.Model.Domain;
 using System.Linq;
+using Microsoft.AspNet.Identity;
 
 namespace Gopher.Model.Tools
 {
@@ -26,7 +27,10 @@ namespace Gopher.Model.Tools
         /// <returns></returns>
         public static Translation GetTranslation(string labelName)
         {
-            int languageId = 1;
+            var userRepository = DependencyResolver.Current.GetService<IUserRepository>();
+            var currentUser = userRepository.GetSingle(HttpContext.Current.User.Identity.GetUserId());
+
+            int languageId = currentUser.LanguageId;
 
             var cache = HttpContext.Current.Cache;
 

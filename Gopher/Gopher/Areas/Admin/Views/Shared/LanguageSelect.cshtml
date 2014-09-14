@@ -1,0 +1,15 @@
+﻿@model int?
+
+<select class="form-group" name="LanguageId" id="LanguageId">
+    <option value="1">@Html.Translation("Languages_English")</option>
+    <option value="2">@Html.Translation("Languages_Japanese")</option>
+</select>
+
+@if (Model != null)
+{
+    <script>
+        $(function () {
+            $("select[name=LanguageId]").val(@Model);
+        });
+    </script>
+}

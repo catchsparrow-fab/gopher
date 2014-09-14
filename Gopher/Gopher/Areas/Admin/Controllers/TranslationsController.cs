@@ -25,6 +25,8 @@ namespace Gopher.Areas.Admin.Controllers
             if (lang != null)
                 languageId = (int)lang;
 
+            ViewBag.CurrentLanguage = (Language)languageId;
+
             var model = translationRepository.GetAll(languageId);
             return View(model);
         }
@@ -54,7 +56,10 @@ namespace Gopher.Areas.Admin.Controllers
                 return new HttpNotFoundResult();
             existingTranslation.Text = translation.Text;
             translationRepository.Update(existingTranslation);
-            return RedirectToAction("Index");
+            if (!string.IsNullOrEmpty(Request.QueryString["lang"]))
+                return RedirectToAction("Index", new { lang = Request.QueryString["lang"] });
+            else
+                return RedirectToAction("Index");
         }
     }
 }
