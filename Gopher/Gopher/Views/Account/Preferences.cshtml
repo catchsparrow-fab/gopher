@@ -1,0 +1,28 @@
+﻿@{
+    ViewBag.Title = "Preferences";
+    Layout = "_AccountLayout.cshtml";
+}
+@using Microsoft.AspNet.Identity
+@model Gopher.Models.PreferencesViewModel
+<h2>Change personal preferences</h2>
+<p>You're logged in as <strong>@User.Identity.GetUserName()</strong>.</p>
+
+@using (Html.BeginForm("Preferences", "Account", FormMethod.Post, new { @class = "form-horizontal" }))
+{
+    <div class="row">
+        <div class="col-md-12">
+            <div class="form-group">
+                <label for="LanguageId" class="col-md-2 control-label">@Html.DisplayNameFor(model => model.User.LanguageId)</label>
+
+                <div class="col-md-10">
+                    @Html.Partial("~/Areas/Admin/Views/Shared/LanguageSelect.cshtml", Model != null ? (int?)Model.User.LanguageId : null)
+                </div>
+            </div>
+            <div class="form-group">
+                <div class="col-md-offset-2 col-md-10">
+                    <input type="submit" value="Submit" class="btn btn-default" />
+                </div>
+            </div>
+        </div>
+    </div>
+}

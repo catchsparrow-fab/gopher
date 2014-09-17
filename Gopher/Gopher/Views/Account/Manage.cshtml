@@ -2,6 +2,7 @@
 @using Microsoft.AspNet.Identity;
 @{
     ViewBag.Title = "Manage Account";
+    Layout = "_AccountLayout.cshtml";
 }
 
 <h2>@ViewBag.Title.</h2>
@@ -19,6 +20,4 @@
         }
     </div>
 </div>
-@section Scripts {
-    @Scripts.Render("~/bundles/jqueryval")
-}
+

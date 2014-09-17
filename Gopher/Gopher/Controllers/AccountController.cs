@@ -5,6 +5,7 @@ using System.Security.Claims;
 using System.Threading.Tasks;
 using System.Web;
 using System.Web.Mvc;
+using Gopher.Model.Abstractions;
 using Gopher.Model.Domain;
 using Microsoft.AspNet.Identity;
 using Microsoft.AspNet.Identity.EntityFramework;
@@ -16,14 +17,16 @@ namespace Gopher.Controllers
     [Authorize]
     public class AccountController : Controller
     {
-        public AccountController()
-            : this(new UserManager<ApplicationUser>(new UserStore<ApplicationUser>(new ApplicationDbContext())))
+        IUserRepository userRepository = null;
+        public AccountController(IUserRepository userRepository)
+            : this(new UserManager<ApplicationUser>(new UserStore<ApplicationUser>(new ApplicationDbContext())), userRepository)
         {
         }
 
-        public AccountController(UserManager<ApplicationUser> userManager)
+        public AccountController(UserManager<ApplicationUser> userManager, IUserRepository userRepository)
         {
             UserManager = userManager;
+            this.userRepository = userRepository;
         }
 
         public UserManager<ApplicationUser> UserManager { get; private set; }
@@ -127,6 +130,7 @@ namespace Gopher.Controllers
                 : "";
             ViewBag.HasLocalPassword = HasPassword();
             ViewBag.ReturnUrl = Url.Action("Manage");
+            ViewBag.ActiveTab = "manage";
             return View();
         }
 
@@ -138,6 +142,7 @@ namespace Gopher.Controllers
         {
             bool hasPassword = HasPassword();
             ViewBag.HasLocalPassword = hasPassword;
+            ViewBag.ActiveTab = "manage";
             ViewBag.ReturnUrl = Url.Action("Manage");
             if (hasPassword)
             {
@@ -318,6 +323,26 @@ namespace Gopher.Controllers
                 UserManager = null;
             }
             base.Dispose(disposing);
+        }
+
+        // /account/preferences
+        [HttpGet]
+        public ActionResult Preferences()
+        {
+            var model = new PreferencesViewModel();
+            model.User = userRepository.GetSingle(User.Identity.GetUserId());
+            ViewBag.ActiveTab = "preferences";
+            return View();
+        }
+
+        [HttpPost]
+        public ActionResult Preferences(int languageId)
+        {
+            var user = userRepository.GetSingle(User.Identity.GetUserId());
+            user.LanguageId = languageId;
+            userRepository.Update(user);
+            ViewBag.ActiveTab = "preferences";
+            return View();
         }
 
         #region Helpers
