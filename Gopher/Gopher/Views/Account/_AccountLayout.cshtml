@@ -7,10 +7,14 @@
     <div class="col-sm-3 col-md-2 sidebar">
         <ul class="nav nav-sidebar">
             <li class="@(ViewBag.ActiveTab == "manage" ? "active" : string.Empty)">
-                @Html.ActionLink("Change my password", "Manage", "Account")
+                <a href="@Url.Action("Manage")">
+                    @Html.Translation("Account_Tabs_ChangeMyPassword")
+                </a>
             </li>
             <li class="@(ViewBag.ActiveTab == "preferences" ? "active" : string.Empty)">
-                @Html.ActionLink("My preferences", "Preferences", "Account")
+                <a href="@Url.Action("Preferences")">
+                    @Html.Translation("Account_Tabs_MyPreferences")
+                </a>
             </li>
         </ul>
     </div>

@@ -1,11 +1,12 @@
 ﻿@{
-    ViewBag.Title = "Preferences";
+    ViewBag.Title = TranslationHelper.Get("Account_Tabs_MyPreferences");
     Layout = "_AccountLayout.cshtml";
 }
+@using Gopher.Model.Tools
 @using Microsoft.AspNet.Identity
 @model Gopher.Models.PreferencesViewModel
-<h2>Change personal preferences</h2>
-<p>You're logged in as <strong>@User.Identity.GetUserName()</strong>.</p>
+<h2>@ViewBag.Title</h2>
+<p>@Html.Translation("Account_YouAreLoggedInAs") <strong> @User.Identity.GetUserName()</strong></p>
 
 @using (Html.BeginForm("Preferences", "Account", FormMethod.Post, new { @class = "form-horizontal" }))
 {
@@ -20,7 +21,7 @@
             </div>
             <div class="form-group">
                 <div class="col-md-offset-2 col-md-10">
-                    <input type="submit" value="Submit" class="btn btn-default" />
+                    <input type="submit" value="@Html.Translation("Generic_Save")" class="btn btn-default" />
                 </div>
             </div>
         </div>

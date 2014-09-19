@@ -10,7 +10,7 @@ namespace Gopher.Model.Domain
     {
         English = 1, Japanese = 2,
 
-        Default = 1
+        Default = 2
     }
 
     public class LanguageHelper

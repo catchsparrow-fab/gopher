@@ -10,7 +10,7 @@
 
 <ul class="nav nav-tabs" role="tablist">
     <li class="@(ViewBag.CurrentLanguage == Language.English ? "active" : string.Empty)">
-        <a href="@Url.Action("Index", new { lang = (int)Language.Default })">@Html.Translation("Languages_English")</a>
+        <a href="@Url.Action("Index", new { lang = (int)Language.English })">@Html.Translation("Languages_English")</a>
     </li>
     <li class="@(ViewBag.CurrentLanguage == Language.Japanese ? "active" : string.Empty)">
         <a href="@Url.Action("Index", new { lang = (int)Language.Japanese })">@Html.Translation("Languages_Japanese")</a>

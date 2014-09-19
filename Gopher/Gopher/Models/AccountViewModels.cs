@@ -1,12 +1,12 @@
 ﻿using System.ComponentModel.DataAnnotations;
 using Gopher.Model.Domain;
+using Gopher.Model.Tools;
 
 namespace Gopher.Models
 {
     public class ExternalLoginConfirmationViewModel
     {
         [Required]
-        [Display(Name = "User name")]
         public string UserName { get; set; }
     }
 
@@ -14,33 +14,33 @@ namespace Gopher.Models
     {
         [Required]
         [DataType(DataType.Password)]
-        [Display(Name = "Current password")]
+        [TranslatableDisplayName("Account_OldPassword")]
         public string OldPassword { get; set; }
 
         [Required]
         [StringLength(100, ErrorMessage = "The {0} must be at least {2} characters long.", MinimumLength = 6)]
         [DataType(DataType.Password)]
-        [Display(Name = "New password")]
+        [TranslatableDisplayName("Account_NewPassword")]
         public string NewPassword { get; set; }
 
         [DataType(DataType.Password)]
-        [Display(Name = "Confirm new password")]
         [Compare("NewPassword", ErrorMessage = "The new password and confirmation password do not match.")]
+        [TranslatableDisplayName("Account_ConfirmNewPassword")]
         public string ConfirmPassword { get; set; }
     }
 
     public class LoginViewModel
     {
         [Required]
-        [Display(Name = "User name")]
+        [TranslatableDisplayName("Generic_Name")]
         public string UserName { get; set; }
 
         [Required]
         [DataType(DataType.Password)]
-        [Display(Name = "Password")]
+        [TranslatableDisplayName("Generic_Password")]
         public string Password { get; set; }
 
-        [Display(Name = "Remember me?")]
+        [TranslatableDisplayName("Login_RememberMe")]
         public bool RememberMe { get; set; }
     }
 

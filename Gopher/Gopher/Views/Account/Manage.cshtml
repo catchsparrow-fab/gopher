@@ -1,11 +1,12 @@
-﻿@using Gopher.Models;
+﻿@using Gopher.Model.Tools
+@using Gopher.Models;
 @using Microsoft.AspNet.Identity;
 @{
-    ViewBag.Title = "Manage Account";
+    ViewBag.Title = TranslationHelper.Get("Account_Tabs_ChangeMyPassword");
     Layout = "_AccountLayout.cshtml";
 }
 
-<h2>@ViewBag.Title.</h2>
+<h2>@ViewBag.Title</h2>
 
 <p class="text-success">@ViewBag.StatusMessage</p>
 <div class="row">

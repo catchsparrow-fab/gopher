@@ -30,7 +30,9 @@ namespace Gopher.Model.Tools
             var userRepository = DependencyResolver.Current.GetService<IUserRepository>();
             var currentUser = userRepository.GetSingle(HttpContext.Current.User.Identity.GetUserId());
 
-            int languageId = currentUser.LanguageId;
+            var languageId = (int)Language.Default;
+            if (currentUser != null)
+                languageId = currentUser.LanguageId;
 
             var cache = HttpContext.Current.Cache;
 
