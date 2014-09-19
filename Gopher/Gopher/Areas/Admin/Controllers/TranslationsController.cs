@@ -26,6 +26,7 @@ namespace Gopher.Areas.Admin.Controllers
                 languageId = (int)lang;
 
             ViewBag.CurrentLanguage = (Language)languageId;
+            ViewBag.ActiveTab = "translations";
 
             var model = translationRepository.GetAll(languageId);
             return View(model);

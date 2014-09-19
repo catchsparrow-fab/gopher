@@ -1,10 +1,11 @@
-﻿@model Gopher.Model.Domain.Translation
+﻿@using Gopher.Model.Tools
+@model Gopher.Model.Domain.Translation
 
 @{
-    ViewBag.Title = "Edit";
+    ViewBag.Title = TranslationHelper.Get("Administration_Translations_EditTranslation");
 }
 
-<h1 class="page-header">Edit translation</h1>
+<h1 class="page-header">@ViewBag.Title</h1>
 <h4>@Model.LabelName</h4>
 <hr />
 

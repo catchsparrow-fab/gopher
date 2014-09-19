@@ -1,18 +1,19 @@
 ﻿@using Gopher.Model.Domain
+@using Gopher.Model.Tools
 @model IEnumerable<Gopher.Model.Domain.Translation>
 
 @{
-    ViewBag.Title = "Translations";
+    ViewBag.Title = TranslationHelper.Get("Administration_Tabs_Translations");
 }
 
 <h1 class="page-header">@ViewBag.Title</h1>
 
 <ul class="nav nav-tabs" role="tablist">
-    <li class="@(ViewBag.CurrentLanguage == Language.Default ? "active" : string.Empty)">
-        <a href="@Url.Action("Index", new { lang = (int)Language.Default })">English</a>
+    <li class="@(ViewBag.CurrentLanguage == Language.English ? "active" : string.Empty)">
+        <a href="@Url.Action("Index", new { lang = (int)Language.Default })">@Html.Translation("Languages_English")</a>
     </li>
     <li class="@(ViewBag.CurrentLanguage == Language.Japanese ? "active" : string.Empty)">
-        <a href="@Url.Action("Index", new { lang = (int)Language.Japanese })">Japanese</a>
+        <a href="@Url.Action("Index", new { lang = (int)Language.Japanese })">@Html.Translation("Languages_Japanese")</a>
     </li>
 </ul>
 
@@ -20,13 +21,13 @@
     @using (Html.BeginForm())
     {
         <div class="form-group">
-            <input type="submit" value="Clear cache" class="btn btn-sm btn-primary" />
+            <input type="submit" value="@Html.Translation("Generic_ClearCache")" class="btn btn-sm btn-primary" />
         </div>
         if (ViewBag.CacheCleared == true)
         {
             <div class="alert alert-success alert-dismissable">
                 <button type="button" class="close" data-dismiss="alert"><span aria-hidden="true">&times;</span><span class="sr-only"></span></button>
-                Cache successfully cleared
+                @Html.Translation("Generic_CacheCleared")
             </div>
         }
     }

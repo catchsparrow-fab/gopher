@@ -107,6 +107,7 @@
     <Compile Include="Tools\GopherModelModule.cs" />
     <Compile Include="Tools\Helper.cs" />
     <Compile Include="Tools\ProcParameter.cs" />
+    <Compile Include="Tools\TranslatableDisplayNameAttribute.cs" />
     <Compile Include="Tools\TranslationHelper.cs" />
   </ItemGroup>
   <ItemGroup />

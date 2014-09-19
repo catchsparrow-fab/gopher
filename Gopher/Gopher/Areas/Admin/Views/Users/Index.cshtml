@@ -1,7 +1,8 @@
 ﻿
 @{
-    ViewBag.Title = "Users";
+    ViewBag.Title = TranslationHelper.Get("Administration_Tabs_Users");
 }
+@using Gopher.Model.Tools
 @model Gopher.Models.UserListViewModel
 <h1 class="page-header">@ViewBag.Title</h1>
 
@@ -11,4 +12,4 @@
     <p>No users in the system.</p>
 }
 
-<a href="@Url.Action("Create")" class="btn btn-default">New user</a>
+<a href="@Url.Action("Create")" class="btn btn-default">@Html.Translation("Administration_Users_NewUser")</a>

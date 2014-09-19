@@ -29,7 +29,7 @@ namespace Gopher.Model.Repositories
 
         public IEnumerable<Translation> GetAll(int languageId)
         {
-            return DbHelper.GetList<Translation>("SELECT p.PageLabelId, p.LabelName, @languageId as LanguageId, t.Translation FROM PageLabels p INNER JOIN Translations t ON t.PageLabelId = p.PageLabelId WHERE t.LanguageId = @languageId",
+            return DbHelper.GetList<Translation>("SELECT p.PageLabelId, p.LabelName, @languageId as LanguageId, t.Translation FROM PageLabels p INNER JOIN Translations t ON t.PageLabelId = p.PageLabelId WHERE t.LanguageId = @languageId ORDER BY p.LabelName",
                 CommandType.DynamicSql,
                 new DbParameter("languageId", languageId));
         }

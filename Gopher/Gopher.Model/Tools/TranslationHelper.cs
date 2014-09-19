@@ -50,6 +50,11 @@ namespace Gopher.Model.Tools
             return result;
         }
 
+        public static string Get(string labelName)
+        {
+            return GetTranslation(labelName).Text;
+        }
+
         private const string TRANSLATIONS_CACHE_KEY = "translations_{0}";
         
         private static string GetCacheKey(int lang)

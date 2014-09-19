@@ -59,7 +59,9 @@
         </div>
     }
     <p>
-        <input type="submit" name="submit" value="Save" class="btn btn-primary" />
-        @Html.ActionLink("Back", "Index", null, new { @class = "btn btn-default" })
+        <input type="submit" name="submit" value="@Html.Translation("Generic_Save")" class="btn btn-primary" />
+        <a href="@Url.Action("Index")" class="btn btn-default">
+            @Html.Translation("Generic_Back")
+        </a>
     </p>
 }

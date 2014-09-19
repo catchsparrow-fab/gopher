@@ -7,13 +7,19 @@
     <div class="col-sm-3 col-md-2 sidebar">
         <ul class="nav nav-sidebar">
             <li class="@(ViewBag.ActiveTab == "users" ? "active" : string.Empty)">
-                @Html.ActionLink("Users", "Index", "Users")
+                <a href="@Url.Action("Index", "Users")">
+                    @Html.Translation("Administration_Tabs_Users")
+                </a>
             </li>
             <li class="@(ViewBag.ActiveTab == "codes" ? "active" : string.Empty)">
-                @Html.ActionLink("Codes", "Index", "Codes")
+                <a href="@Url.Action("Index", "Codes")">
+                    @Html.Translation("Administration_Tabs_Codes")
+                </a>
             </li>
             <li class="@(ViewBag.ActiveTab == "translations" ? "active" : string.Empty)">
-                @Html.ActionLink("Translations", "Index", "Translations")
+                <a href="@Url.Action("Index", "Translations")">
+                    @Html.Translation("Administration_Tabs_Translations")
+                </a>
             </li>
         </ul>
     </div>
