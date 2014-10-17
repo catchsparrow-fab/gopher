@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace Gopher.Model.Tools
+namespace Gopher.Tools
 {
     public class DbParameter
     {

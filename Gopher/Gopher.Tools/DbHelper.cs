@@ -1,8 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
-using Gopher.Model.Abstractions;
 
-namespace Gopher.Model.Tools
+namespace Gopher.Tools
 {
     public class DbHelper
     {

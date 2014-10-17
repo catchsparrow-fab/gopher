@@ -1,4 +1,4 @@
-﻿namespace Gopher.Model.Tools
+﻿namespace Gopher.Tools
 {
     public enum CommandType
     {

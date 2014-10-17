@@ -2,7 +2,7 @@
 using System.Configuration;
 using System.Data.SqlClient;
 
-namespace Gopher.Model.Tools
+namespace Gopher.Tools
 {
     public class DataAccess
     {

@@ -1,8 +1,7 @@
 ﻿using System;
 using System.Data.SqlClient;
-using SwankSpank.Domain.Abstractions;
 
-namespace Gopher.Model.Tools
+namespace Gopher.Tools
 {
     public class DataReader : IDataReader, IDisposable
     {

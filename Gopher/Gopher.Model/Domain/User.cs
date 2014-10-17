@@ -7,7 +7,7 @@ using System.Text;
 using System.Threading.Tasks;
 using Gopher.Model.Abstractions;
 using Gopher.Model.Tools;
-using SwankSpank.Domain.Abstractions;
+using Gopher.Tools;
 
 namespace Gopher.Model.Domain
 {

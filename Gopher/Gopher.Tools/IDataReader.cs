@@ -1,4 +1,4 @@
-﻿namespace SwankSpank.Domain.Abstractions
+﻿namespace Gopher.Tools
 {
     public interface IDataReader
     {

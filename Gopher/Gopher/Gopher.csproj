@@ -261,6 +261,10 @@
       <Project>{3D5F10AC-B1BC-4D15-BB3E-3F0D2BA4F4AA}</Project>
       <Name>Gopher.Model</Name>
     </ProjectReference>
+    <ProjectReference Include="..\Gopher.Tools\Gopher.Tools.csproj">
+      <Project>{f50b5aa3-bbe0-4769-8f78-09533e9d637b}</Project>
+      <Name>Gopher.Tools</Name>
+    </ProjectReference>
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>

@@ -6,6 +6,7 @@ using System.Threading.Tasks;
 using Gopher.Model.Abstractions;
 using Gopher.Model.Domain;
 using Gopher.Model.Tools;
+using Gopher.Tools;
 
 namespace Gopher.Model.Repositories
 {

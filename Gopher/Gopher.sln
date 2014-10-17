@@ -11,6 +11,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Gopher.Model", "Gopher.Mode
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Gopher.ImportExport", "Gopher.ImportExport\Gopher.ImportExport.csproj", "{2FA7B281-F946-48D9-987D-C468D852E3B5}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Gopher.Tools", "Gopher.Tools\Gopher.Tools.csproj", "{F50B5AA3-BBE0-4769-8F78-09533E9D637B}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -33,6 +35,10 @@ Global
 		{2FA7B281-F946-48D9-987D-C468D852E3B5}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{2FA7B281-F946-48D9-987D-C468D852E3B5}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{2FA7B281-F946-48D9-987D-C468D852E3B5}.Release|Any CPU.Build.0 = Release|Any CPU
+		{F50B5AA3-BBE0-4769-8F78-09533E9D637B}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{F50B5AA3-BBE0-4769-8F78-09533E9D637B}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{F50B5AA3-BBE0-4769-8F78-09533E9D637B}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{F50B5AA3-BBE0-4769-8F78-09533E9D637B}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
