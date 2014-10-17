@@ -93,6 +93,10 @@
     <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\Gopher.ImportExport\Gopher.ImportExport.csproj">
+      <Project>{2fa7b281-f946-48d9-987d-c468d852e3b5}</Project>
+      <Name>Gopher.ImportExport</Name>
+    </ProjectReference>
     <ProjectReference Include="..\Gopher.Model\Gopher.Model.csproj">
       <Project>{3D5F10AC-B1BC-4D15-BB3E-3F0D2BA4F4AA}</Project>
       <Name>Gopher.Model</Name>

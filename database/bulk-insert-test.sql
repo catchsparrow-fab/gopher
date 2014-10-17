@@ -1,13 +1,13 @@
 begin transaction
 
-create table #temp(id int, name nvarchar(50), email nvarchar(50))
-bulk insert #temp
-from 'f:\projects\gopher-project\data\test.csv'
+SET DATEFORMAT dmy
+bulk insert Customers
+from 'f:\projects\gopher-project\data\output.csv'
 with  (
-	FIELDTERMINATOR=';',
+	FIELDTERMINATOR=',',
 	DATAFILETYPE = 'widechar'
 );
-select * from #temp
-drop table #temp
+select * from Customers
+delete from Customers
 
 commit
