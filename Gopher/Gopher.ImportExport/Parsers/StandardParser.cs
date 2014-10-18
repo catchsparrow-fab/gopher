@@ -1,18 +1,15 @@
-﻿using System;
-using System.Collections.Generic;
-using System.IO;
-using System.Linq;
+﻿using System.IO;
 using System.Text;
-using System.Threading.Tasks;
+using Gopher.ImportExport.Domain;
 using Gopher.ImportExport.Tools;
 
-namespace Gopher.ImportExport
+namespace Gopher.ImportExport.Parsers
 {
     public abstract class StandardParser : IParser
     {
         public void Parse(Stream input, Stream output)
         {
-            using (var reader = new StreamReader(input))
+            using (var reader = new StreamReader(input, InputEncoding))
             using (var writer = new StreamWriter(output, Encoding.BigEndianUnicode))
             {
                 reader.ReadLine(); // header
@@ -33,5 +30,13 @@ namespace Gopher.ImportExport
         }
 
         protected abstract Customer GetCustomer(string[] array);
+
+        protected virtual Encoding InputEncoding
+        {
+            get
+            {
+                return Encoding.UTF8;
+            }
+        }
     }
 }

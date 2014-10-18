@@ -1,21 +1,18 @@
-﻿using System;
-using System.Collections.Generic;
-using System.IO;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using Gopher.ImportExport.Domain;
 using Gopher.ImportExport.Tools;
 
-namespace Gopher.ImportExport
+namespace Gopher.ImportExport.Parsers
 {
     public class EccubeParser : StandardParser
     {
+        private const string ECCUBE_SHOP_ID = "EC";
+
         protected override Customer GetCustomer(string[] array)
         {
             return new Customer
             {
                 Id = array[0],
-                ShopId = "EC",
+                ShopId = ECCUBE_SHOP_ID,
                 NameKanji = string.Format("{0} {1}", array[1], array[2]),
                 NameKana = string.Format("{0} {1}", array[3], array[4]),
                 Sex = Format.GetSex(array[18]),

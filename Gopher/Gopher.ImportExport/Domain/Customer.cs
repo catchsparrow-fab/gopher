@@ -1,10 +1,6 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
-namespace Gopher.ImportExport
+namespace Gopher.ImportExport.Domain
 {
     // array to form a line: 
     // 0 - customer id (string)
