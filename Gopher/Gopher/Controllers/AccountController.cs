@@ -332,7 +332,7 @@ namespace Gopher.Controllers
             var model = new PreferencesViewModel();
             model.User = userRepository.GetSingle(User.Identity.GetUserId());
             ViewBag.ActiveTab = "preferences";
-            return View();
+            return View(model);
         }
 
         [HttpPost]
@@ -341,8 +341,7 @@ namespace Gopher.Controllers
             var user = userRepository.GetSingle(User.Identity.GetUserId());
             user.LanguageId = languageId;
             userRepository.Update(user);
-            ViewBag.ActiveTab = "preferences";
-            return View();
+            return Preferences();
         }
 
         #region Helpers
