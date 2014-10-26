@@ -45,19 +45,18 @@
 
         @Html.Partial("LanguageSelect", Model != null ? (int?)Model.LanguageId : null)
     </div>
-    if (Model == null || User.Identity.GetUserId() != Model.Id)
-    {
-        <div class="checkbox">
-            <label>
-                @Html.CheckBoxFor(model => model.IsAdmin)
-                @Html.DisplayNameFor(model => model.IsAdmin)
-            </label>
-        </div>
-    } else {
-        <div class="form-group">
-            @Html.DisplayNameFor(model => model.IsAdmin)
-        </div>
-    }
+    <div class="checkbox">
+        @if (Model == null || User.Identity.GetUserId() != Model.Id)
+        {
+            @Html.CheckBoxFor(model => model.IsAdmin)
+        }
+        else
+        {
+            <input type="checkbox" disabled="disabled" name="IsAdmin" value="true" checked="checked" />
+            <input type="hidden" name="IsAdmin" value="true" />
+        }
+        @Html.DisplayNameFor(model => model.IsAdmin)
+    </div>
     <p>
         <input type="submit" name="submit" value="@Html.Translation("Generic_Save")" class="btn btn-primary" />
         <a href="@Url.Action("Index")" class="btn btn-default">
