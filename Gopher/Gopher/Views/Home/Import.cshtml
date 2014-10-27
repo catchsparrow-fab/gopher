@@ -1,5 +1,52 @@
 ﻿@{
-    ViewBag.Title = "Import";
+    ViewBag.Title = Html.Translation("Header_Import");
 }
-<h2>@ViewBag.Title.</h2>
-<h3>Is coming up here.</h3>
+<h2>@ViewBag.Title</h2>
+
+<form action="/upload/uploadhandler.ashx" method="post" enctype="multipart/form-data" id="import-form">
+    <div>
+        <input type="file" name="file" id="file" />
+    </div>
+    <p class="help-block">
+        @Html.Translation("Import_Info")
+    </p>
+    <input type="submit" value="@Html.Translation("Import_Upload")" class="btn btn-primary" />
+</form>
+<div id="uploading-result" style="display:none;">
+    <strong id="status-message"></strong>
+    <span id="records-affected-label"></span>
+    <span id="records-affected-value"></span>
+</div>
+<div style="display:none;" id="loading-bar">
+    <img src="~/content/img/loader.gif" />
+</div>
+
+<script>
+    $("#import-form").submit(function (event) {
+        event.preventDefault();
+        var self = $(this);
+        self.hide();
+        $("#loading-bar").show();
+
+        self.ajaxSubmit({
+            //url: self.attr("action"),
+            //type: self.attr("method"),
+            //data: self.serialize(),
+            success: function (response) {
+                if (response.status == 0) {
+                    $("#status-message").text("Successfully uploaded.");
+                    $("#uploading-result").addClass("alert-success");
+                } else {
+                    $("#status-message").text("Error uploading the file.");
+                    $("#uploading-result").addClass("alert-danger");
+                }
+                $("#records-affected-label").text("Records inserted: ");
+                $("#records-affected-value").text(response.affected);
+            },
+            complete: function () {
+                $("#uploading-result").show();
+                $("#loading-bar").hide();
+            }
+        });
+    });
+</script>

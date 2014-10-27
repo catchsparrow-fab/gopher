@@ -7,6 +7,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using Gopher.ImportExport.Parsers;
+using Gopher.Tools;
 
 namespace Gopher.ImportExport
 {
@@ -48,7 +49,7 @@ namespace Gopher.ImportExport
             return result;
         }
 
-        public static void Execute(Stream input, Stream output)
+        public static void GenerateBulkInsertFile(Stream input, Stream output)
         {
             var parser = CreateParser(input);
 
@@ -56,6 +57,13 @@ namespace Gopher.ImportExport
             {
                 parser.Parse(input, output);
             }
+        }
+
+        public static int BulkInsert(string fileName)
+        {
+            var affected = DbHelper.ExecuteScalar<int>("UploadData", CommandType.StoredProc,
+                new DbParameter("fileName", fileName));
+            return affected;
         }
 
         private static IParser CreateParser(Stream stream)

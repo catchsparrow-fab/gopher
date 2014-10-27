@@ -28,6 +28,13 @@ namespace Gopher.Controllers
             return View();
         }
 
+        //[HttpPost]
+        //[ActionName("Import")]
+        //public ActionResult UploadFile()
+        //{
+        //    return View(); 
+        //}
+
         [NonAction]
         public void CreateAdminRole()
         {

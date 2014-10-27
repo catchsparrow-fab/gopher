@@ -182,10 +182,14 @@
     <Compile Include="Tools\Helper.cs" />
     <Compile Include="Tools\HtmlHelpers.cs" />
     <Compile Include="Tools\NinjectDependencyResolver.cs" />
+    <Compile Include="Upload\UploadHandler.ashx.cs">
+      <DependentUpon>UploadHandler.ashx</DependentUpon>
+    </Compile>
   </ItemGroup>
   <ItemGroup>
     <Content Include="Content\bootstrap.css" />
     <Content Include="Content\bootstrap.min.css" />
+    <Content Include="Content\img\loader.gif" />
     <Content Include="favicon.ico" />
     <Content Include="fonts\glyphicons-halflings-regular.svg" />
     <Content Include="Global.asax" />
@@ -203,6 +207,7 @@
     <Content Include="Scripts\jquery-1.10.2.js" />
     <Content Include="Scripts\jquery-1.10.2.min.js" />
     <None Include="Scripts\jquery.validate-vsdoc.js" />
+    <Content Include="Scripts\jquery.form.min.js" />
     <Content Include="Scripts\jquery.validate.js" />
     <Content Include="Scripts\jquery.validate.min.js" />
     <Content Include="Scripts\jquery.validate.unobtrusive.js" />
@@ -247,6 +252,7 @@
     <Content Include="Areas\Admin\Views\Codes\Index.cshtml" />
     <Content Include="Views\Account\Preferences.cshtml" />
     <Content Include="Views\Account\_AccountLayout.cshtml" />
+    <Content Include="Upload\UploadHandler.ashx" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
@@ -259,6 +265,10 @@
     <None Include="Project_Readme.html" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\Gopher.ImportExport\Gopher.ImportExport.csproj">
+      <Project>{2fa7b281-f946-48d9-987d-c468d852e3b5}</Project>
+      <Name>Gopher.ImportExport</Name>
+    </ProjectReference>
     <ProjectReference Include="..\Gopher.Model\Gopher.Model.csproj">
       <Project>{3D5F10AC-B1BC-4D15-BB3E-3F0D2BA4F4AA}</Project>
       <Name>Gopher.Model</Name>

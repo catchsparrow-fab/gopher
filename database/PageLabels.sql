@@ -42,3 +42,6 @@ exec AddTranslation 'Account_ConfirmNewPassword', 'Confirm new password'
 exec AddTranslation 'Account_Tabs_MyPreferences', 'My preferences'
 exec AddTranslation 'Account_Tabs_ChangeMyPassword', 'Change my password'
 exec AddTranslation 'Account_YouAreLoggedInAs', 'You''re logged in as'
+
+exec AddTranslation 'Import_Info', 'Choose an ECCUBE or TempoVisor file on your computer to upload.'
+exec AddTranslation 'Import_Upload', 'Upload'

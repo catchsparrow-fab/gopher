@@ -55,7 +55,7 @@ namespace Gopher.Tests.Misc
             using (var input = new FileStream(inputFileName, FileMode.Open))
             using (var output = new FileStream(outputFileName, FileMode.Create))
             {
-                Import.Execute(input, output);
+                Import.GenerateBulkInsertFile(input, output);
             }
  
         }
@@ -69,7 +69,7 @@ namespace Gopher.Tests.Misc
             using (var input = new FileStream(inputFileName, FileMode.Open))
             using (var output = new FileStream(outputFileName, FileMode.Create))
             {
-                Import.Execute(input, output);
+                Import.GenerateBulkInsertFile(input, output);
             }
  
         }
