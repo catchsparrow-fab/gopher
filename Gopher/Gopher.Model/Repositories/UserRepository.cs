@@ -62,9 +62,9 @@ namespace Gopher.Model.Repositories
             };
         }
 
-        private static UserManager<ApplicationUser> GetUserManager()
+        private UserManager<ApplicationUser> GetUserManager()
         {
-            var store = new UserStore<ApplicationUser>(new ApplicationDbContext());
+            var store = new UserStore<ApplicationUser>(context);
             store.AutoSaveChanges = true;
             return new UserManager<ApplicationUser>(store);
         }
