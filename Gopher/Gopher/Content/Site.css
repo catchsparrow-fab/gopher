@@ -119,3 +119,11 @@ body {
 .main .page-header {
   margin-top: 0;
 }
+
+.ur-table {
+    max-width: 400px;
+}
+
+.ur-name {
+    /*width: 100px;*/
+}
