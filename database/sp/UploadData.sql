@@ -21,13 +21,18 @@ BEGIN
 
 	SET DATEFORMAT dmy
 
-	BULK INSERT Customers
-		FROM 'f:\projects\gopher-project\data\output.csv'
+	DECLARE @sql nvarchar(MAX) -- bulk insert has to be dynamic sql because it does not support file name as a variable
+	SET @sql =
+	'BULK INSERT Customers
+		FROM ''' + @fileName + '''
 		WITH  (
-			FIELDTERMINATOR=',',
-			DATAFILETYPE = 'widechar'
+			FIELDTERMINATOR='','',
+			DATAFILETYPE = ''widechar''
 		);
-	
+	';
+
+	EXEC (@sql)
+
 	SELECT @@ROWCOUNT
 
 	COMMIT
