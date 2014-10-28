@@ -39,7 +39,10 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="BulkInsertResults.cs" />
     <Compile Include="Domain\Customer.cs" />
+    <Compile Include="InputFileType.cs" />
+    <Compile Include="ParseResults.cs" />
     <Compile Include="Parsers\EccubeParser.cs" />
     <Compile Include="Import.cs" />
     <Compile Include="Parsers\IParser.cs" />
@@ -48,6 +51,7 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Domain\Sex.cs" />
     <Compile Include="Parsers\StandardParser.cs" />
+    <Compile Include="Tools\ErrorMessage.cs" />
     <Compile Include="Tools\Format.cs" />
   </ItemGroup>
   <ItemGroup>

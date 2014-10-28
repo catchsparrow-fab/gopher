@@ -36,5 +36,10 @@ namespace Gopher.ImportExport.Parsers
                 return Encoding.GetEncoding(932); // shift-jis
             }
         }
+
+        protected override InputFileType FileType
+        {
+            get { return InputFileType.TempoVisor; }
+        }
     }
 }

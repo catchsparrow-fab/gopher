@@ -1,4 +1,5 @@
-﻿using System.IO;
+﻿using System;
+using System.IO;
 using System.Text;
 using Gopher.ImportExport.Domain;
 using Gopher.ImportExport.Tools;
@@ -7,29 +8,47 @@ namespace Gopher.ImportExport.Parsers
 {
     public abstract class StandardParser : IParser
     {
-        public void Parse(Stream input, Stream output)
+        public ParseResults Parse(Stream input, Stream output)
         {
-            using (var reader = new StreamReader(input, InputEncoding))
-            using (var writer = new StreamWriter(output, Encoding.BigEndianUnicode))
+            var result = new ParseResults();
+
+            try
             {
-                reader.ReadLine(); // header
+                result.FileSize = input.Length;
+                result.FileType = FileType;
 
-                string line = reader.ReadLine();
-
-                while (!string.IsNullOrEmpty(line))
+                using (var reader = new StreamReader(input, InputEncoding))
+                using (var writer = new StreamWriter(output, Encoding.BigEndianUnicode))
                 {
-                    var array = line.Split(',');
-                    if (array.Length > 0)
+                    reader.ReadLine(); // header
+
+                    string line = reader.ReadLine();
+
+                    while (!string.IsNullOrEmpty(line))
                     {
-                        var customer = GetCustomer(array);
-                        writer.WriteLine(Format.CustomerToString(customer));
+                        var array = line.Split(',');
+                        if (array.Length > 0)
+                        {
+                            result.RowsInFile += 1;
+                            var customer = GetCustomer(array);
+                            writer.WriteLine(Format.CustomerToString(customer));
+                        }
+                        line = reader.ReadLine();
                     }
-                    line = reader.ReadLine();
                 }
+
+                result.Status = ParseStatus.Success;
             }
+            catch (Exception ex)
+            {
+                result.ErrorMessage = ErrorMessage.FromException(ex);
+            }
+
+            return result;
         }
 
         protected abstract Customer GetCustomer(string[] array);
+        protected abstract InputFileType FileType { get; } 
 
         protected virtual Encoding InputEncoding
         {

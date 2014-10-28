@@ -28,5 +28,10 @@ namespace Gopher.ImportExport.Parsers
                 TimesPurchased = Format.GetInt32(array[27])
             };
         }
+
+        protected override InputFileType FileType
+        {
+            get { return InputFileType.Eccube; }
+        }
     }
 }

@@ -12,16 +12,196 @@
     </p>
     <input type="submit" value="@Html.Translation("Import_Upload")" class="btn btn-primary" />
 </form>
-<div id="uploading-result" style="display:none;">
-    <strong id="status-message"></strong>
-    <span id="records-affected-label"></span>
-    <span id="records-affected-value"></span>
+<div id="uploading-result" style="display:none;" class="alert">
+    <div class="panel" id="uploading-result-panel">
+        <div class="panel-heading">
+            <h3 class="panel-title" id="status-message">Upload results</h3>
+        </div>
+        <div class="panel-body">
+            <h3>Summary</h3>
+            <div class="table-responsive">
+                <table class="table table-striped">
+                    <tr id="status-row">
+                        <td>
+                            Status
+                        </td>
+                        <td>
+                            <strong id="status-value">
+                            </strong>
+                        </td>
+                    </tr>
+                    <tr id="file-name-row">
+                        <td>
+                            File name
+                        </td>
+                        <td>
+                            <strong id="file-name-value">
+                            </strong>
+                        </td>
+                    </tr>
+                    <tr id="error-message-row" class="danger" style="display:none;">
+                        <td>
+                            Error message
+                        </td>
+                        <td>
+                            <strong id="error-message-value">
+                            </strong>
+                        </td>
+                    </tr>
+                </table>
+            </div>
+
+            <h3>Parser</h3>
+            <div class="table-responsive">
+                <table class="table table-striped">
+                    <tr id="parse-status-row">
+                        <td>
+                            Parser status
+                        </td>
+                        <td>
+                            <strong id="parse-status-value"></strong>
+                        </td>
+                    </tr>
+                    <tr id="file-format-row">
+                        <td>
+                            File format
+                        </td>
+                        <td>
+                            <strong id="file-format-value">
+                            </strong>
+                        </td>
+                    </tr>
+                    <tr id="file-size-row">
+                        <td>
+                            File size
+                        </td>
+                        <td>
+                            <strong id="file-size-value"></strong>
+                        </td>
+                    </tr>
+                    <tr id="rows-infile-row">
+                        <td>
+                            Rows in file
+                        </td>
+                        <td>
+                            <strong id="rows-infile-value"></strong>
+                        </td>
+                    </tr>
+                    <tr id="parse-message-row" style="display:none;" class="danger">
+                        <td>
+                            Error message
+                        </td>
+                        <td>
+                            <strong id="parse-message-value"></strong>
+                        </td>
+                    </tr>
+                </table>
+            </div>
+            
+            <h3>Database import</h3>
+            <div class="table-responsive">
+                <table class="table table-striped">
+                    <tr id="db-status-row">
+                        <td>
+                            Database importer status
+                        </td>
+                        <td>
+                            <strong id="db-status-value"></strong>
+                        </td>
+                    </tr>
+                    <tr id="rows-affected-row">
+                        <td>
+                            Rows affected
+                        </td>
+                        <td>
+                            <strong id="rows-affected-value"></strong>
+                        </td>
+                    </tr>
+                    <tr id="db-message-row" class="danger" style="display:none;">
+                        <td>
+                            Error message
+                        </td>
+                        <td>
+                            <strong id="db-message-value"></strong>
+                        </td>
+                    </tr>
+                </table>
+            </div>
+        </div>
+    </div>
 </div>
 <div style="display:none;" id="loading-bar">
     <img src="~/content/img/loader.gif" />
 </div>
 
 <script>
+    function bytesToSize(bytes) {
+        if(bytes == 0) return '0 Bytes';
+        var k = 1000;
+        var sizes = ['Bytes', 'KB', 'MB', 'GB', 'TB', 'PB', 'EB', 'ZB', 'YB'];
+        var i = Math.floor(Math.log(bytes) / Math.log(k));
+        return (bytes / Math.pow(k, i)).toPrecision(3) + ' ' + sizes[i];
+    }
+    function renderUploadResult(response) {
+        if (response.status == 0) {
+            $("#status-message").text("Successfully uploaded.");
+            $("#uploading-result-panel").addClass("panel-success");
+            $("#status-row").addClass("success");
+            $("#status-value").text("Success");
+        } else {
+            $("#status-message").text("Error importing the file.");
+            $("#uploading-result-panel").addClass("panel-danger");
+            $("#status-row").addClass("danger");
+            $("#status-value").text("Error");
+        }
+
+        if (response.message) {
+            $("#error-message-row").show();
+            $("#error-message-value").text(response.message);
+        }
+
+        $("#file-name-value").text(response.fileName);
+
+        if (response.parse.status == 1) {
+            $("#parse-status-row").addClass("danger");
+            $("#parse-status-value").text("Error");
+        } else {
+            $("#parse-status-row").addClass("success");
+            $("#parse-status-value").text("Success");
+        }
+
+        if (response.parse.type == 1) {
+            $("#file-format-value").text("ECCube");
+        } else if (response.parse.type == 2) {
+            $("#file-format-value").text("TempoVisor");
+        } else {
+            $("#file-format-row").addClass("danger");
+            $("#file-format-value").text("Unrecognized");
+        }
+
+        $("#file-size-value").text(bytesToSize(response.parse.size));
+        $("#rows-infile-value").text(response.parse.rows);
+        if (response.parse.message) {
+            $("#parse-message-row").show();
+            $("#parse-message-value").text(response.parse.message);
+        }
+
+        if (response.bulkInsert.status == 0) {
+            $("#db-status-row").addClass("success");
+            $("#db-status-value").text("Success");
+        } else {
+            $("#db-status-row").addClass("danger");
+            $("#db-status-value").text("Error");
+        }
+
+        $("#rows-affected-value").text(response.bulkInsert.affected);
+        
+        if (response.bulkInsert.message) {
+            $("#db-message-row").show();
+            $("#db-message-value").text(response.bulkInsert.message);
+        }
+    };
+
     $("#import-form").submit(function (event) {
         event.preventDefault();
         var self = $(this);
@@ -29,19 +209,8 @@
         $("#loading-bar").show();
 
         self.ajaxSubmit({
-            //url: self.attr("action"),
-            //type: self.attr("method"),
-            //data: self.serialize(),
             success: function (response) {
-                if (response.status == 0) {
-                    $("#status-message").text("Successfully uploaded.");
-                    $("#uploading-result").addClass("alert-success");
-                } else {
-                    $("#status-message").text("Error uploading the file.");
-                    $("#uploading-result").addClass("alert-danger");
-                }
-                $("#records-affected-label").text("Records inserted: ");
-                $("#records-affected-value").text(response.affected);
+                renderUploadResult(response);
             },
             complete: function () {
                 $("#uploading-result").show();

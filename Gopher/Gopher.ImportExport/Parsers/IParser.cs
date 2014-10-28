@@ -4,6 +4,6 @@ namespace Gopher.ImportExport.Parsers
 {
     public interface IParser
     {
-        void Parse(Stream input, Stream output);
+        ParseResults Parse(Stream input, Stream output);
     }
 }

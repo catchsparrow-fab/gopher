@@ -7,19 +7,13 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using Gopher.ImportExport.Parsers;
+using Gopher.ImportExport.Tools;
 using Gopher.Tools;
 
 namespace Gopher.ImportExport
 {
     public static class Import
     {
-        private enum InputFileType
-        {
-            Unrecognized = 0,
-            Eccube = 1,
-            TempoVisor = 2,
-        }
-
         private static InputFileType DetermineFileType(Stream stream)
         {
             var result = InputFileType.Unrecognized;
@@ -49,21 +43,39 @@ namespace Gopher.ImportExport
             return result;
         }
 
-        public static void GenerateBulkInsertFile(Stream input, Stream output)
+        public static ParseResults GenerateBulkInsertFile(Stream input, Stream output)
         {
             var parser = CreateParser(input);
 
             if (parser != null)
             {
-                parser.Parse(input, output);
+                return parser.Parse(input, output);
             }
+
+            return new ParseResults()
+            {
+                ErrorMessage = "Invalid file format (#20).",
+                Status = ParseStatus.Error
+            };
         }
 
-        public static int BulkInsert(string fileName)
+        public static BulkInsertResults BulkInsert(string fileName)
         {
-            var affected = DbHelper.ExecuteScalar<int>("UploadData", CommandType.StoredProc,
-                new DbParameter("fileName", fileName));
-            return affected;
+            var result = new BulkInsertResults();
+            result.Status = BulkInsertStatus.Success;
+
+            try
+            {
+                result.RowsAffected = DbHelper.ExecuteScalar<int>("UploadData", CommandType.StoredProc,
+                    new DbParameter("fileName", fileName));
+            }
+            catch (Exception ex)
+            {
+                result.Status = BulkInsertStatus.Error;
+                result.ErrorMessage = ErrorMessage.FromException(ex);
+            }
+
+            return result;
         }
 
         private static IParser CreateParser(Stream stream)
