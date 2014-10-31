@@ -39,7 +39,7 @@ namespace Gopher.ImportExport.Tools
         {
             if (dt == null) return string.Empty;
 
-            return dt.Value.ToString("d");
+            return dt.Value.ToString("yyyyMMdd");
         }
 
         public static int? GetInt32(string s)
@@ -48,6 +48,19 @@ namespace Gopher.ImportExport.Tools
             if (int.TryParse(s, out value))
                 return value;
             return null;
+        }
+
+        public static bool? GetBoolean(string s)
+        {
+            bool value;
+            if (bool.TryParse(s, out value))
+                return value;
+            return null;
+        }
+
+        public static string MergeIntoString(string[] array, int startIndex, int count)
+        {
+            return string.Join(" ", array.Skip(startIndex).Take(count).ToArray());
         }
 
         public static decimal? GetDecimal(string s)
@@ -66,11 +79,15 @@ namespace Gopher.ImportExport.Tools
             return null;
         }
 
-        public static Sex? GetSex(string s)
+        public static T? GetNullableEnum<T>(string s)
+            where T: struct
         {
             int value;
             if (int.TryParse(s, out value))
-                return (Sex)value;
+            {
+                object obj = value;
+                return (T)obj;
+            }
             return null;
         }
     }

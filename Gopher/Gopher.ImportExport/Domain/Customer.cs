@@ -37,5 +37,7 @@ namespace Gopher.ImportExport.Domain
         public DateTime? DateUpdated { get; set; }
         public DateTime? DateFirstPurchased { get; set; }
         public DateTime? DateLastPurchased { get; set; }
+        public TempoVisorData TempoVisorData { get; set; } // !new
+        public string CellPhone { get; set; } // !new
     }
 }

@@ -19,13 +19,24 @@ namespace Gopher.ImportExport.Parsers
                 NameKana = array[3],
                 NameKanji = array[6],
                 Phone = array[4],
-                Sex = Format.GetSex(array[12]),
+                Sex = Format.GetNullableEnum<Sex>(array[12]),
                 DateOfBirth = Format.GetDateTime(array[9]),
                 DateRegistered = Format.GetDateTime(array[10]),
                 DateUpdated = Format.GetDateTime(array[43]),
                 Email = array[20],
                 EmailMobile = array[21],
-                Prefecture = TempoVisorPrefectureHelper.GetPrefecture(array[7])
+                Prefecture = TempoVisorPrefectureHelper.GetPrefecture(array[7]),
+                CellPhone = array[5],
+                TempoVisorData = new TempoVisorData
+                {
+                    Area = Format.GetInt32(array[13]),
+                    Black = Format.GetBoolean(array[14]),
+                    CompanyCode = array[0],
+                    CutoutDate = Format.GetDateTime(array[42]),
+                    DirectMailFlag = Format.GetBoolean(array[19]),
+                    EmailAccept = Format.GetNullableEnum<TempoVisorEmailAccept>(array[22]),
+                    Fillers = Format.MergeIntoString(array, 32, 9)
+                }
             };
         }
 

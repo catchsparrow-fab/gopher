@@ -15,7 +15,7 @@ namespace Gopher.ImportExport.Parsers
                 ShopId = ECCUBE_SHOP_ID,
                 NameKanji = string.Format("{0} {1}", array[1], array[2]),
                 NameKana = string.Format("{0} {1}", array[3], array[4]),
-                Sex = Format.GetSex(array[18]),
+                Sex = Format.GetNullableEnum<Sex>(array[18]),
                 DateOfBirth = Format.GetDateTime(array[20]),
                 DateFirstPurchased = Format.GetDateTime(array[25]),
                 DateLastPurchased = Format.GetDateTime(array[26]),

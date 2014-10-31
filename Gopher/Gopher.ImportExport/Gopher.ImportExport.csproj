@@ -41,6 +41,7 @@
   <ItemGroup>
     <Compile Include="BulkInsertResults.cs" />
     <Compile Include="Domain\Customer.cs" />
+    <Compile Include="Domain\TempoVisorData.cs" />
     <Compile Include="InputFileType.cs" />
     <Compile Include="ParseResults.cs" />
     <Compile Include="Parsers\EccubeParser.cs" />

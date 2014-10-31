@@ -1,7 +1,9 @@
 ﻿using System;
 using System.IO;
 using Gopher.ImportExport;
+using Gopher.ImportExport.Domain;
 using Gopher.ImportExport.Parsers;
+using Gopher.ImportExport.Tools;
 using Gopher.Model.Domain;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 
@@ -57,7 +59,7 @@ namespace Gopher.Tests.Misc
             {
                 Import.GenerateBulkInsertFile(input, output);
             }
- 
+
         }
 
         [TestMethod]
@@ -71,7 +73,48 @@ namespace Gopher.Tests.Misc
             {
                 Import.GenerateBulkInsertFile(input, output);
             }
- 
+
+        }
+
+        [TestMethod]
+        public void MergeIntoSingleColumn()
+        {
+            string[] array = {
+                 "a",
+                 "b",
+                 "c",
+                 "d",
+                 "e",
+                 "f"
+            };
+
+            string expected = "c d e";
+
+            string actual = Format.MergeIntoString(array, 2, 3);
+
+            Assert.AreEqual(expected, actual);
+        }
+
+        [TestMethod]
+        public void GetNullableEnum_ExistingValue()
+        {
+            string value = "1";
+
+            Sex? expected = Sex.Male;
+
+            Sex? actual = Format.GetNullableEnum<Sex>(value);
+
+            Assert.AreEqual(expected, actual);
+        }
+
+        [TestMethod]
+        public void GetNullableEnum_MissingValue()
+        {
+            string value = "";
+
+            Sex? actual = Format.GetNullableEnum<Sex>(value);
+
+            Assert.IsNull(actual);
         }
     }
 }
