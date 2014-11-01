@@ -19,6 +19,30 @@ namespace Gopher.ImportExport.Domain
     // 13 - date updated (datetime)
     // 14 - date first purchased (datetime)
     // 15 - date last purchased (datetime)
+    // TEMPO-VISOR DATA
+    //	16	CompanyCode	string
+    //	17	Zip	string
+    //	18	Area	int?
+    //	19	Black	bool?
+    //	20	MemberRank	int?
+    //	21	Status	int?
+    //	22	MemberNumber	string
+    //	23	DirectMailFlag	bool?
+    //	24	EmailAccept	TempoVisorEmailAccept?
+    //	25	Note	string
+    //	26	PriceApplication	int?
+    //	27	Point	int?
+    //	28	PointDeposited	int?
+    //	29	LastPointIssued	int?
+    //	30	LastPointIssuedDate	DateTime?
+    //	31	LastPointUsed	int?
+    //	32	LastPointUsedDate	DateTime?
+    //	33	Fillers	string
+    //	34	Operation	TempoVisorOperation?
+    //	35	CutoutDate	DateTime?
+    //	36	ExpirationDate	DateTime?
+    //	37	LastVisitedDate	DateTime?
+    // ECCUBE DATA
     public class Customer
     {
         public string Id { get; set; }

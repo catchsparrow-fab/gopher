@@ -31,7 +31,30 @@ namespace Gopher.ImportExport.Tools
                 customer.TimesPurchased,
                 DtToString(customer.DateUpdated),
                 DtToString(customer.DateFirstPurchased),
-                DtToString(customer.DateLastPurchased)
+                DtToString(customer.DateLastPurchased),
+                // TEMPO-VISOR DATA
+                customer.TempoVisorData.CompanyCode,
+                customer.TempoVisorData.Zip,
+                customer.TempoVisorData.Area,
+                customer.TempoVisorData.Black,
+                customer.TempoVisorData.MemberRank,
+                customer.TempoVisorData.Status,
+                customer.TempoVisorData.MemberNumber,
+                customer.TempoVisorData.DirectMailFlag,
+                (int?)customer.TempoVisorData.EmailAccept,
+                customer.TempoVisorData.Note,
+                customer.TempoVisorData.PriceApplication,
+                customer.TempoVisorData.Point,
+                customer.TempoVisorData.PointDeposited,
+                customer.TempoVisorData.LastPointIssued,
+                DtToString(customer.TempoVisorData.LastPointIssuedDate),
+                customer.TempoVisorData.LastPointUsed,
+                DtToString(customer.TempoVisorData.LastPointUsedDate),
+                customer.TempoVisorData.Fillers,
+                (int?)customer.TempoVisorData.Operation,
+                DtToString(customer.TempoVisorData.CutoutDate),
+                DtToString(customer.TempoVisorData.ExpirationDate),
+                DtToString(customer.TempoVisorData.LastVisitedDate)
             });
         }
 

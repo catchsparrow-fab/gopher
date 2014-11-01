@@ -43,5 +43,7 @@ namespace Gopher.ImportExport.Domain
         public string Fillers { get; set; } // 9 elements
         public TempoVisorOperation? Operation { get; set; }
         public DateTime? CutoutDate { get; set; }
+        public DateTime? ExpirationDate { get; set; }
+        public DateTime? LastVisitedDate { get; set; }
     }
 }
