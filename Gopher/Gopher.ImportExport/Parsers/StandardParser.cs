@@ -54,7 +54,7 @@ namespace Gopher.ImportExport.Parsers
         {
             get
             {
-                return Encoding.UTF8;
+                return Encoding.GetEncoding(932); // shift-jis
             }
         }
     }

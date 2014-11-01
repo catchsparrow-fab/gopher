@@ -1,4 +1,6 @@
-﻿using Gopher.ImportExport.Domain;
+﻿using System;
+using System.Text;
+using Gopher.ImportExport.Domain;
 using Gopher.ImportExport.Tools;
 
 namespace Gopher.ImportExport.Parsers
@@ -13,20 +15,42 @@ namespace Gopher.ImportExport.Parsers
             {
                 Id = array[0],
                 ShopId = ECCUBE_SHOP_ID,
-                NameKanji = string.Format("{0} {1}", array[1], array[2]),
-                NameKana = string.Format("{0} {1}", array[3], array[4]),
-                Sex = Format.GetNullableEnum<Sex>(array[18]),
-                DateOfBirth = Format.GetDateTime(array[20]),
-                DateFirstPurchased = Format.GetDateTime(array[25]),
-                DateLastPurchased = Format.GetDateTime(array[26]),
-                DateRegistered = Format.GetDateTime(array[32]),
-                DateUpdated = Format.GetDateTime(array[33]),
-                Email = array[10],
-                EmailMobile = array[11],
-                Phone = string.Format("{0}{1}{2}", array[12], array[13], array[14]),
-                AmountPurchased = Format.GetDecimal(array[28]),
-                TimesPurchased = Format.GetInt32(array[27])
+                NameKanji = Format.MergeIntoString(array, 1, 2),
+                NameKana = Format.MergeIntoString(array, 3, 2),
+                Zip = Format.MergeIntoString(array, 6, 2),
+                Prefecture = array[8],
+                Address = Format.MergeIntoString(array, 9, 2),
+                Email = array[11],
+                Phone = Format.MergeIntoString(array, 12, 3, string.Empty),
+                Sex = GetSex(array[18]),
+                DateOfBirth = GetDateTime(array[20]),
+                Note = array[25],
+                DateRegistered = GetDateTime(array[26]),
+                DateUpdated = GetDateTime(array[27]),
+                EccubeData = new EccubeData
+                {
+                    CompanyName = array[5],
+                    Fax = Format.MergeIntoString(array, 15, 3, string.Empty),
+                    Occupation = array[19],
+                    DateFirstPurchased = GetDateTime(array[21]),
+                    DateLastPurchased = GetDateTime(array[22]),
+                    TimesPurchased = Format.GetInt32(array[23]),
+                    ProductWarranty = Format.MergeIntoString(array, 31, 100)
+                }
             };
+        }
+
+        private static Sex? GetSex(string value)
+        {
+            if (value == "男性") return Sex.Male;
+            if (value == "女性") return Sex.Female;
+            return null;
+        }
+
+        private static DateTime? GetDateTime(string value)
+        {
+            value = value.Replace("\"", string.Empty); // datetimes in eccube are wrapped in quotes
+            return Format.GetDateTime(value);
         }
 
         protected override InputFileType FileType

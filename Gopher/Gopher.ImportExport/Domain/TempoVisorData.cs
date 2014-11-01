@@ -24,7 +24,6 @@ namespace Gopher.ImportExport.Domain
     public class TempoVisorData
     {
         public string CompanyCode { get; set; }
-        public string Zip { get; set; }
         public int? Area { get; set; }
         public bool? Black { get; set; }
         public int? MemberRank { get; set; }
@@ -32,7 +31,6 @@ namespace Gopher.ImportExport.Domain
         public string MemberNumber { get; set; }
         public bool? DirectMailFlag { get; set; }
         public TempoVisorEmailAccept? EmailAccept { get; set; }
-        public string Note { get; set; }
         public int? PriceApplication { get; set; }
         public int? Point { get; set; }
         public int? PointDeposited { get; set; }

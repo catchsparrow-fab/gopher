@@ -30,7 +30,7 @@ namespace Gopher.ImportExport
                         case 44: 
                             result = InputFileType.TempoVisor;
                             break;
-                        case 176: 
+                        case 131: 
                             result = InputFileType.Eccube;
                             break;
                     }

@@ -26,15 +26,14 @@ namespace Gopher.ImportExport.Tools
                 customer.Email,
                 customer.EmailMobile,
                 customer.Phone,
-                customer.AmountPurchased,
                 DtToString(customer.DateRegistered),
-                customer.TimesPurchased,
                 DtToString(customer.DateUpdated),
-                DtToString(customer.DateFirstPurchased),
-                DtToString(customer.DateLastPurchased),
+                customer.Zip,
+                customer.CellPhone,
+                customer.Note,
+                customer.Address,
                 // TEMPO-VISOR DATA
                 customer.TempoVisorData.CompanyCode,
-                customer.TempoVisorData.Zip,
                 customer.TempoVisorData.Area,
                 customer.TempoVisorData.Black,
                 customer.TempoVisorData.MemberRank,
@@ -42,7 +41,6 @@ namespace Gopher.ImportExport.Tools
                 customer.TempoVisorData.MemberNumber,
                 customer.TempoVisorData.DirectMailFlag,
                 (int?)customer.TempoVisorData.EmailAccept,
-                customer.TempoVisorData.Note,
                 customer.TempoVisorData.PriceApplication,
                 customer.TempoVisorData.Point,
                 customer.TempoVisorData.PointDeposited,
@@ -54,7 +52,15 @@ namespace Gopher.ImportExport.Tools
                 (int?)customer.TempoVisorData.Operation,
                 DtToString(customer.TempoVisorData.CutoutDate),
                 DtToString(customer.TempoVisorData.ExpirationDate),
-                DtToString(customer.TempoVisorData.LastVisitedDate)
+                DtToString(customer.TempoVisorData.LastVisitedDate),
+                // TEMPO-VISOR DATA
+                customer.EccubeData.CompanyName,
+                customer.EccubeData.Fax,
+                customer.EccubeData.Occupation,
+                DtToString(customer.EccubeData.DateFirstPurchased),
+                DtToString(customer.EccubeData.DateLastPurchased),
+                customer.EccubeData.TimesPurchased,
+                customer.EccubeData.ProductWarranty,
             });
         }
 
@@ -81,9 +87,13 @@ namespace Gopher.ImportExport.Tools
             return null;
         }
 
-        public static string MergeIntoString(string[] array, int startIndex, int count)
+        public static string MergeIntoString(string[] array, int startIndex, int count, string delimiter = " ")
         {
-            return string.Join(" ", array.Skip(startIndex).Take(count).ToArray());
+            var result = string.Join(delimiter, array.Skip(startIndex).Take(count).ToArray().Where(s => !string.IsNullOrWhiteSpace(s)));
+            //if (result.Length == 0)
+            //    return null;
+            //else
+                return result;
         }
 
         public static decimal? GetDecimal(string s)

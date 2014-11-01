@@ -53,7 +53,8 @@ namespace Gopher.ImportExport.Parsers
             "熊本県",
             "大分県",
             "宮崎県",
-            "沖縄県",        };
+            "沖縄県",
+        };
 
         private static readonly Dictionary<string, string> CONVERTABLE_PREFECTURES =
             new Dictionary<string,string>
