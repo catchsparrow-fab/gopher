@@ -42,6 +42,8 @@
     <Compile Include="BulkInsertResults.cs" />
     <Compile Include="Domain\Customer.cs" />
     <Compile Include="Domain\EccubeData.cs" />
+    <Compile Include="Domain\EccubeEmailTarget.cs" />
+    <Compile Include="Domain\EccubeSubscriptionType.cs" />
     <Compile Include="Domain\TempoVisorData.cs" />
     <Compile Include="InputFileType.cs" />
     <Compile Include="ParseResults.cs" />

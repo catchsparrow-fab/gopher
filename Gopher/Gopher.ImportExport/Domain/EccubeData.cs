@@ -15,5 +15,8 @@ namespace Gopher.ImportExport.Domain
         public DateTime? DateLastPurchased { get; set; }
         public int? TimesPurchased { get; set; }
         public string ProductWarranty { get; set; }
+        public bool? Deleted { get; set; }
+        public EccubeSubscriptionType? SubscriptionType { get; set; }
+        public EccubeEmailTarget? EmailTarget { get; set; }
     }
 }

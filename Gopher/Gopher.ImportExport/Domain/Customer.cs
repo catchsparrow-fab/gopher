@@ -19,17 +19,17 @@ namespace Gopher.ImportExport.Domain
     // 13   CellPhone string,
     // 14	Note	string
     // 15   Address string
+    // 16	PointBalance	int?
     // TEMPO-VISOR DATA
-    //	16	CompanyCode	string
-    //	17	Area	int?
-    //	18	Black	bool?
-    //	19	MemberRank	int?
-    //	20	Status	int?
-    //	21	MemberNumber	string
-    //	22	DirectMailFlag	bool?
-    //	23	EmailAccept	TempoVisorEmailAccept?
-    //	24	PriceApplication	int?
-    //	25	Point	int?
+    //	17	CompanyCode	string
+    //	18	Area	int?
+    //	19	Black	bool?
+    //	20	MemberRank	int?
+    //	21	Status	int?
+    //	22	MemberNumber	string
+    //	23	DirectMailFlag	bool?
+    //	24	EmailAccept	TempoVisorEmailAccept?
+    //	25	PriceApplication	int?
     //	26	PointDeposited	int?
     //	27	LastPointIssued	int?
     //	28	LastPointIssuedDate	DateTime?
@@ -48,6 +48,9 @@ namespace Gopher.ImportExport.Domain
     //  40  LastPurchased datetime
     //  41  TimesPurchased int
     //  42  ProductWarranty string
+    //  43  Deleted bool
+    //  44  SubscriptionType int
+    //  45  EmailTarget int
     public class Customer
     {
         public string Id { get; set; }
@@ -68,6 +71,7 @@ namespace Gopher.ImportExport.Domain
         public string Zip { get; set; }
         public string Note { get; set; }
         public string Address { get; set; }
+        public int? PointBalance { get; set; }
 
         public Customer()
         {

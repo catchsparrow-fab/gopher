@@ -29,6 +29,7 @@ CREATE TABLE [dbo].[Customers](
 	[CellPhone] [nvarchar](250) NULL,
 	[Note] [nvarchar](250) NULL,
 	[Address] [nvarchar](250) NULL,
+	[PointBalance] [int] NULL,
 	[TV_CompanyCode] [nvarchar](250) NULL,
 	[TV_Area] [int] NULL,
 	[TV_Black] [bit] NULL,
@@ -38,7 +39,6 @@ CREATE TABLE [dbo].[Customers](
 	[TV_DirectMailFlag] [bit] NULL,
 	[TV_EmailAccept] [int] NULL,
 	[TV_PriceApplication] [int] NULL,
-	[TV_Point] [int] NULL,
 	[TV_PointDeposited] [int] NULL,
 	[TV_LastPointIssued] [int] NULL,
 	[TV_LastPointIssuedDate] [datetime] NULL,
@@ -56,6 +56,9 @@ CREATE TABLE [dbo].[Customers](
 	[EC_DateLastPurchased] [datetime] NULL,
 	[EC_TimesPurchased] [int] NULL,
 	[EC_ProductWarranty] [nvarchar](2000) NULL,
+	[EC_Deleted] [bit] NULL,
+	[EC_SubscriptionType] [int] NULL,
+	[EC_EmailTarget] [int] NULL,
 ) ON [PRIMARY]
 
 GO

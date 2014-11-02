@@ -32,7 +32,6 @@ namespace Gopher.ImportExport.Domain
         public bool? DirectMailFlag { get; set; }
         public TempoVisorEmailAccept? EmailAccept { get; set; }
         public int? PriceApplication { get; set; }
-        public int? Point { get; set; }
         public int? PointDeposited { get; set; }
         public int? LastPointIssued { get; set; }
         public DateTime? LastPointIssuedDate { get; set; }

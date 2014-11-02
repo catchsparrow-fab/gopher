@@ -29,6 +29,7 @@ namespace Gopher.ImportExport.Parsers
                 Email = array[20],
                 EmailMobile = array[21],
                 Note = array[23],
+                PointBalance = Format.GetInt32(array[26]),
                 DateUpdated = Format.GetDateTime(array[43]),
                 TempoVisorData = new TempoVisorData
                 {
@@ -44,7 +45,6 @@ namespace Gopher.ImportExport.Parsers
                     EmailAccept = Format.GetNullableEnum<TempoVisorEmailAccept>(array[22]),
                     PriceApplication = Format.GetInt32(array[24]),
                     LastVisitedDate = Format.GetDateTime(array[25]),
-                    Point = Format.GetInt32(array[26]),
                     PointDeposited = Format.GetInt32(array[27]),
                     LastPointIssued = Format.GetInt32(array[28]),
                     LastPointIssuedDate = Format.GetDateTime(array[29]),

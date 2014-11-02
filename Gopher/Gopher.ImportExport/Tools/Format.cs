@@ -32,6 +32,7 @@ namespace Gopher.ImportExport.Tools
                 customer.CellPhone,
                 customer.Note,
                 customer.Address,
+                customer.PointBalance,
                 // TEMPO-VISOR DATA
                 customer.TempoVisorData.CompanyCode,
                 customer.TempoVisorData.Area,
@@ -42,7 +43,6 @@ namespace Gopher.ImportExport.Tools
                 customer.TempoVisorData.DirectMailFlag,
                 (int?)customer.TempoVisorData.EmailAccept,
                 customer.TempoVisorData.PriceApplication,
-                customer.TempoVisorData.Point,
                 customer.TempoVisorData.PointDeposited,
                 customer.TempoVisorData.LastPointIssued,
                 DtToString(customer.TempoVisorData.LastPointIssuedDate),
@@ -61,6 +61,9 @@ namespace Gopher.ImportExport.Tools
                 DtToString(customer.EccubeData.DateLastPurchased),
                 customer.EccubeData.TimesPurchased,
                 customer.EccubeData.ProductWarranty,
+                customer.EccubeData.Deleted,
+                (int?)customer.EccubeData.SubscriptionType,
+                (int?)customer.EccubeData.EmailTarget
             });
         }
 
@@ -89,11 +92,7 @@ namespace Gopher.ImportExport.Tools
 
         public static string MergeIntoString(string[] array, int startIndex, int count, string delimiter = " ")
         {
-            var result = string.Join(delimiter, array.Skip(startIndex).Take(count).ToArray().Where(s => !string.IsNullOrWhiteSpace(s)));
-            //if (result.Length == 0)
-            //    return null;
-            //else
-                return result;
+            return string.Join(delimiter, array.Skip(startIndex).Take(count).ToArray().Where(s => !string.IsNullOrWhiteSpace(s)));
         }
 
         public static decimal? GetDecimal(string s)

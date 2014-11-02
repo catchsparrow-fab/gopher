@@ -24,6 +24,7 @@ namespace Gopher.ImportExport.Parsers
                 Phone = Format.MergeIntoString(array, 12, 3, string.Empty),
                 Sex = GetSex(array[18]),
                 DateOfBirth = GetDateTime(array[20]),
+                PointBalance = Format.GetInt32(array[24]),
                 Note = array[25],
                 DateRegistered = GetDateTime(array[26]),
                 DateUpdated = GetDateTime(array[27]),
@@ -35,6 +36,9 @@ namespace Gopher.ImportExport.Parsers
                     DateFirstPurchased = GetDateTime(array[21]),
                     DateLastPurchased = GetDateTime(array[22]),
                     TimesPurchased = Format.GetInt32(array[23]),
+                    SubscriptionType = EccubeSubscriptionTypeHelper.FromString(array[28]),
+                    EmailTarget = Format.GetNullableEnum<EccubeEmailTarget>(array[29]),
+                    Deleted = Format.GetBoolean(array[30]),
                     ProductWarranty = Format.MergeIntoString(array, 31, 100)
                 }
             };
