@@ -1,4 +1,5 @@
 ﻿using System;
+using Gopher.Tools;
 
 namespace Gopher.ImportExport.Domain
 {
@@ -51,7 +52,7 @@ namespace Gopher.ImportExport.Domain
     //  43  Deleted bool
     //  44  SubscriptionType int
     //  45  EmailTarget int
-    public class Customer
+    public class Customer : IPersistent
     {
         public string Id { get; set; }
         public string ShopId { get; set; }
@@ -77,6 +78,30 @@ namespace Gopher.ImportExport.Domain
         {
             TempoVisorData = new TempoVisorData();
             EccubeData = new EccubeData();
+        }
+
+        public void Init(IDataReader reader)
+        {
+            Id = reader.GetString("CustomerId");
+            ShopId = reader.GetString("ShopId");
+            Prefecture = reader.GetString("Prefecture");
+            NameKanji = reader.GetString("NameKanji");
+            NameKana = reader.GetString("NameKana");
+            Sex = reader.GetNullableEnum<Sex>("Sex");
+            DateOfBirth = reader.GetNullableDateTime("DateOfBirth");
+            Email = reader.GetString("Email");
+            EmailMobile = reader.GetString("EmailMobile");
+            Phone = reader.GetString("Phone");
+            DateRegistered = reader.GetNullableDateTime("DateRegistered");
+            DateUpdated = reader.GetNullableDateTime("DateUpdated");
+            Zip = reader.GetString("Zip");
+            CellPhone = reader.GetString("CellPhone");
+            Note = reader.GetString("Note");
+            Address = reader.GetString("Address");
+            PointBalance = reader.GetNullableInt32("PointBalance");
+
+            TempoVisorData.Init(reader);
+            EccubeData.Init(reader);
         }
     }
 }

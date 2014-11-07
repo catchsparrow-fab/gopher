@@ -10,6 +10,7 @@ namespace Gopher.Tools
 
         private static bool HasColumn(SqlDataReader dr, string columnName)
         {
+            return true;
             for (int i = 0; i < dr.FieldCount; i++)
             {
                 if (dr.GetName(i).Equals(columnName, StringComparison.InvariantCultureIgnoreCase))
@@ -26,6 +27,8 @@ namespace Gopher.Tools
 
         public string GetString(string name)
         {
+            if (IsNull(name)) return null;
+
             return reader.GetString(reader.GetOrdinal(name));
         }
 
@@ -39,6 +42,41 @@ namespace Gopher.Tools
         public int GetInt32(string name)
         {
             return reader.GetInt32(reader.GetOrdinal(name));
+        }
+
+        public decimal GetDecimal(string name)
+        {
+            return reader.GetDecimal(reader.GetOrdinal(name));
+        }
+
+        public decimal? GetNullableDecimal(string name)
+        {
+            if (HasColumn(reader, name) && !IsNull(name))
+                return GetDecimal(name);
+            return null;
+        }
+
+        public int? GetNullableInt32(string name)
+        {
+            if (HasColumn(reader, name) && !IsNull(name))
+                return GetInt32(name);
+            return null;
+        }
+
+        public T? GetNullableEnum<T>(string name)
+            where T : struct
+        {
+            object value = GetNullableInt32(name);
+            if (value == null) 
+                return null;
+            return (T)value; 
+        }
+
+        public bool? GetNullableBoolean(string name)
+        {
+            if (HasColumn(reader, name) && !IsNull(name))
+                return reader.GetBoolean(reader.GetOrdinal(name));
+            return null;
         }
 
         public bool GetBoolean(string name)
@@ -56,17 +94,10 @@ namespace Gopher.Tools
             return reader.GetByte(reader.GetOrdinal(name));
         }
 
-        public DateTime? GetDateTimeNullable(string name)
+        public DateTime? GetNullableDateTime(string name)
         {
             if (HasColumn(reader, name) && !IsNull(name))
                 return GetDateTime(name);
-            return null;
-        }
-
-        public int? GetInt32Nullable(string name)
-        {
-            if (HasColumn(reader, name) && !IsNull(name))
-                return GetInt32(name);
             return null;
         }
 

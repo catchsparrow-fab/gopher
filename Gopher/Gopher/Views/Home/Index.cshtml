@@ -2,7 +2,31 @@
     ViewBag.Title = "Home Page";
 }
 
-<div class="jumbotron">
-    <h1>Customer search</h1>
-    <p class="lead">Is coming up here.</p>
-</div>
+<form id="search-form" method="post" action="@Url.Action()" class="form-horizontal">
+    <div class="form-group">
+        <input type="submit" value="Search" />
+    </div>
+</form>
+<form id="download-form" method="post" action="@Url.Action("DownloadCsv", "Home")" class="form-horizontal">
+    <div class="form-group">
+        <input type="submit" value="Download CSV" />
+    </div>
+</form>
+
+<script>
+    $("#search-form").submit(function (event) {
+        event.preventDefault();
+        var self = $(this);
+        $("#loading-bar").show();
+
+        self.ajaxSubmit({
+            success: function (response) {
+                renderUploadResult(response);
+            },
+            complete: function () {
+                $("#uploading-result").show();
+                $("#loading-bar").hide();
+            }
+        });
+    });
+</script>

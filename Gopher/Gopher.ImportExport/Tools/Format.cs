@@ -5,6 +5,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using Gopher.ImportExport.Domain;
+using Gopher.Tools;
 
 namespace Gopher.ImportExport.Tools
 {
@@ -65,6 +66,22 @@ namespace Gopher.ImportExport.Tools
                 (int?)customer.EccubeData.SubscriptionType,
                 (int?)customer.EccubeData.EmailTarget
             });
+        }
+
+        private class Column : IPersistent
+        {
+            public string Name { get; set; }
+
+            public void Init(IDataReader reader)
+            {
+                Name = reader.GetString("COLUMN_NAME");
+            }
+        }
+
+        public static string[] GetHeaders()
+        {
+            return DbHelper.GetList<Column>("sp_columns", CommandType.StoredProc,
+                new DbParameter("table_name", "Customers")).Select(i => i.Name).ToArray();
         }
 
         private static string DtToString(DateTime? dt)

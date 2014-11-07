@@ -114,5 +114,26 @@ namespace Gopher.Tools
 
             return (T)Convert.ChangeType(obj, typeof(T));
         }
+
+        public static IEnumerable<T> GetPrimitivesList<T>(string commandText, CommandType commandType, params DbParameter[] parameters)
+        {
+            var dataAccess = DataAccess.Create();
+
+            List<T> list = new List<T>();
+
+            dataAccess.SetCommand(commandText, commandType, parameters);
+
+            using (var reader = dataAccess.ExecuteReader())
+            {
+                while (reader.Read())
+                {
+                    T item = (T)reader[0];
+
+                    list.Add(item);
+                }
+            }
+
+            return list;
+        }
     }
 }
