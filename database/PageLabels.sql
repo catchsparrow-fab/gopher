@@ -60,3 +60,7 @@ exec AddTranslation 'Import_RowsInFile', 'Rows in file'
 exec AddTranslation 'Import_DatabaseImport', 'Database import'
 exec AddTranslation 'Import_DatabaseImportStatus', 'Database import status'
 exec AddTranslation 'Import_RowsAffected', 'RowsAffected'
+
+-- search tool
+exec AddTranslation 'Generic_Male', 'Male'
+exec AddTranslation 'Generic_Female', 'Female'

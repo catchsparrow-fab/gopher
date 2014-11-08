@@ -5,6 +5,7 @@ using System.Linq;
 using System.Text;
 using System.Web;
 using System.Web.Mvc;
+using Gopher.ImportExport.Domain;
 using Gopher.ImportExport.Tools;
 using Gopher.Model.Abstractions;
 using Gopher.Model.Domain;
@@ -24,9 +25,22 @@ namespace Gopher.Controllers
             this.repository = repository;
         }
 
+        [ActionName("Index")]
+        [HttpPost]
+        public ActionResult CustomersIndex()
+        {
+            var customers = GetCustomers();
+            return View(new CustomerSearchViewModel(customers.Take(100)));
+        }
+
         public ActionResult Index()
         {
             return View();
+        }
+
+        private IEnumerable<Customer> GetCustomers()
+        {
+            return repository.GetCustomers(null);
         }
 
         public FileResult DownloadCSV()
@@ -37,7 +51,7 @@ namespace Gopher.Controllers
             using (var writer = new StreamWriter(stream, Encoding.UTF8, 1024, true))
             {
                 writer.WriteLine(header);
-                foreach (var customer in repository.GetCustomers(null))
+                foreach (var customer in GetCustomers())
                 {
                     writer.WriteLine(Format.CustomerToString(customer));
                 }
@@ -57,13 +71,6 @@ namespace Gopher.Controllers
         {
             return View();
         }
-
-        //[HttpPost]
-        //[ActionName("Import")]
-        //public ActionResult UploadFile()
-        //{
-        //    return View(); 
-        //}
 
         [NonAction]
         public void CreateAdminRole()

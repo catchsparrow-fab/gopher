@@ -1,6 +1,7 @@
 ﻿@{
     ViewBag.Title = "Home Page";
 }
+@model Gopher.Models.CustomerSearchViewModel
 
 <form id="search-form" method="post" action="@Url.Action()" class="form-horizontal">
     <div class="form-group">
@@ -12,21 +13,28 @@
         <input type="submit" value="Download CSV" />
     </div>
 </form>
+@if (Model != null && Model.Customers != null)
+{
+    <div>
+        <span>Search result</span>
+        @Html.Partial("CustomerList", Model.Customers)
+    </div>
+}
 
 <script>
-    $("#search-form").submit(function (event) {
-        event.preventDefault();
-        var self = $(this);
-        $("#loading-bar").show();
+    //$("#search-form").submit(function (event) {
+    //    event.preventDefault();
+    //    var self = $(this);
+    //    $("#loading-bar").show();
 
-        self.ajaxSubmit({
-            success: function (response) {
-                renderUploadResult(response);
-            },
-            complete: function () {
-                $("#uploading-result").show();
-                $("#loading-bar").hide();
-            }
-        });
-    });
+    //    self.ajaxSubmit({
+    //        success: function (response) {
+    //            renderUploadResult(response);
+    //        },
+    //        complete: function () {
+    //            $("#uploading-result").show();
+    //            $("#loading-bar").hide();
+    //        }
+    //    });
+    //});
 </script>

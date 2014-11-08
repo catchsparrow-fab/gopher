@@ -19,7 +19,7 @@ namespace Gopher.Tests.Controllers
             HomeController controller = new HomeController(null);
 
             // Act
-            ViewResult result = controller.Index() as ViewResult;
+            ViewResult result = controller.CustomersIndex() as ViewResult;
 
             // Assert
             Assert.IsNotNull(result);

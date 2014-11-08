@@ -1,0 +1,55 @@
+﻿@model IEnumerable<Gopher.Models.CustomerViewModel>
+
+<table class="table table-bordered table-responsive gopher-table">
+    <thead>
+        <tr>
+            <th rowspan="2" style="vertical-align:middle; text-align:center">
+                @Html.DisplayNameFor(model => model.Shop)
+            </th>
+            <th style="vertical-align:middle; text-align:center">
+                @Html.DisplayNameFor(model => model.CustomerId)
+            </th>
+            <th rowspan="2" style="vertical-align:middle; text-align:center">
+                @Html.DisplayNameFor(model => model.NameKanji)
+                <br />
+                (@Html.DisplayNameFor(model => model.NameKana))
+            </th>
+            <th rowspan="2" style="vertical-align:middle; text-align:center">
+                @Html.DisplayNameFor(model => model.Sex)
+            </th>
+            <th colspan="2" style="vertical-align:middle; text-align:center">
+                Contact info
+            </th>
+        </tr>
+        <tr>
+            <th style="vertical-align:middle; text-align:center">
+                @Html.DisplayNameFor(model => model.Prefecture)
+            </th>
+            <th style="vertical-align:middle; text-align:center">
+                @Html.DisplayNameFor(model => model.Phone)
+            </th>
+            <th style="vertical-align:middle; text-align:center">
+                @Html.DisplayNameFor(model => model.Email)
+            </th>
+        </tr>
+    </thead>
+
+    @foreach (var item in Model)
+    {
+        <tr>
+            <td rowspan="2">@item.Shop</td>
+            <td>@item.CustomerId</td>
+            <td rowspan="2">@item.NameKanji
+                <br/>
+                (@item.NameKana)
+            </td>
+            <td rowspan="2">@item.Sex</td>
+            <td rowspan="2">@item.Phone</td>
+            <td rowspan="2">@item.Email</td>
+        </tr>
+        <tr>
+            <td>@item.Prefecture</td>
+        </tr>
+    }
+
+</table>

@@ -127,3 +127,8 @@ body {
 .ur-name {
     /*width: 100px;*/
 }
+
+.gopher-th {
+    vertical-align: middle;
+    text-align: center;
+}
