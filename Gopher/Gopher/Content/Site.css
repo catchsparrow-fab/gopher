@@ -128,7 +128,20 @@ body {
     /*width: 100px;*/
 }
 
-.gopher-th {
-    vertical-align: middle;
-    text-align: center;
+.search-form-table {
+    margin-top: 20px;
+}
+
+    .search-form-table td {
+        padding: 6px 60px 6px 6px;
+        border: 1px solid #b2b2b2;
+    }
+
+#search-button-wrapper {
+    margin-top: 12px;
+
+}
+
+.td-gray {
+    background-color:#f0f0f0;
 }

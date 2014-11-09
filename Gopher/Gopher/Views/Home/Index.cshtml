@@ -3,23 +3,63 @@
 }
 @model Gopher.Models.CustomerSearchViewModel
 
-<form id="search-form" method="post" action="@Url.Action()" class="form-horizontal">
-    <div class="form-group">
-        <input type="submit" value="Search" />
+<form id="search-form" method="post" action="@Url.Action()" class="search-form-table">
+    <table>
+        <tr>
+            <td class="td-gray">
+                Customer Id
+            </td>
+            <td colspan="3">
+                <input type="text" id="CustomerId" name="CustomerId" />
+            </td>
+        </tr>
+        <tr>
+            <td class="td-gray">
+                Shop
+            </td>
+            <td>
+                <select></select>
+            </td>
+            <td class="td-gray">
+                Prefecture
+            </td>
+            <td>
+                <select></select>
+            </td>
+        </tr>
+        <tr>
+            <td class="td-gray">
+                Sex
+            </td>            
+            <td>
+                <input type="checkbox" name="Sex" value="1" checked="checked" />
+                <input type="checkbox" name="Sex" value="2" checked="checked" />
+            </td>
+            <td class="td-gray">
+                Month of birth
+            </td>
+            <td>
+                <select></select>
+            </td>
+        </tr>
+    </table>
+    <div id="search-button-wrapper">
+        <input type="submit" value="Search" name="search" id="search" />
     </div>
-</form>
-<form id="download-form" method="post" action="@Url.Action("DownloadCsv", "Home")" class="form-horizontal">
+@*<form id="download-form" method="post" action="@Url.Action("DownloadCsv", "Home")" class="form-horizontal">
     <div class="form-group">
         <input type="submit" value="Download CSV" />
     </div>
-</form>
+</form>*@
 @if (Model != null && Model.Customers != null)
 {
     <div>
         <span>Search result</span>
+        <input type="submit" value="Download CSV" name="download" id="download" />
         @Html.Partial("CustomerList", Model.Customers)
     </div>
 }
+</form>
 
 <script>
     //$("#search-form").submit(function (event) {

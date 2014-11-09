@@ -27,10 +27,16 @@ namespace Gopher.Controllers
 
         [ActionName("Index")]
         [HttpPost]
-        public ActionResult CustomersIndex()
+        public ActionResult CustomersIndex(CustomerFilter filter, string download, string search)
         {
-            var customers = GetCustomers();
-            return View(new CustomerSearchViewModel(customers.Take(100)));
+            var customers = repository.GetCustomers(filter);
+
+            if (!string.IsNullOrEmpty(search))
+                return View(new CustomerSearchViewModel(customers.Take(100)));
+            else if (!string.IsNullOrEmpty(download))
+                return DownloadCSV(customers);
+
+            throw new NotImplementedException("Method not supported.");
         }
 
         public ActionResult Index()
@@ -38,12 +44,7 @@ namespace Gopher.Controllers
             return View();
         }
 
-        private IEnumerable<Customer> GetCustomers()
-        {
-            return repository.GetCustomers(null);
-        }
-
-        public FileResult DownloadCSV()
+        public FileResult DownloadCSV(IEnumerable<Customer> customers)
         {
             string header = string.Join(",", Format.GetHeaders());
             var stream = new MemoryStream();
@@ -51,7 +52,7 @@ namespace Gopher.Controllers
             using (var writer = new StreamWriter(stream, Encoding.UTF8, 1024, true))
             {
                 writer.WriteLine(header);
-                foreach (var customer in GetCustomers())
+                foreach (var customer in customers)
                 {
                     writer.WriteLine(Format.CustomerToString(customer));
                 }

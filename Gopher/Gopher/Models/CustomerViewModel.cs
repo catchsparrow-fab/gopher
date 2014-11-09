@@ -57,9 +57,11 @@ namespace Gopher.Models
                     switch (customer.Sex)
                     {
                         case ImportExport.Domain.Sex.Male:
-                            return TranslationHelper.Get("Generic_Male");
+                            return "男性";
+                            //return TranslationHelper.Get("Generic_Male");
                         case ImportExport.Domain.Sex.Female:
-                            return TranslationHelper.Get("Generic_Female");
+                            return "女性";
+                            //return TranslationHelper.Get("Generic_Female");
                     }
                 }
 
