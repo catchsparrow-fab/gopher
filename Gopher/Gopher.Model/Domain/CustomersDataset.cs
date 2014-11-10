@@ -4,12 +4,12 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using Gopher.ImportExport.Domain;
-using Gopher.Model.Domain;
 
-namespace Gopher.Model.Abstractions
+namespace Gopher.Model.Domain
 {
-    public interface ICustomerRepository
+    public class CustomersDataset
     {
-        CustomersDataset GetCustomers(CustomerFilter filter);
+        public IEnumerable<Customer> Customers { get; set; }
+        public int TotalCount { get; set; }
     }
 }

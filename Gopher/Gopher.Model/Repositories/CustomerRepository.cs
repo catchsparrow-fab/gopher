@@ -5,22 +5,54 @@ using System.Text;
 using System.Threading.Tasks;
 using Gopher.ImportExport.Domain;
 using Gopher.Model.Abstractions;
+using Gopher.Model.Domain;
 using Gopher.Tools;
 
 namespace Gopher.Model.Repositories
 {
     public class CustomerRepository : ICustomerRepository
     {
-        public IEnumerable<Customer> GetCustomers(CustomerFilter filter)
+        public CustomersDataset GetCustomers(CustomerFilter filter)
         {
-            return DbHelper.GetList<Customer>("GetCustomers", CommandType.StoredProc,
+            var dataset = new CustomersDataset();
+            using (var reader = DbHelper.ExecuteReader("GetCustomers", CommandType.StoredProc, GetParameters(filter).ToArray()))
+            {
+                var list = new List<Customer>();
+                while (reader.Read())
+                {
+                    var item = new Customer();
+                    item.Init(reader);
+                    list.Add(item);
+                }
+
+                dataset.Customers = list;
+
+                reader.NextResult();
+                reader.Read();
+
+                dataset.TotalCount = reader.GetInt32("TotalCount");
+            }
+            return dataset;
+        }
+
+        private static IEnumerable<DbParameter> GetParameters(CustomerFilter filter)
+        {
+            return new List<DbParameter>
+            {
                 new DbParameter("customerId", filter.CustomerId),
                 new DbParameter("sex", GetSexFilter(filter.Sex)),
                 new DbParameter("dobMin", filter.DateOfBirth.Min),
                 new DbParameter("dobMax", filter.DateOfBirth.Max),
                 new DbParameter("timesPurchasedMin", filter.TimesPurchased.Min),
-                new DbParameter("timesPurchasedMax", filter.TimesPurchased.Max)
-                );
+                new DbParameter("timesPurchasedMax", filter.TimesPurchased.Max),
+                new DbParameter("count", 50),
+                new DbParameter("start", GetStartingIndex(filter.Page))
+            };
+        }
+
+        private static object GetStartingIndex(int? page = 1)
+        {
+            return (page - 1) * 50;
         }
 
         private static object GetSexFilter(Sex[] selected)
@@ -28,13 +60,6 @@ namespace Gopher.Model.Repositories
             if (selected == null || selected.Length != 1) return null;
 
             return selected[0];
-        }
-
-        private static IEnumerable<DbParameter> GetParameters(CustomerFilter filter)
-        {
-            var list = new List<DbParameter>();
-            //if (filter.
-            return list;
         }
     }
 }

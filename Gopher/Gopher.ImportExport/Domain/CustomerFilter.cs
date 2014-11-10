@@ -14,14 +14,14 @@ namespace Gopher.ImportExport.Domain
         //public Range<decimal> AmountPurchased { get; set; }
         public Range<int> TimesPurchased { get; set; }
         //public Range<DateTime> DateRegistered { get; set; }
-        public int? Count { get; set; }
-        public int? Start { get; set; }
+        public int? Page { get; set; }
 
         public CustomerFilter()
         {
             DateOfBirth = new Range<DateTime>();
             TimesPurchased = new Range<int>();
-            Count = 20;
+            Page = 1;
+            Sex = new Sex[0];
         }
     }
 }

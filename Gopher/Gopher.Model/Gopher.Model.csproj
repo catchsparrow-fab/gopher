@@ -57,6 +57,7 @@
   <ItemGroup>
     <Compile Include="Abstractions\ICustomerRepository.cs" />
     <Compile Include="Abstractions\ITranslationRepository.cs" />
+    <Compile Include="Domain\CustomersDataset.cs" />
     <Compile Include="Domain\IdentityModels.cs" />
     <Compile Include="Domain\Language.cs" />
     <Compile Include="Domain\Translation.cs" />

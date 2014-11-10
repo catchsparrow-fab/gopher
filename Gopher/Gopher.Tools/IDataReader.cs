@@ -10,6 +10,7 @@ namespace Gopher.Tools
         }
 
         bool Read();
+        bool NextResult();
         string GetString(string name);
         bool GetBoolean(string name);
         bool? GetNullableBoolean(string name);

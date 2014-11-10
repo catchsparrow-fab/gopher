@@ -1,0 +1,52 @@
+﻿@using Gopher.ImportExport.Domain
+@model Gopher.ImportExport.Domain.CustomerFilter
+<table>
+    <tr>
+        <td class="td-gray">
+            Customer Id
+        </td>
+        <td colspan="3">
+            @Html.TextBoxFor(m => m.CustomerId)
+        </td>
+    </tr>
+    <tr>
+        <td class="td-gray">
+            Shop
+        </td>
+        <td>
+            <select></select>
+        </td>
+        <td class="td-gray">
+            Prefecture
+        </td>
+        <td>
+            <select></select>
+        </td>
+    </tr>
+    <tr>
+        <td class="td-gray">
+            Sex
+        </td>
+        <td>
+            @if (Model == null || Model.Sex.Contains(Sex.Male)) {
+                <input type="checkbox" name="Sex" value="1" checked="checked" /> 
+            } else {
+                <input type="checkbox" name="Sex" value="1" /> 
+            }
+            @if (Model == null || Model.Sex.Contains(Sex.Female)) {
+                <input type="checkbox" name="Sex" value="2" checked="checked" />
+            } else {
+                <input type="checkbox" name="Sex" value="2" />
+            }
+        </td>
+        <td class="td-gray">
+            Month of birth
+        </td>
+        <td>
+            <select></select>
+        </td>
+    </tr>
+</table>
+<div id="search-button-wrapper">
+    <input type="submit" value="Search" name="search" id="search" />
+</div>

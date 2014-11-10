@@ -24,15 +24,36 @@ CREATE PROCEDURE GetCustomers
 	@count int = 20
 AS
 BEGIN
-	SELECT * FROM Customers c
+	IF @count = -1 BEGIN
+
+		SELECT * FROM Customers c
+		WHERE (@customerId IS NULL OR @customerId = c.CustomerId)
+			AND (@sex IS NULL OR @sex = c.Sex)
+			AND (@dobMin IS NULL OR @dobMin < c.DateOfBirth)
+			AND (@dobMax IS NULL OR @dobMax > c.DateOfBirth)
+			AND (@timesPurchasedMin IS NULL OR @timesPurchasedMin < c.EC_TimesPurchased)
+			AND (@timesPurchasedMax iS NULL OR @timesPurchasedMax > c.EC_TimesPurchased) 
+		ORDER BY CustomerId
+
+	END ELSE BEGIN
+		SELECT * FROM Customers c
+		WHERE (@customerId IS NULL OR @customerId = c.CustomerId)
+			AND (@sex IS NULL OR @sex = c.Sex)
+			AND (@dobMin IS NULL OR @dobMin < c.DateOfBirth)
+			AND (@dobMax IS NULL OR @dobMax > c.DateOfBirth)
+			AND (@timesPurchasedMin IS NULL OR @timesPurchasedMin < c.EC_TimesPurchased)
+			AND (@timesPurchasedMax iS NULL OR @timesPurchasedMax > c.EC_TimesPurchased) 
+		ORDER BY CustomerId
+		OFFSET @start ROWS FETCH NEXT @count ROWS ONLY
+	END
+
+	SELECT COUNT(*) AS TotalCount FROM Customers c
 	WHERE (@customerId IS NULL OR @customerId = c.CustomerId)
-		AND (@sex IS NULL OR @sex = c.Sex)
-		AND (@dobMin IS NULL OR @dobMin < c.DateOfBirth)
-		AND (@dobMax IS NULL OR @dobMax > c.DateOfBirth)
-		AND (@timesPurchasedMin IS NULL OR @timesPurchasedMin < c.EC_TimesPurchased)
-		AND (@timesPurchasedMax iS NULL OR @timesPurchasedMax > c.EC_TimesPurchased) 
-	ORDER BY CustomerId
-	OFFSET @start ROWS FETCH NEXT @count ROWS ONLY
+			AND (@sex IS NULL OR @sex = c.Sex)
+			AND (@dobMin IS NULL OR @dobMin < c.DateOfBirth)
+			AND (@dobMax IS NULL OR @dobMax > c.DateOfBirth)
+			AND (@timesPurchasedMin IS NULL OR @timesPurchasedMin < c.EC_TimesPurchased)
+			AND (@timesPurchasedMax iS NULL OR @timesPurchasedMax > c.EC_TimesPurchased) 
 END
 
 GO

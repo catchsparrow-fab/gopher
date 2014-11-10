@@ -1,0 +1,20 @@
+﻿@model Gopher.Models.PaginationViewModel
+           
+@for (int i = Model.StartPage; i <= Model.EndPage; i++)
+{
+    <span class="pagination-link" data-page="@i">@i</span>  
+}
+
+<input type="hidden" name="Page" id="Page" value="@Model.CurrentPage" />
+
+<script>
+    $(function () {
+        $(".pagination-link").click(function (event) {
+            event.preventDefault();
+
+            $("#Page").val($(this).data("page"));
+
+            $("#search-form").submit();
+        });
+    });
+</script>

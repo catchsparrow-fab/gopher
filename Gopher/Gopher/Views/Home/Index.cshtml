@@ -4,58 +4,19 @@
 @model Gopher.Models.CustomerSearchViewModel
 
 <form id="search-form" method="post" action="@Url.Action()" class="search-form-table">
-    <table>
-        <tr>
-            <td class="td-gray">
-                Customer Id
-            </td>
-            <td colspan="3">
-                <input type="text" id="CustomerId" name="CustomerId" />
-            </td>
-        </tr>
-        <tr>
-            <td class="td-gray">
-                Shop
-            </td>
-            <td>
-                <select></select>
-            </td>
-            <td class="td-gray">
-                Prefecture
-            </td>
-            <td>
-                <select></select>
-            </td>
-        </tr>
-        <tr>
-            <td class="td-gray">
-                Sex
-            </td>            
-            <td>
-                <input type="checkbox" name="Sex" value="1" checked="checked" />
-                <input type="checkbox" name="Sex" value="2" checked="checked" />
-            </td>
-            <td class="td-gray">
-                Month of birth
-            </td>
-            <td>
-                <select></select>
-            </td>
-        </tr>
-    </table>
-    <div id="search-button-wrapper">
-        <input type="submit" value="Search" name="search" id="search" />
-    </div>
-@*<form id="download-form" method="post" action="@Url.Action("DownloadCsv", "Home")" class="form-horizontal">
-    <div class="form-group">
-        <input type="submit" value="Download CSV" />
-    </div>
-</form>*@
+<h4 class="search-result-title">Customer search</h4>
+@Html.Partial("CustomerSearchForm", Model != null ? Model.Filter : null)
 @if (Model != null && Model.Customers != null)
 {
     <div>
-        <span>Search result</span>
-        <input type="submit" value="Download CSV" name="download" id="download" />
+        <h4 class="search-result-title">Search results</h4>
+        <div class="search-result-header">
+            <span class="search-result-count">15 results</span>
+            <input type="submit" value="Download CSV" name="download" id="download" />
+        </div>
+        <div class="pagination-panel">
+            @Html.Partial("Pagination", Model.PaginationViewModel)
+        </div>
         @Html.Partial("CustomerList", Model.Customers)
     </div>
 }

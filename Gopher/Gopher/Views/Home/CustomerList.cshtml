@@ -1,6 +1,6 @@
 ﻿@model IEnumerable<Gopher.Models.CustomerViewModel>
 
-<table class="table table-bordered table-responsive gopher-table">
+<table class="search-form-table">
     <thead>
         <tr>
             <th rowspan="2" style="vertical-align:middle; text-align:center">
@@ -41,7 +41,9 @@
             <td>@item.CustomerId</td>
             <td rowspan="2">@item.NameKanji
                 <br/>
-                (@item.NameKana)
+                @if (!string.IsNullOrEmpty(item.NameKana)) {
+                    <text>(@item.NameKana)</text>
+                }
             </td>
             <td rowspan="2">@item.Sex</td>
             <td rowspan="2">@item.Phone</td>

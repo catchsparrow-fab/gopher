@@ -29,14 +29,45 @@ namespace Gopher.Controllers
         [HttpPost]
         public ActionResult CustomersIndex(CustomerFilter filter, string download, string search)
         {
-            var customers = repository.GetCustomers(filter);
+            var data = repository.GetCustomers(filter);
 
-            if (!string.IsNullOrEmpty(search))
-                return View(new CustomerSearchViewModel(customers.Take(100)));
-            else if (!string.IsNullOrEmpty(download))
-                return DownloadCSV(customers);
+            if (!string.IsNullOrEmpty(download))
+                return DownloadCSV(data.Customers);
+            else // search
+            {
+                var model = new CustomerSearchViewModel
+                {
+                    Customers = data.Customers.Take(100).Select(c => new CustomerViewModel(c)),
+                    Filter = filter,
+                    PaginationViewModel = GetPaginationViewModel(data.TotalCount, filter.Page)
+                };
+                return View(model);
+            }
+        }
 
-            throw new NotImplementedException("Method not supported.");
+        private const int PageSize = 50;
+
+        private PaginationViewModel GetPaginationViewModel(int totalCount, int? page = 1)
+        {
+            var model = new PaginationViewModel();
+            model.CurrentPage = page != null ? page.Value : 1;
+            if (page > 1)
+                model.FirstPage = 1;
+
+            int lastPage = (totalCount + 1) / PageSize + 1;
+
+            if (page < lastPage)
+                model.LastPage = lastPage;
+
+            model.StartPage = model.CurrentPage / 10 * 10 + 1;
+            model.EndPage = model.StartPage + 9;
+
+            if (model.StartPage > 1)
+                model.PrevPage = model.StartPage - 1;
+            if (model.EndPage < lastPage)
+                model.NextPage = model.EndPage + 1;
+
+            return model;
         }
 
         public ActionResult Index()

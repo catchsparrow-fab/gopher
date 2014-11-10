@@ -19,6 +19,11 @@ namespace Gopher.Tools
             return false;
         }
 
+        public bool NextResult()
+        {
+            return reader.NextResult();
+        }
+
         public DataReader(SqlDataReader reader, DataAccess disposableParent)
         {
             this.reader = reader;

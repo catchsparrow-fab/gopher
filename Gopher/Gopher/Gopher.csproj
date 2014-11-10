@@ -257,6 +257,8 @@
     <Content Include="Views\Account\_AccountLayout.cshtml" />
     <Content Include="Upload\UploadHandler.ashx" />
     <Content Include="Views\Home\CustomerList.cshtml" />
+    <Content Include="Views\Home\CustomerSearchForm.cshtml" />
+    <Content Include="Views\Home\Pagination.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
