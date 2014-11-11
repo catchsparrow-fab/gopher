@@ -159,6 +159,10 @@ body {
     background-color: #f0f0f0;
 }
 
+.btn {
+    border-radius: 0px;
+}
+
 .search-result-count {
     margin-right: 12px;
 }
@@ -167,6 +171,40 @@ body {
     padding: 2px 6px;
     border: 1px solid gray;
     margin: 6px 6px 0 0;
-    color:#428bca;
-    cursor:pointer;
+    color: #428bca;
+    cursor: pointer;
+    text-decoration:none;
 }
+
+    .pagination-link:hover, .pagination-link-active {
+        text-decoration:none;
+        border:1px solid black;
+        background-color: #f0f0f0;
+    }
+
+.pagination-link-active {
+    cursor:default;
+    font-weight:bold;
+}
+
+.pagination-link-disabled {
+    color:gray;
+    cursor:default;
+}
+
+.gopher-navbar {
+    background-color: #f0f0f0;
+    border-bottom: 2px #428bca solid;
+}
+
+.nav > li > a.gopher-menu-item {
+    color: black;
+}
+
+.result-count {
+    color:red;
+}
+
+/*.nav > li > a.gopher-menu-item :hover {
+    color: #428bca !important;
+}*/

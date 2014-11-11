@@ -39,7 +39,8 @@ namespace Gopher.Controllers
                 {
                     Customers = data.Customers.Take(100).Select(c => new CustomerViewModel(c)),
                     Filter = filter,
-                    PaginationViewModel = GetPaginationViewModel(data.TotalCount, filter.Page)
+                    PaginationViewModel = GetPaginationViewModel(data.TotalCount, filter.Page),
+                    TotalCount = data.TotalCount
                 };
                 return View(model);
             }
@@ -51,7 +52,7 @@ namespace Gopher.Controllers
         {
             var model = new PaginationViewModel();
             model.CurrentPage = page != null ? page.Value : 1;
-            if (page > 1)
+            if (page > 10)
                 model.FirstPage = 1;
 
             int lastPage = (totalCount + 1) / PageSize + 1;
@@ -59,8 +60,8 @@ namespace Gopher.Controllers
             if (page < lastPage)
                 model.LastPage = lastPage;
 
-            model.StartPage = model.CurrentPage / 10 * 10 + 1;
-            model.EndPage = model.StartPage + 9;
+            model.StartPage = (model.CurrentPage - 1) / 10 * 10 + 1;
+            model.EndPage = Math.Min(model.StartPage + 9, lastPage);
 
             if (model.StartPage > 1)
                 model.PrevPage = model.StartPage - 1;

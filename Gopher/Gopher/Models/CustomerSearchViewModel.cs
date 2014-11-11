@@ -22,6 +22,7 @@ namespace Gopher.Models
         public IEnumerable<CustomerViewModel> Customers { get; set; }
         public CustomerFilter Filter { get; set; }
         public PaginationViewModel PaginationViewModel { get; set; }
+        public int TotalCount { get; set; }
 
         public CustomerSearchViewModel()
         {

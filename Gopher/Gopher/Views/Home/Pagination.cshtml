@@ -1,20 +1,50 @@
 ﻿@model Gopher.Models.PaginationViewModel
-           
-@for (int i = Model.StartPage; i <= Model.EndPage; i++)
+
+@if (Model.FirstPage != null)
 {
-    <span class="pagination-link" data-page="@i">@i</span>  
+    <span class="pagination-link" data-page="@Model.FirstPage">@Model.FirstPage</span>
+}
+@*else 
+{
+    <span class="pagination-link pagination-link-disabled" data-page="1">1</span>
+}*@
+
+@if (Model.PrevPage != null)
+{
+    <span class="pagination-link" data-page="@Model.PrevPage">&lt;</span>
 }
 
-<input type="hidden" name="Page" id="Page" value="@Model.CurrentPage" />
+@for (int i = Model.StartPage; i <= Model.EndPage; i++) {
+    <span class="pagination-link" data-page="@i">@i</span>
+}
 
-<script>
-    $(function () {
-        $(".pagination-link").click(function (event) {
-            event.preventDefault();
+@if (Model.NextPage != null)
+{
+    <span class="pagination-link" data-page="@Model.NextPage">&gt;</span>
+}
 
-            $("#Page").val($(this).data("page"));
+@if (Model.LastPage != null)
+{
+    <span class="pagination-link" data-page="@Model.LastPage">@Model.LastPage</span>
+}
 
-            $("#search-form").submit();
+    <input type="hidden" name="Page" id="Page" value="@Model.CurrentPage" />
+
+    <script>
+        $(function () {
+            $(".pagination-link").click(function (event) {
+                event.preventDefault();
+
+                $("#Page").val($(this).data("page"));
+
+                $("#search-form").submit();
+            });
+            $(".pagination-link").each(function () {
+                var page = $(this).data("page");
+                if (page == @Model.CurrentPage) {
+                    $(this).addClass("pagination-link-active");
+                    $(this).off("click");
+                }
+            });
         });
-    });
-</script>
+    </script>

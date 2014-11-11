@@ -10,7 +10,7 @@
     <script src="~/scripts/jquery.form.min.js"></script>
 </head>
 <body>
-    <div class="navbar navbar-inverse navbar-fixed-top">
+    <div class="navbar navbar-inverse navbar-fixed-top gopher-navbar">
         <div class="container-fluid">
             <div class="navbar-header">
                 <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
@@ -22,21 +22,22 @@
             <div class="navbar-collapse collapse">
                 @if (User.Identity.IsAuthenticated)
                 {
+                    <a href="/"><img class="pull-left" height="50" src="/content/img/zwilling.jpg" /></a>
                     <ul class="nav navbar-nav">
-                        <li>
-                            <a href="@Url.Action("Index", "Home", new { area = string.Empty })">
+                        <li >
+                            <a class="gopher-menu-item" href="@Url.Action("Index", "Home", new { area = string.Empty })">
                                 @Html.Translation("Header_CustomerSearch")
                             </a>
                         </li>
                         <li>
-                            <a href="@Url.Action("Import", "Home", new { area = string.Empty })">
+                            <a class="gopher-menu-item" href="@Url.Action("Import", "Home", new { area = string.Empty })">
                                 @Html.Translation("Header_Import")
                             </a>
                         </li>
                         @if (User.IsInRole("Admin"))
                         {
                             <li>
-                                <a href="@Url.Action("Index", "Users", new { area = "Admin" })">
+                                <a class="gopher-menu-item" href="@Url.Action("Index", "Users", new { area = "Admin" })">
                                     @Html.Translation("Header_Administration")
                                 </a>
                             </li>
