@@ -205,6 +205,6 @@ body {
     color:red;
 }
 
-/*.nav > li > a.gopher-menu-item :hover {
-    color: #428bca !important;
-}*/
+.nav > li > a.gopher-menu-item:hover {
+    color: #428bca;
+}
