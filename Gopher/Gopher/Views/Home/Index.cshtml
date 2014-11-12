@@ -1,11 +1,12 @@
 ﻿@{
     ViewBag.Title = "Home Page";
 }
+@using Gopher.Models
 @model Gopher.Models.CustomerSearchViewModel
 
 <form id="search-form" method="post" action="@Url.Action()" class="search-form-table">
     <h4 class="search-result-title">Customer search</h4>
-    @Html.Partial("CustomerSearchForm", Model != null ? Model.Filter : null)
+    @Html.Partial("CustomerSearchForm", Model)
     @if (Model != null && Model.Customers != null)
     {
         <div>

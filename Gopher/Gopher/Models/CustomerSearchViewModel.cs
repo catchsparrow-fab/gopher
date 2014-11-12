@@ -28,6 +28,7 @@ namespace Gopher.Models
         public CustomerFilter Filter { get; set; }
         public PaginationViewModel PaginationViewModel { get; set; }
         public int TotalCount { get; set; }
+        public IEnumerable<string> Prefectures { get; set; }
 
         public CustomerSearchViewModel()
         {

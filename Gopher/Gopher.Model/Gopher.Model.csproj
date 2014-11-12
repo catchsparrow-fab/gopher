@@ -68,6 +68,7 @@
     <Compile Include="Abstractions\Core\ISingleItemRepository.cs" />
     <Compile Include="Abstractions\IUserRepository.cs" />
     <Compile Include="Repositories\CustomerRepository.cs" />
+    <Compile Include="Repositories\PrefectureRepository.cs" />
     <Compile Include="Repositories\TranslationRepository.cs" />
     <Compile Include="Repositories\UserRepository.cs" />
     <Compile Include="Tools\GopherModelModule.cs" />

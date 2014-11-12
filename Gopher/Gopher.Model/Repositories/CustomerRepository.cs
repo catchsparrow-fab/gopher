@@ -54,6 +54,7 @@ namespace Gopher.Model.Repositories
                 new DbParameter("emailMobile", filter.EmailMobile),
                 new DbParameter("phone", filter.Phone),
                 new DbParameter("productWarranty", filter.ProductWarranty),
+                new DbParameter("prefecture", filter.Prefecture),
             };
         }
 

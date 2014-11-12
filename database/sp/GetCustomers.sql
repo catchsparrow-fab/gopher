@@ -28,8 +28,8 @@ CREATE PROCEDURE GetCustomers
 	@email nvarchar(250) = NULL,
 	@emailMobile nvarchar(250) = NULL,
 	@phone nvarchar(250) = NULL,
-	@productWarranty nvarchar(250) = NULL
-
+	@productWarranty nvarchar(250) = NULL,
+	@prefecture nvarchar(250) = NULL
 AS
 BEGIN
 	IF @count = -1 BEGIN
@@ -48,6 +48,7 @@ BEGIN
 			AND (@emailMobile IS NULL OR c.EmailMobile LIKE '%' + @emailMobile + '%')
 			AND (@phone IS NULL OR c.Phone LIKE '%' + @phone + '%')
 			AND (@productWarranty IS NULL OR c.EC_ProductWarranty LIKE '%' + @productWarranty + '%')
+			AND (@prefecture IS NULL OR c.Prefecture = @prefecture)
 		ORDER BY CustomerId
 
 	END ELSE BEGIN
@@ -65,6 +66,7 @@ BEGIN
 			AND (@emailMobile IS NULL OR c.EmailMobile LIKE '%' + @emailMobile + '%')
 			AND (@phone IS NULL OR c.Phone LIKE '%' + @phone + '%')
 			AND (@productWarranty IS NULL OR c.EC_ProductWarranty LIKE '%' + @productWarranty + '%')
+			AND (@prefecture IS NULL OR c.Prefecture = @prefecture)
 		ORDER BY CustomerId
 		OFFSET @start ROWS FETCH NEXT @count ROWS ONLY
 	END
@@ -83,6 +85,7 @@ BEGIN
 			AND (@emailMobile IS NULL OR c.EmailMobile LIKE '%' + @emailMobile + '%')
 			AND (@phone IS NULL OR c.Phone LIKE '%' + @phone + '%')
 			AND (@productWarranty IS NULL OR c.EC_ProductWarranty LIKE '%' + @productWarranty + '%')
+			AND (@prefecture IS NULL OR c.Prefecture = @prefecture)
 END
 
 GO

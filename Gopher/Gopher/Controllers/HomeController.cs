@@ -9,6 +9,7 @@ using Gopher.ImportExport.Domain;
 using Gopher.ImportExport.Tools;
 using Gopher.Model.Abstractions;
 using Gopher.Model.Domain;
+using Gopher.Model.Repositories;
 using Gopher.Models;
 using Microsoft.AspNet.Identity;
 using Microsoft.AspNet.Identity.EntityFramework;
@@ -19,29 +20,29 @@ namespace Gopher.Controllers
     public class HomeController : Controller
     {
         private readonly ICustomerRepository repository;
+        private readonly IPrefectureRepository prefectureRepository;
 
-        public HomeController(ICustomerRepository repository)
+        public HomeController(ICustomerRepository repository, IPrefectureRepository prefectureRepository)
         {
             this.repository = repository;
+            this.prefectureRepository = prefectureRepository;
         }
 
         [ActionName("Index")]
         [HttpPost]
-        public ActionResult CustomersIndex(CustomerFilter filter, string download, string search)
+        public ActionResult CustomersIndex(CustomerSearchViewModel viewModel, string download, string search)
         {
-            var data = repository.GetCustomers(filter);
+            var data = repository.GetCustomers(viewModel.Filter);
 
             if (!string.IsNullOrEmpty(download))
                 return DownloadCSV(data.Customers);
             else // search
             {
-                var model = new CustomerSearchViewModel
-                {
-                    Customers = data.Customers.Take(100).Select(c => new CustomerViewModel(c)),
-                    Filter = filter,
-                    PaginationViewModel = GetPaginationViewModel(data.TotalCount, filter.Page),
-                    TotalCount = data.TotalCount
-                };
+                var model = GetEmptyCustomerSearchViewModel();
+                model.Customers = data.Customers.Select(c => new CustomerViewModel(c));
+                model.Filter = viewModel.Filter;
+                model.PaginationViewModel = GetPaginationViewModel(data.TotalCount, viewModel.Filter.Page);
+                model.TotalCount = data.TotalCount;
                 return View(model);
             }
         }
@@ -73,9 +74,17 @@ namespace Gopher.Controllers
             return model;
         }
 
+        private CustomerSearchViewModel GetEmptyCustomerSearchViewModel()
+        {
+            return new CustomerSearchViewModel
+            {
+                Prefectures = prefectureRepository.GetAll()
+            };
+        }
+
         public ActionResult Index()
         {
-            return View();
+            return View(GetEmptyCustomerSearchViewModel());
         }
 
         public FileResult DownloadCSV(IEnumerable<Customer> customers)
@@ -93,7 +102,7 @@ namespace Gopher.Controllers
             }
 
             stream.Position = 0;
-            
+
             return File(stream, "text/csv", "gopher-db-" + DateTime.Now.ToString("yyyy-MM-dd") + ".csv");
         }
 

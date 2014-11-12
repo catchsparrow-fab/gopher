@@ -16,7 +16,7 @@ namespace Gopher.Tests.Controllers
         public void Index()
         {
             // Arrange
-            HomeController controller = new HomeController(null);
+            HomeController controller = new HomeController(null, null);
 
             // Act
             ViewResult result = controller.CustomersIndex(null, null, null) as ViewResult;

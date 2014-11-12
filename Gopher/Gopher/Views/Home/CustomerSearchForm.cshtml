@@ -1,12 +1,12 @@
 ﻿@using Gopher.ImportExport.Domain
-@model Gopher.ImportExport.Domain.CustomerFilter
+@model Gopher.Models.CustomerSearchViewModel
 <table>
     <tr>
         <td class="td-gray">
             Customer Id
         </td>
         <td colspan="3">
-            @Html.TextBoxFor(m => m.CustomerId)
+            @Html.TextBoxFor(m => m.Filter.CustomerId)
         </td>
     </tr>
     <tr>
@@ -20,7 +20,21 @@
             Prefecture
         </td>
         <td>
-            <select></select>
+            <select id="Filter_Prefecture" name="Filter.Prefecture">
+                <option value="">-</option>
+                @foreach (var pref in Model.Prefectures)
+                {
+                    <option value="@pref">@pref</option>
+                }
+            </select>
+            @if (Model.Filter != null && !string.IsNullOrEmpty(Model.Filter.Prefecture))
+            {
+                <script>
+                    $(function () {
+                        $("#Filter_Prefecture").val("@Model.Filter.Prefecture");
+                    });
+                </script>
+            }
         </td>
     </tr>
     <tr>
@@ -28,13 +42,13 @@
             Name (Kanji)
         </td>
         <td>
-            @Html.TextBoxFor(m => m.NameKanji)
+            @Html.TextBoxFor(m => m.Filter.NameKanji)
         </td>
         <td class="td-gray">
             Name (Kana)
         </td>
         <td>
-            @Html.TextBoxFor(m => m.NameKana)
+            @Html.TextBoxFor(m => m.Filter.NameKana)
         </td>
     </tr>
     <tr>
@@ -42,22 +56,22 @@
             Sex
         </td>
         <td>
-            @if (Model == null || Model.Sex.Contains(Sex.Male))
+            @if (Model.Filter == null || Model.Filter.Sex.Contains(Sex.Male))
             {
-                <input type="checkbox" id="sex-male" name="Sex" value="1" checked="checked" />
+                <input type="checkbox" id="sex-male" name="Filter.Sex" value="1" checked="checked" />
             }
             else
             {
-                <input type="checkbox" id="sex-male" name="Sex" value="1" />
+                <input type="checkbox" id="sex-male" name="Filter.Sex" value="1" />
             }
             <label style="font-weight:normal;" for="sex-male">@Html.Translation("Generic_Male")</label>
-            @if (Model == null || Model.Sex.Contains(Sex.Female))
+            @if (Model.Filter == null || Model.Filter.Sex.Contains(Sex.Female))
             {
-                <input type="checkbox" id="sex-female" name="Sex" value="2" checked="checked" />
+                <input type="checkbox" id="sex-female" name="Filter.Sex" value="2" checked="checked" />
             }
             else
             {
-                <input type="checkbox" id="sex-female" name="Sex" value="2" />
+                <input type="checkbox" id="sex-female" name="Filter.Sex" value="2" />
             }
             <label style="font-weight:normal;" for="sex-female">@Html.Translation("Generic_Female")</label>
         </td>
@@ -65,18 +79,18 @@
             Month of birth
         </td>
         <td>
-            <select id="mob" name="MonthOfBirth">
+            <select id="mob" name="Filter.MonthOfBirth">
                 <option value="">-</option>
                 @for (int i = 1; i <= 12; i++)
                 {
                     <option value="@i">@i</option>
                 }
             </select>
-            @if (Model != null && Model.MonthOfBirth != null)
+            @if (Model.Filter != null && Model.Filter.MonthOfBirth != null)
             {
                 <script>
                     $(function () {
-                        $("#mob").val(@Model.MonthOfBirth);
+                        $("#mob").val(@Model.Filter.MonthOfBirth);
                     });
                 </script>
             }
@@ -84,23 +98,23 @@
     </tr>
     <tr>
         <td class="td-gray">Email</td>
-        <td colspan="3">@Html.TextBoxFor(m => m.Email)</td>
+        <td colspan="3">@Html.TextBoxFor(m => m.Filter.Email)</td>
     </tr>
     <tr>
         <td class="td-gray">Email (mobile)</td>
-        <td colspan="3">@Html.TextBoxFor(m => m.EmailMobile)</td>
+        <td colspan="3">@Html.TextBoxFor(m => m.Filter.EmailMobile)</td>
     </tr>
     <tr>
         <td class="td-gray">Phone</td>
-        <td colspan="3">@Html.TextBoxFor(m => m.Phone)</td>
+        <td colspan="3">@Html.TextBoxFor(m => m.Filter.Phone)</td>
     </tr>
     <tr>
         <td class="td-gray">Times purchased</td>
-        <td colspan="3">@Html.TextBoxFor(m => m.TimesPurchased.Min) ~ @Html.TextBoxFor(m => m.TimesPurchased.Max)</td>
+        <td colspan="3">@Html.TextBoxFor(m => m.Filter.TimesPurchased.Min) ~ @Html.TextBoxFor(m => m.Filter.TimesPurchased.Max)</td>
     </tr>
     <tr>
         <td class="td-gray">Product warranty serial</td>
-        <td colspan="3">@Html.TextBoxFor(m => m.ProductWarranty)</td>
+        <td colspan="3">@Html.TextBoxFor(m => m.Filter.ProductWarranty)</td>
     </tr>
 </table>
 <div id="search-button-wrapper">

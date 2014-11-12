@@ -26,6 +26,7 @@ namespace Gopher.ImportExport.Domain
         public string ProductWarranty { get; set; }
         public TempoVisorEmailAccept? EmailFormat { get; set; }
         public EccubeEmailTarget? EmailTarget { get; set; }
+        public string Prefecture { get; set; }
 
         public CustomerFilter()
         {
