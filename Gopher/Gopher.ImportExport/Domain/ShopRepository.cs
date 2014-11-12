@@ -1,12 +1,7 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using Gopher.Model.Domain;
+﻿using System.Collections.Generic;
 using Gopher.Tools;
 
-namespace Gopher.Model.Repositories
+namespace Gopher.ImportExport.Domain
 {
     public interface IShopRepository
     {

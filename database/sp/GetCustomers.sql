@@ -29,12 +29,14 @@ CREATE PROCEDURE GetCustomers
 	@emailMobile nvarchar(250) = NULL,
 	@phone nvarchar(250) = NULL,
 	@productWarranty nvarchar(250) = NULL,
-	@prefecture nvarchar(250) = NULL
+	@prefecture nvarchar(250) = NULL,
+	@shopId int = NULL
 AS
 BEGIN
 	IF @count = -1 BEGIN
 
-		SELECT * FROM Customers c
+		SELECT c.*, s.FullName as ShopName FROM Customers c
+		INNER JOIN Shops s ON s.ShopId = c.ShopId
 		WHERE (@customerId IS NULL OR @customerId = c.CustomerId)
 			AND (@sex IS NULL OR @sex = c.Sex)
 			AND (@dobMin IS NULL OR @dobMin < c.DateOfBirth)
@@ -49,10 +51,12 @@ BEGIN
 			AND (@phone IS NULL OR c.Phone LIKE '%' + @phone + '%')
 			AND (@productWarranty IS NULL OR c.EC_ProductWarranty LIKE '%' + @productWarranty + '%')
 			AND (@prefecture IS NULL OR c.Prefecture = @prefecture)
+			AND (@shopId IS NULL OR c.ShopId = @shopId)
 		ORDER BY CustomerId
 
 	END ELSE BEGIN
-		SELECT * FROM Customers c
+		SELECT c.*, s.FullName as ShopName FROM Customers c
+		INNER JOIN Shops s ON s.ShopId = c.ShopId
 		WHERE (@customerId IS NULL OR @customerId = c.CustomerId)
 			AND (@sex IS NULL OR @sex = c.Sex)
 			AND (@dobMin IS NULL OR @dobMin < c.DateOfBirth)
@@ -67,6 +71,7 @@ BEGIN
 			AND (@phone IS NULL OR c.Phone LIKE '%' + @phone + '%')
 			AND (@productWarranty IS NULL OR c.EC_ProductWarranty LIKE '%' + @productWarranty + '%')
 			AND (@prefecture IS NULL OR c.Prefecture = @prefecture)
+			AND (@shopId IS NULL OR c.ShopId = @shopId)
 		ORDER BY CustomerId
 		OFFSET @start ROWS FETCH NEXT @count ROWS ONLY
 	END
@@ -86,6 +91,7 @@ BEGIN
 			AND (@phone IS NULL OR c.Phone LIKE '%' + @phone + '%')
 			AND (@productWarranty IS NULL OR c.EC_ProductWarranty LIKE '%' + @productWarranty + '%')
 			AND (@prefecture IS NULL OR c.Prefecture = @prefecture)
+			AND (@shopId IS NULL OR c.ShopId = @shopId)
 END
 
 GO

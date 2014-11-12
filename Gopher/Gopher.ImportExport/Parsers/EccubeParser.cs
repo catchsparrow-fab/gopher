@@ -7,7 +7,7 @@ namespace Gopher.ImportExport.Parsers
 {
     public class EccubeParser : StandardParser
     {
-        private const string ECCUBE_SHOP_ID = "EC";
+        private const int ECCUBE_SHOP_ID = 0;
 
         protected override Customer GetCustomer(string[] array)
         {

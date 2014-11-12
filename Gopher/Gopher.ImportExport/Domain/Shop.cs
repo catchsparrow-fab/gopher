@@ -1,11 +1,6 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using Gopher.Tools;
+﻿using Gopher.Tools;
 
-namespace Gopher.Model.Domain
+namespace Gopher.ImportExport.Domain
 {
     public class Shop : IPersistent
     {

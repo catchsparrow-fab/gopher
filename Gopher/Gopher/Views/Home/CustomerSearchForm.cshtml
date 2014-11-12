@@ -14,7 +14,21 @@
             Shop
         </td>
         <td>
-            <select></select>
+            <select name="Filter.ShopId" id="shops">
+                <option value="">-</option>
+                @foreach (var shop in Model.Shops)
+                {
+                    <option value="@shop.Id">@shop.Name</option>
+                }
+            </select>
+            @if (Model.Filter != null && Model.Filter.ShopId != null)
+            {
+                <script>
+                    $(function () {
+                        $("#shops").val(@Model.Filter.ShopId);
+                    });
+                </script>
+            }
         </td>
         <td class="td-gray">
             Prefecture

@@ -60,7 +60,6 @@
     <Compile Include="Domain\CustomersDataset.cs" />
     <Compile Include="Domain\IdentityModels.cs" />
     <Compile Include="Domain\Language.cs" />
-    <Compile Include="Domain\Shop.cs" />
     <Compile Include="Domain\Translation.cs" />
     <Compile Include="Domain\User.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -70,7 +69,6 @@
     <Compile Include="Abstractions\IUserRepository.cs" />
     <Compile Include="Repositories\CustomerRepository.cs" />
     <Compile Include="Repositories\PrefectureRepository.cs" />
-    <Compile Include="Repositories\ShopRepository.cs" />
     <Compile Include="Repositories\TranslationRepository.cs" />
     <Compile Include="Repositories\UserRepository.cs" />
     <Compile Include="Tools\GopherModelModule.cs" />

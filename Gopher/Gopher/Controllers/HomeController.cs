@@ -21,11 +21,15 @@ namespace Gopher.Controllers
     {
         private readonly ICustomerRepository repository;
         private readonly IPrefectureRepository prefectureRepository;
+        private readonly IShopRepository shopRepository;
 
-        public HomeController(ICustomerRepository repository, IPrefectureRepository prefectureRepository)
+        public HomeController(ICustomerRepository repository, 
+            IPrefectureRepository prefectureRepository,
+            IShopRepository shopRepository)
         {
             this.repository = repository;
             this.prefectureRepository = prefectureRepository;
+            this.shopRepository = shopRepository;
         }
 
         [ActionName("Index")]
@@ -78,7 +82,8 @@ namespace Gopher.Controllers
         {
             return new CustomerSearchViewModel
             {
-                Prefectures = prefectureRepository.GetAll()
+                Prefectures = prefectureRepository.GetAll(),
+                Shops = shopRepository.GetAll()
             };
         }
 

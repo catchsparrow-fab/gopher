@@ -15,7 +15,7 @@ GO
 CREATE TABLE [dbo].[Customers](
 	[ImportedFrom] [int] NOT NULL,
 	[CustomerId] [nvarchar](50) NOT NULL,
-	[ShopId] [nvarchar](50) NULL,
+	[ShopId] [int] NULL,
 	[Prefecture] [nvarchar](250) NULL,
 	[NameKanji] [nvarchar](250) NULL,
 	[NameKana] [nvarchar](250) NULL,

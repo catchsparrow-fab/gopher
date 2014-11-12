@@ -58,7 +58,7 @@ namespace Gopher.ImportExport.Domain
     {
         public InputFileType ImportedFrom { get; set; }
         public string Id { get; set; }
-        public string ShopId { get; set; }
+        public int ShopId { get; set; }
         public string Prefecture { get; set; }
         public string NameKanji { get; set; }
         public string NameKana { get; set; }
@@ -77,6 +77,9 @@ namespace Gopher.ImportExport.Domain
         public string Address { get; set; }
         public int? PointBalance { get; set; }
 
+        // Calculated properties
+        public string ShopName { get; set; }
+
         public Customer()
         {
             TempoVisorData = new TempoVisorData();
@@ -87,7 +90,8 @@ namespace Gopher.ImportExport.Domain
         {
             ImportedFrom = reader.GetEnum<InputFileType>("ImportedFrom");
             Id = reader.GetString("CustomerId");
-            ShopId = reader.GetString("ShopId");
+            ShopId = reader.GetInt32("ShopId");
+            ShopName = reader.GetString("ShopName");
             Prefecture = reader.GetString("Prefecture");
             NameKanji = reader.GetString("NameKanji");
             NameKana = reader.GetString("NameKana");

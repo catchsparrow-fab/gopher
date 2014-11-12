@@ -13,7 +13,7 @@ namespace Gopher.Models
         {
             get
             {
-                return customer.ShopId;
+                return customer.ShopName;
             }
         }
 

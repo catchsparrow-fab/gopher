@@ -10,13 +10,20 @@ namespace Gopher.ImportExport.Parsers
 {
     public class TempoVisorParser : StandardParser
     {
+        IEnumerable<Shop> shops = null;
+
+        public TempoVisorParser()
+        {
+            shops = new ShopRepository().GetAll();
+        }
+
         protected override Customer GetCustomer(string[] array)
         {
             return new Customer
             {
                 ImportedFrom = InputFileType.TempoVisor,
                 Id = array[1],
-                ShopId = array[2],
+                ShopId = GetShopId(array[2]),
                 NameKana = array[3],
                 Phone = array[4],
                 CellPhone = array[5],
@@ -56,6 +63,14 @@ namespace Gopher.ImportExport.Parsers
                     CutoutDate = Format.GetDateTime(array[42]),
                 }
             };
+        }
+
+        private int GetShopId(string s)
+        {
+            var id = Convert.ToInt32(s);
+            var shop = shops.SingleOrDefault(item => item.ImportedId == id);
+            if (shop == null) return -1;
+            return shop.Id;
         }
 
         protected override InputFileType FileType

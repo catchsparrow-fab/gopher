@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using Gopher.ImportExport.Domain;
 using Gopher.Model.Abstractions;
 using Gopher.Model.Repositories;
 using Ninject.Modules;
