@@ -20,8 +20,16 @@ CREATE PROCEDURE GetCustomers
 	@dobMax datetime = NULL,
 	@timesPurchasedMin int = NULL,
 	@timesPurchasedMax int = NULL,
+	@count int = 20,
 	@start int = 0,
-	@count int = 20
+	@monthOfBirth int = NULL,
+	@nameKanji nvarchar(250) = NULL,
+	@nameKana nvarchar(250) = NULL,
+	@email nvarchar(250) = NULL,
+	@emailMobile nvarchar(250) = NULL,
+	@phone nvarchar(250) = NULL,
+	@productWarranty nvarchar(250) = NULL
+
 AS
 BEGIN
 	IF @count = -1 BEGIN
@@ -31,8 +39,15 @@ BEGIN
 			AND (@sex IS NULL OR @sex = c.Sex)
 			AND (@dobMin IS NULL OR @dobMin < c.DateOfBirth)
 			AND (@dobMax IS NULL OR @dobMax > c.DateOfBirth)
-			AND (@timesPurchasedMin IS NULL OR @timesPurchasedMin < c.EC_TimesPurchased)
-			AND (@timesPurchasedMax iS NULL OR @timesPurchasedMax > c.EC_TimesPurchased) 
+			AND (@timesPurchasedMin IS NULL OR @timesPurchasedMin <= c.EC_TimesPurchased)
+			AND (@timesPurchasedMax IS NULL OR @timesPurchasedMax >= c.EC_TimesPurchased) 
+			AND (@monthOfBirth IS NULL OR DATEPART(month, c.DateOfBirth) = @monthOfBirth)
+			AND (@nameKanji IS NULL OR c.NameKanji LIKE '%' + @nameKanji + '%')
+			AND (@nameKana IS NULL OR c.NameKana LIKE '%' + @nameKana + '%')
+			AND (@email IS NULL OR c.Email LIKE '%' + @email + '%')
+			AND (@emailMobile IS NULL OR c.EmailMobile LIKE '%' + @emailMobile + '%')
+			AND (@phone IS NULL OR c.Phone LIKE '%' + @phone + '%')
+			AND (@productWarranty IS NULL OR c.EC_ProductWarranty LIKE '%' + @productWarranty + '%')
 		ORDER BY CustomerId
 
 	END ELSE BEGIN
@@ -41,19 +56,33 @@ BEGIN
 			AND (@sex IS NULL OR @sex = c.Sex)
 			AND (@dobMin IS NULL OR @dobMin < c.DateOfBirth)
 			AND (@dobMax IS NULL OR @dobMax > c.DateOfBirth)
-			AND (@timesPurchasedMin IS NULL OR @timesPurchasedMin < c.EC_TimesPurchased)
-			AND (@timesPurchasedMax iS NULL OR @timesPurchasedMax > c.EC_TimesPurchased) 
+			AND (@timesPurchasedMin IS NULL OR @timesPurchasedMin <= c.EC_TimesPurchased)
+			AND (@timesPurchasedMax IS NULL OR @timesPurchasedMax >= c.EC_TimesPurchased) 
+			AND (@monthOfBirth IS NULL OR DATEPART(month, c.DateOfBirth) = @monthOfBirth)
+			AND (@nameKanji IS NULL OR c.NameKanji LIKE '%' + @nameKanji + '%')
+			AND (@nameKana IS NULL OR c.NameKana LIKE '%' + @nameKana + '%')
+			AND (@email IS NULL OR c.Email LIKE '%' + @email + '%')
+			AND (@emailMobile IS NULL OR c.EmailMobile LIKE '%' + @emailMobile + '%')
+			AND (@phone IS NULL OR c.Phone LIKE '%' + @phone + '%')
+			AND (@productWarranty IS NULL OR c.EC_ProductWarranty LIKE '%' + @productWarranty + '%')
 		ORDER BY CustomerId
 		OFFSET @start ROWS FETCH NEXT @count ROWS ONLY
 	END
 
 	SELECT COUNT(*) AS TotalCount FROM Customers c
-	WHERE (@customerId IS NULL OR @customerId = c.CustomerId)
+		WHERE (@customerId IS NULL OR @customerId = c.CustomerId)
 			AND (@sex IS NULL OR @sex = c.Sex)
 			AND (@dobMin IS NULL OR @dobMin < c.DateOfBirth)
 			AND (@dobMax IS NULL OR @dobMax > c.DateOfBirth)
-			AND (@timesPurchasedMin IS NULL OR @timesPurchasedMin < c.EC_TimesPurchased)
-			AND (@timesPurchasedMax iS NULL OR @timesPurchasedMax > c.EC_TimesPurchased) 
+			AND (@timesPurchasedMin IS NULL OR @timesPurchasedMin <= c.EC_TimesPurchased)
+			AND (@timesPurchasedMax IS NULL OR @timesPurchasedMax >= c.EC_TimesPurchased) 
+			AND (@monthOfBirth IS NULL OR DATEPART(month, c.DateOfBirth) = @monthOfBirth)
+			AND (@nameKanji IS NULL OR c.NameKanji LIKE '%' + @nameKanji + '%')
+			AND (@nameKana IS NULL OR c.NameKana LIKE '%' + @nameKana + '%')
+			AND (@email IS NULL OR c.Email LIKE '%' + @email + '%')
+			AND (@emailMobile IS NULL OR c.EmailMobile LIKE '%' + @emailMobile + '%')
+			AND (@phone IS NULL OR c.Phone LIKE '%' + @phone + '%')
+			AND (@productWarranty IS NULL OR c.EC_ProductWarranty LIKE '%' + @productWarranty + '%')
 END
 
 GO

@@ -25,26 +25,82 @@
     </tr>
     <tr>
         <td class="td-gray">
+            Name (Kanji)
+        </td>
+        <td>
+            @Html.TextBoxFor(m => m.NameKanji)
+        </td>
+        <td class="td-gray">
+            Name (Kana)
+        </td>
+        <td>
+            @Html.TextBoxFor(m => m.NameKana)
+        </td>
+    </tr>
+    <tr>
+        <td class="td-gray">
             Sex
         </td>
         <td>
-            @if (Model == null || Model.Sex.Contains(Sex.Male)) {
-                <input type="checkbox" name="Sex" value="1" checked="checked" /> 
-            } else {
-                <input type="checkbox" name="Sex" value="1" /> 
+            @if (Model == null || Model.Sex.Contains(Sex.Male))
+            {
+                <input type="checkbox" id="sex-male" name="Sex" value="1" checked="checked" />
             }
-            @if (Model == null || Model.Sex.Contains(Sex.Female)) {
-                <input type="checkbox" name="Sex" value="2" checked="checked" />
-            } else {
-                <input type="checkbox" name="Sex" value="2" />
+            else
+            {
+                <input type="checkbox" id="sex-male" name="Sex" value="1" />
             }
+            <label style="font-weight:normal;" for="sex-male">@Html.Translation("Generic_Male")</label>
+            @if (Model == null || Model.Sex.Contains(Sex.Female))
+            {
+                <input type="checkbox" id="sex-female" name="Sex" value="2" checked="checked" />
+            }
+            else
+            {
+                <input type="checkbox" id="sex-female" name="Sex" value="2" />
+            }
+            <label style="font-weight:normal;" for="sex-female">@Html.Translation("Generic_Female")</label>
         </td>
         <td class="td-gray">
             Month of birth
         </td>
         <td>
-            <select></select>
+            <select id="mob" name="MonthOfBirth">
+                <option value="">-</option>
+                @for (int i = 1; i <= 12; i++)
+                {
+                    <option value="@i">@i</option>
+                }
+            </select>
+            @if (Model != null && Model.MonthOfBirth != null)
+            {
+                <script>
+                    $(function () {
+                        $("#mob").val(@Model.MonthOfBirth);
+                    });
+                </script>
+            }
         </td>
+    </tr>
+    <tr>
+        <td class="td-gray">Email</td>
+        <td colspan="3">@Html.TextBoxFor(m => m.Email)</td>
+    </tr>
+    <tr>
+        <td class="td-gray">Email (mobile)</td>
+        <td colspan="3">@Html.TextBoxFor(m => m.EmailMobile)</td>
+    </tr>
+    <tr>
+        <td class="td-gray">Phone</td>
+        <td colspan="3">@Html.TextBoxFor(m => m.Phone)</td>
+    </tr>
+    <tr>
+        <td class="td-gray">Times purchased</td>
+        <td colspan="3">@Html.TextBoxFor(m => m.TimesPurchased.Min) ~ @Html.TextBoxFor(m => m.TimesPurchased.Max)</td>
+    </tr>
+    <tr>
+        <td class="td-gray">Product warranty serial</td>
+        <td colspan="3">@Html.TextBoxFor(m => m.ProductWarranty)</td>
     </tr>
 </table>
 <div id="search-button-wrapper">

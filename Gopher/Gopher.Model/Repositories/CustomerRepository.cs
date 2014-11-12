@@ -46,7 +46,14 @@ namespace Gopher.Model.Repositories
                 new DbParameter("timesPurchasedMin", filter.TimesPurchased.Min),
                 new DbParameter("timesPurchasedMax", filter.TimesPurchased.Max),
                 new DbParameter("count", 50),
-                new DbParameter("start", GetStartingIndex(filter.Page))
+                new DbParameter("start", GetStartingIndex(filter.Page)),
+                new DbParameter("monthOfBirth", filter.MonthOfBirth),
+                new DbParameter("nameKanji", filter.NameKanji),
+                new DbParameter("nameKana", filter.NameKana),
+                new DbParameter("email", filter.Email),
+                new DbParameter("emailMobile", filter.EmailMobile),
+                new DbParameter("phone", filter.Phone),
+                new DbParameter("productWarranty", filter.ProductWarranty),
             };
         }
 
