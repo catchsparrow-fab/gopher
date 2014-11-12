@@ -133,18 +133,24 @@ body {
 }
 
 .search-form-table td {
-    padding: 6px 60px 6px 6px;
+    padding: 6px 6px 6px 6px;
     border: 1px solid #b2b2b2;
 }
 
-.search-form-table thead > tr > th {
+.search-result-table td {
+    border: 1px solid #b2b2b2;
+}
+
+.search-result-table thead > tr > th {
     border: 1px solid #b2b2b2;
     text-align: center;
     padding: 6px;
     background-color: #f0f0f0;
 }
 
-#search-button-wrapper, .search-result-header, .search-result-title, .search-form-table, .pagination-panel {
+#search-button-wrapper, .search-result-header, 
+.search-result-title, .search-form-table, .pagination-panel,
+.search-result-table {
     margin-top: 12px;
 }
 

@@ -13,6 +13,7 @@ namespace Gopher.ImportExport.Parsers
         {
             return new Customer
             {
+                ImportedFrom = InputFileType.Eccube,
                 Id = array[0],
                 ShopId = ECCUBE_SHOP_ID,
                 NameKanji = Format.MergeIntoString(array, 1, 2),

@@ -16,6 +16,7 @@ namespace Gopher.Tools
         bool? GetNullableBoolean(string name);
         int GetInt32(string name);
         int? GetNullableInt32(string name);
+        T GetEnum<T>(string name) where T : struct;
         T? GetNullableEnum<T>(string name) where T : struct;
         decimal GetDecimal(string name);
         decimal? GetNullableDecimal(string name);

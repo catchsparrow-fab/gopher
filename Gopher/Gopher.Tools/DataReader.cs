@@ -68,6 +68,13 @@ namespace Gopher.Tools
             return null;
         }
 
+        public T GetEnum<T>(string name)
+            where T : struct
+        {
+            object value = GetInt32(name);
+            return (T)value; 
+        }
+
         public T? GetNullableEnum<T>(string name)
             where T : struct
         {

@@ -17,6 +17,7 @@ namespace Gopher.ImportExport.Tools
         public static string CustomerToString(Customer customer)
         {
             return string.Join(DELIMITER, new object [] {
+                (int)customer.ImportedFrom,
                 customer.Id,
                 customer.ShopId,
                 customer.Prefecture,

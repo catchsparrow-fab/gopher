@@ -14,6 +14,7 @@ namespace Gopher.ImportExport.Parsers
         {
             return new Customer
             {
+                ImportedFrom = InputFileType.TempoVisor,
                 Id = array[1],
                 ShopId = array[2],
                 NameKana = array[3],

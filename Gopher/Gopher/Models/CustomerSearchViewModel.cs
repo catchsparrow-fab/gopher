@@ -15,6 +15,11 @@ namespace Gopher.Models
         public int? PrevPage { get; set; }
         public int? FirstPage { get; set; }
         public int? LastPage { get; set; }
+
+        public PaginationViewModel()
+        {
+            EndPage = -1;
+        }
     }
 
     public class CustomerSearchViewModel

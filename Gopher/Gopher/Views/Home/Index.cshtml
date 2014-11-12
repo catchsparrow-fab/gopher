@@ -4,22 +4,28 @@
 @model Gopher.Models.CustomerSearchViewModel
 
 <form id="search-form" method="post" action="@Url.Action()" class="search-form-table">
-<h4 class="search-result-title">Customer search</h4>
-@Html.Partial("CustomerSearchForm", Model != null ? Model.Filter : null)
-@if (Model != null && Model.Customers != null)
-{
-    <div>
-        <h4 class="search-result-title">Search results</h4>
-        <div class="search-result-header">
-            <span class="search-result-count"><span class="result-count">@Model.TotalCount</span> results</span>
-            <input type="submit" value="Download CSV" name="download" id="download" />
+    <h4 class="search-result-title">Customer search</h4>
+    @Html.Partial("CustomerSearchForm", Model != null ? Model.Filter : null)
+    @if (Model != null && Model.Customers != null)
+    {
+        <div>
+            <h4 class="search-result-title">Search results</h4>
+            <div class="search-result-header">
+                <span class="search-result-count"><span class="result-count">@Model.TotalCount</span> results</span>
+                @if (Model.TotalCount > 0)
+                {
+                    <input type="submit" value="Download CSV" name="download" id="download" />
+                }
+            </div>
+            @if (Model.TotalCount > 0)
+            {
+                <div class="pagination-panel">
+                    @Html.Partial("Pagination", Model.PaginationViewModel)
+                </div>
+                @Html.Partial("CustomerList", Model.Customers)
+            }
         </div>
-        <div class="pagination-panel">
-            @Html.Partial("Pagination", Model.PaginationViewModel)
-        </div>
-        @Html.Partial("CustomerList", Model.Customers)
-    </div>
-}
+    }
 </form>
 
 <script>

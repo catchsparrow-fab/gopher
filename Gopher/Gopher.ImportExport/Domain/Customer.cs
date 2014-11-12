@@ -52,8 +52,11 @@ namespace Gopher.ImportExport.Domain
     //  43  Deleted bool
     //  44  SubscriptionType int
     //  45  EmailTarget int
+    // MISC
+    //  46   ImportedFrom int
     public class Customer : IPersistent
     {
+        public InputFileType ImportedFrom { get; set; }
         public string Id { get; set; }
         public string ShopId { get; set; }
         public string Prefecture { get; set; }
@@ -82,6 +85,7 @@ namespace Gopher.ImportExport.Domain
 
         public void Init(IDataReader reader)
         {
+            ImportedFrom = reader.GetEnum<InputFileType>("ImportedFrom");
             Id = reader.GetString("CustomerId");
             ShopId = reader.GetString("ShopId");
             Prefecture = reader.GetString("Prefecture");

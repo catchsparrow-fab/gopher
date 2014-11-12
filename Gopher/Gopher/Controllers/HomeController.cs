@@ -51,6 +51,8 @@ namespace Gopher.Controllers
         private PaginationViewModel GetPaginationViewModel(int totalCount, int? page = 1)
         {
             var model = new PaginationViewModel();
+            if (totalCount == 0) return model;
+
             model.CurrentPage = page != null ? page.Value : 1;
             if (page > 10)
                 model.FirstPage = 1;

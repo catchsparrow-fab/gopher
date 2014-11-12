@@ -13,6 +13,7 @@ SET QUOTED_IDENTIFIER ON
 GO
 
 CREATE TABLE [dbo].[Customers](
+	[ImportedFrom] [int] NOT NULL,
 	[CustomerId] [nvarchar](50) NOT NULL,
 	[ShopId] [nvarchar](50) NULL,
 	[Prefecture] [nvarchar](250) NULL,
