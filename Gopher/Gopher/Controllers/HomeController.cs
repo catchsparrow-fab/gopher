@@ -36,12 +36,11 @@ namespace Gopher.Controllers
         [HttpPost]
         public ActionResult CustomersIndex(CustomerSearchViewModel viewModel, string download, string search)
         {
-            var data = repository.GetCustomers(viewModel.Filter);
-
             if (!string.IsNullOrEmpty(download))
-                return DownloadCSV(data.Customers);
+                return DownloadCSV(viewModel.Filter);
             else // search
             {
+                var data = repository.GetCustomers(viewModel.Filter);
                 var model = GetEmptyCustomerSearchViewModel();
                 model.Customers = data.Customers.Select(c => new CustomerViewModel(c));
                 model.Filter = viewModel.Filter;
@@ -92,17 +91,19 @@ namespace Gopher.Controllers
             return View(GetEmptyCustomerSearchViewModel());
         }
 
-        public FileResult DownloadCSV(IEnumerable<Customer> customers)
+        public FileResult DownloadCSV(CustomerFilter filter)
         {
+            filter.Count = -1;
+            var data = repository.GetCustomers(filter);
             string header = string.Join(",", Format.GetHeaders());
             var stream = new MemoryStream();
 
             using (var writer = new StreamWriter(stream, Encoding.UTF8, 1024, true))
             {
                 writer.WriteLine(header);
-                foreach (var customer in customers)
+                foreach (var customer in data.Customers)
                 {
-                    writer.WriteLine(Format.CustomerToString(customer));
+                    writer.WriteLine(Format.ExportCustomerToString(customer));
                 }
             }
 

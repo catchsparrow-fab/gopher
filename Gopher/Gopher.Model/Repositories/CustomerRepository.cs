@@ -45,7 +45,7 @@ namespace Gopher.Model.Repositories
                 new DbParameter("dobMax", filter.DateOfBirth.Max),
                 new DbParameter("timesPurchasedMin", filter.TimesPurchased.Min),
                 new DbParameter("timesPurchasedMax", filter.TimesPurchased.Max),
-                new DbParameter("count", 50),
+                new DbParameter("count", filter.Count),
                 new DbParameter("start", GetStartingIndex(filter.Page)),
                 new DbParameter("monthOfBirth", filter.MonthOfBirth),
                 new DbParameter("nameKanji", filter.NameKanji),

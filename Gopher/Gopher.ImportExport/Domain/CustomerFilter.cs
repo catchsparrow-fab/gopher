@@ -28,6 +28,7 @@ namespace Gopher.ImportExport.Domain
         public EccubeEmailTarget? EmailTarget { get; set; }
         public string Prefecture { get; set; }
         public int? ShopId { get; set; }
+        public int Count { get; set; }
 
         public CustomerFilter()
         {
@@ -35,6 +36,7 @@ namespace Gopher.ImportExport.Domain
             TimesPurchased = new Range<int>();
             Page = 1;
             Sex = new Sex[0];
+            Count = 50;
         }
     }
 }

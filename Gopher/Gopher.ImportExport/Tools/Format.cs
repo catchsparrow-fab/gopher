@@ -14,6 +14,71 @@ namespace Gopher.ImportExport.Tools
         private const string DELIMITER = ",";
         private static readonly CultureInfo japaneseCulture = new CultureInfo("ja-JP");
 
+        /// <summary>
+        /// To be used in export (generating csv file).
+        /// </summary>
+        /// <param name="customer"></param>
+        /// <returns></returns>
+        public static string ExportCustomerToString(Customer customer)
+        {
+            return string.Join(DELIMITER, new object [] {
+                (int)customer.ImportedFrom,
+                customer.Id,
+                customer.ShopName,
+                customer.Prefecture,
+                customer.NameKanji,
+                customer.NameKana,
+                (int?)customer.Sex,
+                DtToString(customer.DateOfBirth),
+                customer.Email,
+                customer.EmailMobile,
+                customer.Phone,
+                DtToString(customer.DateRegistered),
+                DtToString(customer.DateUpdated),
+                customer.Zip,
+                customer.CellPhone,
+                customer.Note,
+                customer.Address,
+                customer.PointBalance,
+                // TEMPO-VISOR DATA
+                customer.TempoVisorData.CompanyCode,
+                customer.TempoVisorData.Area,
+                customer.TempoVisorData.Black,
+                customer.TempoVisorData.MemberRank,
+                customer.TempoVisorData.Status,
+                customer.TempoVisorData.MemberNumber,
+                customer.TempoVisorData.DirectMailFlag,
+                (int?)customer.TempoVisorData.EmailAccept,
+                customer.TempoVisorData.PriceApplication,
+                customer.TempoVisorData.PointDeposited,
+                customer.TempoVisorData.LastPointIssued,
+                DtToString(customer.TempoVisorData.LastPointIssuedDate),
+                customer.TempoVisorData.LastPointUsed,
+                DtToString(customer.TempoVisorData.LastPointUsedDate),
+                customer.TempoVisorData.Fillers,
+                (int?)customer.TempoVisorData.Operation,
+                DtToString(customer.TempoVisorData.CutoutDate),
+                DtToString(customer.TempoVisorData.ExpirationDate),
+                DtToString(customer.TempoVisorData.LastVisitedDate),
+                // TEMPO-VISOR DATA
+                customer.EccubeData.CompanyName,
+                customer.EccubeData.Fax,
+                customer.EccubeData.Occupation,
+                DtToString(customer.EccubeData.DateFirstPurchased),
+                DtToString(customer.EccubeData.DateLastPurchased),
+                customer.EccubeData.TimesPurchased,
+                customer.EccubeData.ProductWarranty,
+                customer.EccubeData.Deleted,
+                (int?)customer.EccubeData.SubscriptionType,
+                (int?)customer.EccubeData.EmailTarget
+            });
+        }
+
+        /// <summary>
+        /// To be used in bulk import. 
+        /// </summary>
+        /// <param name="customer"></param>
+        /// <returns></returns>
         public static string CustomerToString(Customer customer)
         {
             return string.Join(DELIMITER, new object [] {
