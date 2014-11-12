@@ -1,94 +1,109 @@
-﻿using System.Web.Mvc;
+﻿using System;
+using System.Web.Mvc;
+using Gopher.Model.Domain;
+using Gopher.Model.Repositories;
+using Gopher.Tools;
 
 namespace Gopher.Areas.Admin.Controllers
 {
     [Authorize(Roles = "Admin")]
     public class CodesController : Controller
     {
+        private readonly IShopRepository repository;
+
+        public CodesController(IShopRepository repository)
+        {
+            this.repository = repository;
+        }
+
         //
         // GET: /AdminCodes/
         public ActionResult Index()
         {
             ViewBag.ActiveTab = "codes";
-            return View();
+            return View(repository.GetAll());
         }
 
-        //
-        // GET: /AdminCodes/Details/5
-        public ActionResult Details(int id)
-        {
-            return View();
-        }
-
-        //
-        // GET: /AdminCodes/Create
         public ActionResult Create()
         {
-            return View();
+            return View("Edit");
         }
 
         //
-        // POST: /AdminCodes/Create
+        // POST: /AdminUsers/Create
         [HttpPost]
-        public ActionResult Create(FormCollection collection)
+        public ActionResult Create(Shop shop)
         {
             try
             {
-                // TODO: Add insert logic here
+                if (ModelState.IsValid)
+                {
+                    repository.Add(shop);
 
-                return RedirectToAction("Index");
+                    return RedirectToAction("Index");
+                }
+
+                return View("Edit");
             }
-            catch
+            catch (Exception ex)
             {
-                return View();
+                ModelState.AddModelError("FatalError", Helper.ErrorMessage(ex));
+                return View("Edit");
             }
         }
 
         //
-        // GET: /AdminCodes/Edit/5
+        // GET: /AdminUsers/Edit/5
         public ActionResult Edit(int id)
         {
-            return View();
+            var model = repository.GetSingle(id);
+
+            if (model == null)
+                return new HttpNotFoundResult("Shop not found.");
+
+            return View(model);
         }
 
         //
-        // POST: /AdminCodes/Edit/5
+        // POST: /AdminUsers/Edit/5
         [HttpPost]
-        public ActionResult Edit(int id, FormCollection collection)
+        public ActionResult Edit(Shop shop)
         {
             try
             {
-                // TODO: Add update logic here
+                if (ModelState.IsValid)
+                {
+                    repository.Update(shop);
 
-                return RedirectToAction("Index");
+                    return RedirectToAction("Index");
+                }
+
+                return View(shop);
             }
-            catch
+            catch (Exception ex)
             {
-                return View();
+                ModelState.AddModelError("FatalError", Helper.ErrorMessage(ex));
+                return View(shop);
             }
         }
 
         //
-        // GET: /AdminCodes/Delete/5
+        // POST: /AdminUsers/Delete/5
+        [HttpPost]
         public ActionResult Delete(int id)
         {
-            return View();
-        }
-
-        //
-        // POST: /AdminCodes/Delete/5
-        [HttpPost]
-        public ActionResult Delete(int id, FormCollection collection)
-        {
             try
             {
-                // TODO: Add delete logic here
-
+                repository.Delete(id);
                 return RedirectToAction("Index");
             }
-            catch
+            catch (Exception ex)
             {
-                return View();
+                ModelState.AddModelError("Fatal error", Helper.ErrorMessage(ex));
+                var user = repository.GetSingle(id);
+                if (user != null)
+                    return View("Edit", user);
+                return View("Edit");
             }
         }
     }

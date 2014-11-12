@@ -13,7 +13,8 @@ SET QUOTED_IDENTIFIER ON
 GO
 
 CREATE TABLE [dbo].[Shops](
-	[ShopId] [int] NOT NULL,
+	[ShopId] [int] IDENTITY(1, 1) NOT NULL,
+	[ShopImportedId] [int] NOT NULL,
 	[FullName] [nvarchar](250) NOT NULL,
  CONSTRAINT [PK_Shops] PRIMARY KEY CLUSTERED 
 (

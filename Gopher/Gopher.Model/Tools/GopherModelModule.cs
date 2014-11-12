@@ -20,6 +20,7 @@ namespace Gopher.Model.Tools
             Bind<ITranslationRepository>().To<TranslationRepository>();
             Bind<ICustomerRepository>().To<CustomerRepository>();
             Bind<IPrefectureRepository>().To<PrefectureRepository>();
+            Bind<IShopRepository>().To<ShopRepository>();
         }
     }
 }

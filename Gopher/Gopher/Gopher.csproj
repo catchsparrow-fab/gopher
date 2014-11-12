@@ -206,6 +206,7 @@
     <Content Include="Areas\Admin\Views\Translations\Index.cshtml" />
     <Content Include="Areas\Admin\Views\Translations\Edit.cshtml" />
     <Content Include="Areas\Admin\Views\Shared\LanguageSelect.cshtml" />
+    <Content Include="Areas\Admin\Views\Codes\Edit.cshtml" />
     <None Include="Properties\PublishProfiles\Default Settings.pubxml" />
     <None Include="Scripts\jquery-1.10.2.intellisense.js" />
     <Content Include="Scripts\jquery-1.10.2.js" />

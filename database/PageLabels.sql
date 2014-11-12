@@ -64,3 +64,4 @@ exec AddTranslation 'Import_RowsAffected', 'RowsAffected'
 -- search tool
 exec AddTranslation 'Generic_Male', 'Male'
 exec AddTranslation 'Generic_Female', 'Female'
+exec AddTranslation 'Administration_Shops_NewShop', 'New shop'

@@ -1,8 +1,38 @@
 ﻿@using Gopher.Model.Tools
+@model IEnumerable<Gopher.Model.Domain.Shop>
 
 @{
     ViewBag.Title = TranslationHelper.Get("Administration_Tabs_Codes");
 }
 
 <h1 class="page-header">@ViewBag.Title</h1>
+<div class="table-responsive">
+    <table class="table table-striped">
+        <thead>
+            <tr>
+                <th>
+                    ShopId
+                </th>
+                <th>
+                    Full name
+                </th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var item in Model)
+            {
+                <tr>
+                    <td>
+                        <a href="@Url.Action("Edit", new { id = item.Id })">@item.ImportedId</a> 
+                    </td>
+                    <td>
+                        <a href="@Url.Action("Edit", new { id = item.Id })">@item.Name</a> 
+                    </td>
+                </tr>
+            }
+        </tbody>
+    </table>
+</div>
+<a href="@Url.Action("Create")" class="btn btn-default">@Html.Translation("Administration_Shops_NewShop")</a>
+
 
