@@ -59,7 +59,7 @@ namespace Gopher.ImportExport
             };
         }
 
-        public static BulkInsertResults BulkInsert(string fileName)
+        public static BulkInsertResults BulkInsert(string fileName, InputFileType inputType)
         {
             var result = new BulkInsertResults();
             result.Status = BulkInsertStatus.Success;
@@ -67,7 +67,8 @@ namespace Gopher.ImportExport
             try
             {
                 result.RowsAffected = DbHelper.ExecuteScalar<int>("UploadData", CommandType.StoredProc,
-                    new DbParameter("fileName", fileName));
+                    new DbParameter("fileName", fileName),
+                    new DbParameter("inputType", (int)inputType));
             }
             catch (Exception ex)
             {

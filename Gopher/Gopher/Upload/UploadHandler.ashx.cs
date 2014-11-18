@@ -44,7 +44,7 @@ namespace Gopher.Upload
                 }
 
                 if (parseResult.Status == ParseStatus.Success)
-                    bulkInsertResult = Import.BulkInsert(tempFileName);
+                    bulkInsertResult = Import.BulkInsert(tempFileName, parseResult.FileType);
 
                 result = new UploadResults(parseResult, bulkInsertResult);
                 result.FileName = context.Request.Files[0].FileName;
