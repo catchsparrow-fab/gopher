@@ -2,7 +2,7 @@
 @model IEnumerable<Gopher.ImportExport.Domain.Shop>
 
 @{
-    ViewBag.Title = TranslationHelper.Get("Administration_Tabs_Codes");
+    ViewBag.Title = TranslationHelper.Get("Administration_Tabs_Shops");
 }
 
 <h1 class="page-header">@ViewBag.Title</h1>
@@ -11,10 +11,10 @@
         <thead>
             <tr>
                 <th>
-                    ShopId
+                    @Html.Translation("Generic_ShopId")
                 </th>
                 <th>
-                    Full name
+                    @Html.Translation("Generic_Name")
                 </th>
             </tr>
         </thead>

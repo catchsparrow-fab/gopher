@@ -5,17 +5,17 @@
 @model Gopher.Models.CustomerSearchViewModel
 
 <form id="search-form" method="post" action="@Url.Action()" class="search-form-table">
-    <h4 class="search-result-title">Customer search</h4>
+    <h4 class="search-result-title">@Html.Translation("Header_CustomerSearch")</h4>
     @Html.Partial("CustomerSearchForm", Model)
     @if (Model != null && Model.Customers != null)
     {
         <div>
-            <h4 class="search-result-title">Search results</h4>
+            <h4 class="search-result-title">@Html.Translation("Generic_SearchResults")</h4>
             <div class="search-result-header">
-                <span class="search-result-count"><span class="result-count">@Model.TotalCount</span> results</span>
+                <span class="search-result-count"><span class="result-count">@Model.TotalCount</span> @Html.Translation("Search_Results")</span>
                 @if (Model.TotalCount > 0)
                 {
-                    <input type="submit" value="Download CSV" name="download" id="download" />
+                    <input type="submit" value="@Html.Translation("Search_DownloadCSV")" name="download" id="download" />
                 }
             </div>
             @if (Model.TotalCount > 0)

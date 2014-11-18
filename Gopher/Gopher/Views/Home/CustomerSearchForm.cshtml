@@ -3,7 +3,7 @@
 <table>
     <tr>
         <td class="td-gray">
-            Customer Id
+            @Html.Translation("Generic_CustomerId")
         </td>
         <td colspan="3">
             @Html.TextBoxFor(m => m.Filter.CustomerId)
@@ -11,7 +11,7 @@
     </tr>
     <tr>
         <td class="td-gray">
-            Shop
+            @Html.Translation("Generic_Shop")
         </td>
         <td>
             <select name="Filter.ShopId" id="shops">
@@ -31,7 +31,7 @@
             }
         </td>
         <td class="td-gray">
-            Prefecture
+            @Html.Translation("Generic_Prefecture")
         </td>
         <td>
             <select id="Filter_Prefecture" name="Filter.Prefecture">
@@ -53,13 +53,13 @@
     </tr>
     <tr>
         <td class="td-gray">
-            Name (Kanji)
+            @Html.Translation("Generic_Name")
         </td>
         <td>
             @Html.TextBoxFor(m => m.Filter.NameKanji)
         </td>
         <td class="td-gray">
-            Name (Kana)
+            @Html.Translation("Generic_Name") (@Html.Translation("Generic_Kana"))
         </td>
         <td>
             @Html.TextBoxFor(m => m.Filter.NameKana)
@@ -67,7 +67,7 @@
     </tr>
     <tr>
         <td class="td-gray">
-            Sex
+            @Html.Translation("Generic_Sex")
         </td>
         <td>
             @if (Model.Filter == null || Model.Filter.Sex.Contains(Sex.Male))
@@ -90,7 +90,7 @@
             <label style="font-weight:normal;" for="sex-female">@Html.Translation("Generic_Female")</label>
         </td>
         <td class="td-gray">
-            Month of birth
+            @Html.Translation("Generic_MonthOfBirth")
         </td>
         <td>
             <select id="mob" name="Filter.MonthOfBirth">
@@ -111,26 +111,36 @@
         </td>
     </tr>
     <tr>
-        <td class="td-gray">Email</td>
+        <td class="td-gray">
+            @Html.Translation("Generic_Email")
+        </td>
         <td colspan="3">@Html.TextBoxFor(m => m.Filter.Email)</td>
     </tr>
     <tr>
-        <td class="td-gray">Email (mobile)</td>
+        <td class="td-gray">
+            @Html.Translation("Generic_EmailMobile")
+        </td>
         <td colspan="3">@Html.TextBoxFor(m => m.Filter.EmailMobile)</td>
     </tr>
     <tr>
-        <td class="td-gray">Phone</td>
+        <td class="td-gray">
+            @Html.Translation("Generic_Phone")
+        </td>
         <td colspan="3">@Html.TextBoxFor(m => m.Filter.Phone)</td>
     </tr>
     <tr>
-        <td class="td-gray">Times purchased</td>
+        <td class="td-gray">
+            @Html.Translation("Generic_TimesPurchased")
+        </td>
         <td colspan="3">@Html.TextBoxFor(m => m.Filter.TimesPurchased.Min) ~ @Html.TextBoxFor(m => m.Filter.TimesPurchased.Max)</td>
     </tr>
     <tr>
-        <td class="td-gray">Product warranty serial</td>
+        <td class="td-gray">
+            @Html.Translation("Generic_ProductWarrantySerial")
+        </td>
         <td colspan="3">@Html.TextBoxFor(m => m.Filter.ProductWarranty)</td>
     </tr>
 </table>
 <div id="search-button-wrapper">
-    <input type="submit" value="Search" name="search" id="search" />
+    <input type="submit" value="@Html.Translation("Generic_Search")" name="search" id="search" />
 </div>

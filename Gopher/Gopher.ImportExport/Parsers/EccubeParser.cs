@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Linq;
 using System.Text;
 using Gopher.ImportExport.Domain;
 using Gopher.ImportExport.Tools;
@@ -7,7 +8,15 @@ namespace Gopher.ImportExport.Parsers
 {
     public class EccubeParser : StandardParser
     {
-        private const int ECCUBE_SHOP_ID = 0;
+        public EccubeParser()
+        {
+            var shops = new ShopRepository().GetAll();
+
+            EccubeShopId = shops.Where(s => s.ImportedId == ECCUBE_SHOP_IMPORT_ID).Single().Id;
+        }
+
+        private readonly int EccubeShopId = 0;
+        private const int ECCUBE_SHOP_IMPORT_ID = 0;
 
         protected override Customer GetCustomer(string[] array)
         {
@@ -15,7 +24,7 @@ namespace Gopher.ImportExport.Parsers
             {
                 ImportedFrom = InputFileType.Eccube,
                 Id = array[0],
-                ShopId = ECCUBE_SHOP_ID,
+                ShopId = EccubeShopId,
                 NameKanji = Format.MergeIntoString(array, 1, 2),
                 NameKana = Format.MergeIntoString(array, 3, 2),
                 Zip = Format.MergeIntoString(array, 6, 2),

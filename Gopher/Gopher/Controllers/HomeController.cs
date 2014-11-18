@@ -63,11 +63,11 @@ namespace Gopher.Controllers
 
             int lastPage = (totalCount + 1) / PageSize + 1;
 
-            if (page < lastPage)
-                model.LastPage = lastPage;
-
             model.StartPage = (model.CurrentPage - 1) / 10 * 10 + 1;
             model.EndPage = Math.Min(model.StartPage + 9, lastPage);
+
+            if (page < lastPage && lastPage > model.EndPage)
+                model.LastPage = lastPage;
 
             if (model.StartPage > 1)
                 model.PrevPage = model.StartPage - 1;

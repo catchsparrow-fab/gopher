@@ -21,7 +21,7 @@ namespace Gopher.ImportExport.Tools
         /// <returns></returns>
         public static string ExportCustomerToString(Customer customer)
         {
-            return string.Join(DELIMITER, new object [] {
+            return string.Join(DELIMITER, new object[] {
                 (int)customer.ImportedFrom,
                 customer.Id,
                 customer.ShopName,
@@ -81,7 +81,7 @@ namespace Gopher.ImportExport.Tools
         /// <returns></returns>
         public static string CustomerToString(Customer customer)
         {
-            return string.Join(DELIMITER, new object [] {
+            return string.Join(DELIMITER, new object[] {
                 (int)customer.ImportedFrom,
                 customer.Id,
                 customer.ShopId,
@@ -134,20 +134,56 @@ namespace Gopher.ImportExport.Tools
             });
         }
 
-        private class Column : IPersistent
-        {
-            public string Name { get; set; }
-
-            public void Init(IDataReader reader)
-            {
-                Name = reader.GetString("COLUMN_NAME");
-            }
-        }
-
         public static string[] GetHeaders()
         {
-            return DbHelper.GetList<Column>("sp_columns", CommandType.StoredProc,
-                new DbParameter("table_name", "Customers")).Select(i => i.Name).ToArray();
+            return new[] {
+                "imported_from",
+                "id",
+                "shop_name",
+                "prefecture",
+                "name_kanji",
+                "name_kana",
+                "sex",
+                "date_of_birth",
+                "email",
+                "email_mobile",
+                "phone",
+                "date_registered",
+                "date_updated",
+                "zip",
+                "cellphone",
+                "note",
+                "address",
+                "point_balance",
+                "tv_company_code",
+                "tv_area",
+                "tv_black",
+                "tv_status",
+                "tv_member_number",
+                "tv_direct_mail_flag",
+                "tv_email_accept",
+                "tv_price_application",
+                "tv_point_deposited",
+                "tv_last_point_issued",
+                "tv_last_point_issued_date",
+                "tv_last_point_used",
+                "tv_last_point_used_date",
+                "tv_fillers",
+                "tv_operation",
+                "tv_cutout_date",
+                "tv_expiration_date",
+                "tv_last_visited_date",
+                "ec_company_name",
+                "ec_fax",
+                "ec_occupation",
+                "ec_date_first_purchased",
+                "ec_date_last_purchased",
+                "ec_times_purchased",
+                "ec_product_warranty",
+                "ec_deleted",
+                "ec_subscription_type",
+                "ec_email_target"
+            };
         }
 
         private static string DtToString(DateTime? dt)
@@ -195,7 +231,7 @@ namespace Gopher.ImportExport.Tools
         }
 
         public static T? GetNullableEnum<T>(string s)
-            where T: struct
+            where T : struct
         {
             int value;
             if (int.TryParse(s, out value))
