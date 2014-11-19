@@ -22,9 +22,8 @@ namespace Gopher.ImportExport.Parsers
                 using (var reader = new CsvParser(new StreamReader(input, InputEncoding)))
                 using (var writer = new StreamWriter(output, Encoding.BigEndianUnicode))
                 {
-                    //reader.ReadLine(); // header
-
-                    var array = reader.Read();
+                    var array = reader.Read(); // header
+                    array = reader.Read();
 
                     while (array != null)
                     {

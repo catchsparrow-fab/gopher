@@ -24,7 +24,7 @@ namespace Gopher.ImportExport.Parsers
                 ImportedFrom = InputFileType.TempoVisor,
                 Id = array[1],
                 ShopId = GetShopId(array[2]),
-                NameKana = array[3],
+                NameKana = KanaHelper.ToFullKana(array[3]),
                 Phone = array[4],
                 CellPhone = array[5],
                 NameKanji = array[6],

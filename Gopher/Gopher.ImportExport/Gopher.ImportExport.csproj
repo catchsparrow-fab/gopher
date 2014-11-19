@@ -57,6 +57,7 @@
     <Compile Include="Parsers\EccubeParser.cs" />
     <Compile Include="Import.cs" />
     <Compile Include="Parsers\IParser.cs" />
+    <Compile Include="Parsers\KanaHelper.cs" />
     <Compile Include="Parsers\TempoVisorParser.cs" />
     <Compile Include="Parsers\TempoVisorPrefectureHelper.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

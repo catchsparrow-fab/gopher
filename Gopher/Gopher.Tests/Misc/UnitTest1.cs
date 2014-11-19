@@ -116,5 +116,16 @@ namespace Gopher.Tests.Misc
 
             Assert.IsNull(actual);
         }
+
+        [TestMethod]
+        public void HalfKana_ToFullKana_Works()
+        {
+            string half = "ﾆｯﾎﾟﾝ";
+            string full = "ニッポン";
+
+            string actual = KanaHelper.ToFullKana(half);
+
+            Assert.AreEqual(full, actual);
+        }
     }
 }
