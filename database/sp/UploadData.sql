@@ -29,7 +29,7 @@ BEGIN
 	'BULK INSERT Customers_Stage
 		FROM ''' + @fileName + '''
 		WITH  (
-			FIELDTERMINATOR='','',
+			FIELDTERMINATOR=''\t'',
 			DATAFILETYPE = ''widechar''
 		);
 	';

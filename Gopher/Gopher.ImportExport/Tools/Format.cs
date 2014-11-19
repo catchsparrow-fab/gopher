@@ -11,7 +11,8 @@ namespace Gopher.ImportExport.Tools
 {
     public class Format
     {
-        private const string DELIMITER = ",";
+        private const string DELIMITER = "\t";
+        private const string EXPORT_DELIMITER = "\t";
         private static readonly CultureInfo japaneseCulture = new CultureInfo("ja-JP");
 
         /// <summary>
@@ -21,7 +22,7 @@ namespace Gopher.ImportExport.Tools
         /// <returns></returns>
         public static string ExportCustomerToString(Customer customer)
         {
-            return string.Join(DELIMITER, new object[] {
+            return string.Join(EXPORT_DELIMITER, new object[] {
                 (int)customer.ImportedFrom,
                 customer.Id,
                 customer.ShopName,

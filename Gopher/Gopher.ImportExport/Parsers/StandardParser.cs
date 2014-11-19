@@ -1,6 +1,8 @@
 ﻿using System;
 using System.IO;
 using System.Text;
+using CsvHelper;
+using CsvHelper.Configuration;
 using Gopher.ImportExport.Domain;
 using Gopher.ImportExport.Tools;
 
@@ -16,24 +18,20 @@ namespace Gopher.ImportExport.Parsers
             {
                 result.FileSize = input.Length;
                 result.FileType = FileType;
-
-                using (var reader = new StreamReader(input, InputEncoding))
+                //using (var reader = new StreamReader(input, InputEncoding))
+                using (var reader = new CsvParser(new StreamReader(input, InputEncoding)))
                 using (var writer = new StreamWriter(output, Encoding.BigEndianUnicode))
                 {
-                    reader.ReadLine(); // header
+                    //reader.ReadLine(); // header
 
-                    string line = reader.ReadLine();
+                    var array = reader.Read();
 
-                    while (!string.IsNullOrEmpty(line))
+                    while (array != null)
                     {
-                        var array = line.Split(',');
-                        if (array.Length > 0)
-                        {
-                            result.RowsInFile += 1;
-                            var customer = GetCustomer(array);
-                            writer.WriteLine(Format.CustomerToString(customer));
-                        }
-                        line = reader.ReadLine();
+                        result.RowsInFile += 1;
+                        var customer = GetCustomer(array);
+                        writer.WriteLine(Format.CustomerToString(customer));
+                        array = reader.Read();
                     }
                 }
 
@@ -48,7 +46,7 @@ namespace Gopher.ImportExport.Parsers
         }
 
         protected abstract Customer GetCustomer(string[] array);
-        protected abstract InputFileType FileType { get; } 
+        protected abstract InputFileType FileType { get; }
 
         protected virtual Encoding InputEncoding
         {
