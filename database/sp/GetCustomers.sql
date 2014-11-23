@@ -30,7 +30,18 @@ CREATE PROCEDURE GetCustomers
 	@phone nvarchar(250) = NULL,
 	@productWarranty nvarchar(250) = NULL,
 	@prefecture nvarchar(250) = NULL,
-	@shopId int = NULL
+	@shopId int = NULL,
+	@ecSubscriptionType int = NULL,
+	@ecEmailTarget int = NULL,
+	@tvEmailAccept int = NULL,
+	@dateRegisteredMin datetime = NULL,
+	@dateRegisteredMax datetime = NULL,
+	@dateUpdatedMin datetime = NULL,
+	@dateUpdatedMax datetime = NULL,
+	@dateFirstPurchasedMin datetime = NULL,
+	@dateFirstPurchasedMax datetime = NULL,
+	@dateLastPurchasedMin datetime = NULL,
+	@dateLastPurchasedMax datetime = NULL
 AS
 BEGIN
 	IF @count = -1 BEGIN
@@ -52,6 +63,17 @@ BEGIN
 			AND (@productWarranty IS NULL OR c.EC_ProductWarranty LIKE '%' + @productWarranty + '%')
 			AND (@prefecture IS NULL OR c.Prefecture = @prefecture)
 			AND (@shopId IS NULL OR c.ShopId = @shopId)
+			AND (@dateRegisteredMin IS NULL OR @dateRegisteredMin < c.DateRegistered)
+			AND (@dateRegisteredMax IS NULL OR @dateRegisteredMax > c.DateRegistered)
+			AND (@dateUpdatedMin IS NULL OR @dateUpdatedMin < c.DateUpdated)
+			AND (@dateUpdatedMax IS NULL OR @dateUpdatedMax > c.DateUpdated)
+			AND (@dateFirstPurchasedMin IS NULL OR @dateFirstPurchasedMin < c.EC_DateFirstPurchased)
+			AND (@dateFirstPurchasedMax IS NULL OR @dateFirstPurchasedMax > c.EC_DateFirstPurchased)
+			AND (@dateLastPurchasedMin IS NULL OR @dateLastPurchasedMin < c.EC_DateLastPurchased)
+			AND (@dateLastPurchasedMax IS NULL OR @dateLastPurchasedMax > c.EC_DateLastPurchased)
+			AND (@ecEmailTarget IS NULL OR @ecEmailTarget = c.EC_EmailTarget)
+			AND (@ecSubscriptionType IS NULL OR @ecSubscriptionType = c.EC_SubscriptionType)
+			AND (@tvEmailAccept IS NULL OR @tvEmailAccept = c.TV_EmailAccept)
 		ORDER BY CustomerId
 
 	END ELSE BEGIN
@@ -72,6 +94,17 @@ BEGIN
 			AND (@productWarranty IS NULL OR c.EC_ProductWarranty LIKE '%' + @productWarranty + '%')
 			AND (@prefecture IS NULL OR c.Prefecture = @prefecture)
 			AND (@shopId IS NULL OR c.ShopId = @shopId)
+			AND (@dateRegisteredMin IS NULL OR @dateRegisteredMin < c.DateRegistered)
+			AND (@dateRegisteredMax IS NULL OR @dateRegisteredMax > c.DateRegistered)
+			AND (@dateUpdatedMin IS NULL OR @dateUpdatedMin < c.DateUpdated)
+			AND (@dateUpdatedMax IS NULL OR @dateUpdatedMax > c.DateUpdated)
+			AND (@dateFirstPurchasedMin IS NULL OR @dateFirstPurchasedMin < c.EC_DateFirstPurchased)
+			AND (@dateFirstPurchasedMax IS NULL OR @dateFirstPurchasedMax > c.EC_DateFirstPurchased)
+			AND (@dateLastPurchasedMin IS NULL OR @dateLastPurchasedMin < c.EC_DateLastPurchased)
+			AND (@dateLastPurchasedMax IS NULL OR @dateLastPurchasedMax > c.EC_DateLastPurchased)
+			AND (@ecEmailTarget IS NULL OR @ecEmailTarget = c.EC_EmailTarget)
+			AND (@ecSubscriptionType IS NULL OR @ecSubscriptionType = c.EC_SubscriptionType)
+			AND (@tvEmailAccept IS NULL OR @tvEmailAccept = c.TV_EmailAccept)
 		ORDER BY CustomerId
 		OFFSET @start ROWS FETCH NEXT @count ROWS ONLY
 	END
@@ -92,6 +125,17 @@ BEGIN
 			AND (@productWarranty IS NULL OR c.EC_ProductWarranty LIKE '%' + @productWarranty + '%')
 			AND (@prefecture IS NULL OR c.Prefecture = @prefecture)
 			AND (@shopId IS NULL OR c.ShopId = @shopId)
+			AND (@dateRegisteredMin IS NULL OR @dateRegisteredMin < c.DateRegistered)
+			AND (@dateRegisteredMax IS NULL OR @dateRegisteredMax > c.DateRegistered)
+			AND (@dateUpdatedMin IS NULL OR @dateUpdatedMin < c.DateUpdated)
+			AND (@dateUpdatedMax IS NULL OR @dateUpdatedMax > c.DateUpdated)
+			AND (@dateFirstPurchasedMin IS NULL OR @dateFirstPurchasedMin < c.EC_DateFirstPurchased)
+			AND (@dateFirstPurchasedMax IS NULL OR @dateFirstPurchasedMax > c.EC_DateFirstPurchased)
+			AND (@dateLastPurchasedMin IS NULL OR @dateLastPurchasedMin < c.EC_DateLastPurchased)
+			AND (@dateLastPurchasedMax IS NULL OR @dateLastPurchasedMax > c.EC_DateLastPurchased)
+			AND (@ecEmailTarget IS NULL OR @ecEmailTarget = c.EC_EmailTarget)
+			AND (@ecSubscriptionType IS NULL OR @ecSubscriptionType = c.EC_SubscriptionType)
+			AND (@tvEmailAccept IS NULL OR @tvEmailAccept = c.TV_EmailAccept)
 END
 
 GO

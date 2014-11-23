@@ -214,3 +214,11 @@ body {
 .nav > li > a.gopher-menu-item:hover {
     color: #428bca;
 }
+
+label {
+    font-weight:normal;
+}
+
+.radio-button-group label {
+    margin-right: 20px;
+}

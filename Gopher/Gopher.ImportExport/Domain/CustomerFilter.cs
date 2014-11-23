@@ -24,11 +24,12 @@ namespace Gopher.ImportExport.Domain
         public Range<DateTime> DateFirstPurchased { get; set; }  
         public Range<DateTime> DateLastPurchased { get; set; }
         public string ProductWarranty { get; set; }
-        public TempoVisorEmailAccept? EmailFormat { get; set; }
-        public EccubeEmailTarget? EmailTarget { get; set; }
+        public TempoVisorEmailAccept? TV_EmailAccept { get; set; }
+        public EccubeEmailTarget? EC_EmailTarget { get; set; }
         public string Prefecture { get; set; }
         public int? ShopId { get; set; }
         public int Count { get; set; }
+        public EccubeSubscriptionType? EC_SubscriptionType { get; set; }
 
         public CustomerFilter()
         {

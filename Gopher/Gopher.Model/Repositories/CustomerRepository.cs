@@ -55,7 +55,17 @@ namespace Gopher.Model.Repositories
                 new DbParameter("phone", filter.Phone),
                 new DbParameter("productWarranty", filter.ProductWarranty),
                 new DbParameter("prefecture", filter.Prefecture),
-                new DbParameter("shopId", filter.ShopId),
+                new DbParameter("dateRegisteredMin", filter.DateRegistered.Min),
+                new DbParameter("dateRegisteredMax", filter.DateRegistered.Max),
+                new DbParameter("dateUpdatedMin", filter.DateUpdated.Min),
+                new DbParameter("dateUpdatedMax", filter.DateUpdated.Max),
+                new DbParameter("dateFirstPurchasedMin", filter.DateFirstPurchased.Min),
+                new DbParameter("dateFirstPurchasedMax", filter.DateFirstPurchased.Max),
+                new DbParameter("dateLastPurchasedMin", filter.DateLastPurchased.Min),
+                new DbParameter("dateLastPurchasedMax", filter.DateLastPurchased.Max),
+                new DbParameter("ecSubscriptionType", filter.EC_SubscriptionType),
+                new DbParameter("ecEmailTarget", filter.EC_EmailTarget),
+                new DbParameter("tvEmailAccept", filter.TV_EmailAccept),
             };
         }
 

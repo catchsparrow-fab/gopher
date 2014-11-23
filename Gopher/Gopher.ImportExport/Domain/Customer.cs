@@ -50,8 +50,8 @@ namespace Gopher.ImportExport.Domain
     //  41  TimesPurchased int
     //  42  ProductWarranty string
     //  43  Deleted bool
-    //  44  SubscriptionType int
-    //  45  EmailTarget int
+    //  44  EC_SubscriptionType int
+    //  45  EC_EmailTarget int
     // MISC
     //  46   ImportedFrom int
     public class Customer : IPersistent

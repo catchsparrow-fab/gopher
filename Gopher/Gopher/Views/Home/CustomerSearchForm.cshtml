@@ -140,6 +140,65 @@
         </td>
         <td colspan="3">@Html.TextBoxFor(m => m.Filter.ProductWarranty)</td>
     </tr>
+    <tr>
+        <td class="td-gray">
+            @Html.Translation("Generic_SubscriptionType")
+        </td>
+        <td colspan="3" class="radio-button-group">
+            <input id="rb-ec-subscription-type-1" type="radio" name="Filter.EC_SubscriptionType" value="" @(Model.Filter == null || Model.Filter.EC_SubscriptionType == null ? "checked" : string.Empty) />
+            <label for="rb-ec-subscription-type-1">@Html.Translation("Generic_All")</label>
+            <input id="rb-ec-subscription-type-2" type="radio" name="Filter.EC_SubscriptionType" value="2" @(Model.Filter != null && Model.Filter.EC_SubscriptionType == EccubeSubscriptionType.Html ? "checked" : string.Empty)  />
+            <label for="rb-ec-subscription-type-2">@Html.Translation("Generic_Html")</label>
+            <input id="rb-ec-subscription-type-3" type="radio" name="Filter.EC_SubscriptionType" value="1" @(Model.Filter != null && Model.Filter.EC_SubscriptionType == EccubeSubscriptionType.PlainText ? "checked" : string.Empty)   />
+            <label for="rb-ec-subscription-type-3">@Html.Translation("Generic_PlainText")</label>
+            <input id="rb-ec-subscription-type-4" type="radio" name="Filter.EC_SubscriptionType" value="0" @(Model.Filter != null && Model.Filter.EC_SubscriptionType == EccubeSubscriptionType.None ? "checked" : string.Empty)   />
+            <label for="rb-ec-subscription-type-4">@Html.Translation("Generic_NotSubscribed")</label>
+        </td>
+    </tr>
+    <tr>
+        <td class="td-gray">
+            @Html.Translation("Generic_EmailTargetECCUBE")
+        </td>
+        <td colspan="3">
+            <div>
+                <input id="rb-ec-email-target-1" type="radio" name="Filter.EC_EmailTarget" value="" @(Model.Filter == null || Model.Filter.EC_EmailTarget == null ? "checked" : string.Empty) />
+                <label for="rb-ec-email-target-1">@Html.Translation("Generic_All")</label>
+            </div>
+            <div>
+                <input id="rb-ec-email-target-2" type="radio" name="Filter.EC_EmailTarget" value="1" @(Model.Filter != null && Model.Filter.EC_EmailTarget == EccubeEmailTarget.PcEmail ? "checked" : string.Empty) />
+                <label for="rb-ec-email-target-2">@Html.Translation("Generic_PcEmail")</label>
+            </div>
+            <div>
+                <input id="rb-ec-email-target-3" type="radio" name="Filter.EC_EmailTarget" value="2" @(Model.Filter != null && Model.Filter.EC_EmailTarget == EccubeEmailTarget.MobileEmail ? "checked" : string.Empty) />
+                <label for="rb-ec-email-target-3">@Html.Translation("Generic_MobileEmail")</label>
+            </div>
+            <div>
+                <input id="rb-ec-email-target-4" type="radio" name="Filter.EC_EmailTarget" value="3" @(Model.Filter != null && Model.Filter.EC_EmailTarget == EccubeEmailTarget.PcEmailOnly ? "checked" : string.Empty) />
+                <label for="rb-ec-email-target-4">@Html.Translation("Generic_PcEmailOnly")</label>
+            </div>
+            <div>
+                <input id="rb-ec-email-target-5" type="radio" name="Filter.EC_EmailTarget" value="4" @(Model.Filter != null && Model.Filter.EC_EmailTarget == EccubeEmailTarget.MobileEmailOnly ? "checked" : string.Empty) />
+                <label for="rb-ec-email-target-5">@Html.Translation("Generic_MobileEmailOnly")</label>
+            </div>
+        </td>
+    </tr>
+    <tr>
+        <td class="td-gray">
+            @Html.Translation("Generic_EmailTargetTempoVisor")
+        </td>
+        <td colspan="3" class="radio-button-group">
+            <input id="rb-tv-email-target-1" type="radio" name="Filter.TV_EmailAccept" value="" @(Model.Filter == null || Model.Filter.TV_EmailAccept == null ? "checked" : string.Empty) />
+            <label for="rb-tv-email-target-1">@Html.Translation("Generic_All")</label>
+            <input id="rb-tv-email-target-2" type="radio" name="Filter.TV_EmailAccept" value="0" @(Model.Filter != null && Model.Filter.TV_EmailAccept == TempoVisorEmailAccept.DoNotSend ? "checked" : string.Empty) />
+            <label for="rb-tv-email-target-2">@Html.Translation("Generic_DoNotSend")</label>
+            <input id="rb-tv-email-target-3" type="radio" name="Filter.TV_EmailAccept" value="1" @(Model.Filter != null && Model.Filter.TV_EmailAccept == TempoVisorEmailAccept.SendToEmail1 ? "checked" : string.Empty) />
+            <label for="rb-tv-email-target-3">@Html.Translation("Generic_SendToEmail1")</label>
+            <input id="rb-tv-email-target-4" type="radio" name="Filter.TV_EmailAccept" value="2" @(Model.Filter != null && Model.Filter.TV_EmailAccept == TempoVisorEmailAccept.SendToEmail2 ? "checked" : string.Empty) />
+            <label for="rb-tv-email-target-4">@Html.Translation("Generic_SendToEmail2")</label>
+            <input id="rb-tv-email-target-5" type="radio" name="Filter.TV_EmailAccept" value="3" @(Model.Filter != null && Model.Filter.TV_EmailAccept == TempoVisorEmailAccept.SendBoth ? "checked" : string.Empty) />
+            <label for="rb-tv-email-target-5">@Html.Translation("Generic_SendBoth")</label>
+        </td>
+    </tr>
 </table>
 <div id="search-button-wrapper">
     <input type="submit" value="@Html.Translation("Generic_Search")" name="search" id="search" />
