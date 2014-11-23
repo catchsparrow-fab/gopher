@@ -19,6 +19,7 @@ BEGIN
 	SET NOCOUNT ON;
 
     SELECT DISTINCT Prefecture FROM Customers WHERE Prefecture IS NOT NULL
+	ORDER BY Prefecture
 END
 
 GO

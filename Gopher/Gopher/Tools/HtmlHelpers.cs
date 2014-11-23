@@ -7,6 +7,7 @@ using System.Text;
 using System.Web;
 using System.Web.Mvc.Html;
 using Gopher.Model.Tools;
+using Gopher.Tools;
 
 namespace System.Web.Mvc
 {
@@ -18,7 +19,7 @@ namespace System.Web.Mvc
             return new MvcHtmlString(text);
         }
 
-        public static MvcHtmlString RadioButtonList<TModel, TEnum>(this HtmlHelper<TModel> helper, 
+        public static MvcHtmlString RadioButtonList<TModel, TEnum>(this HtmlHelper<TModel> helper,
             Expression<Func<TModel, TEnum>> expression)
         {
             var name = ExpressionHelper.GetExpressionText(expression);
@@ -34,7 +35,7 @@ namespace System.Web.Mvc
             var t = typeof(T);
             var u = Nullable.GetUnderlyingType(t);
             if (u != null && u.IsEnum)
-                return Enum.GetValues(u); 
+                return Enum.GetValues(u);
             if (t.IsEnum)
                 return Enum.GetValues(u);
             return new List<object>();
@@ -44,6 +45,34 @@ namespace System.Web.Mvc
         {
             Type u = Nullable.GetUnderlyingType(t);
             return (u != null) && u.IsEnum;
+        }
+
+        
+        public static MvcHtmlString DatePicker<TModel, TProperty>(this HtmlHelper<TModel> helper,
+            Expression<Func<TModel, TProperty>> expression)
+        {
+            var name = ExpressionHelper.GetExpressionText(expression);
+            var metadata = ModelMetadata.FromLambdaExpression(expression, helper.ViewData);
+
+            var tb = new TagBuilder("input");
+            tb.Attributes["class"] = "date-picker";
+            tb.Attributes["type"] = "text";
+            tb.Attributes["name"] = name;
+            string value = string.Empty;
+            if (metadata.ModelType == typeof(DateTime))
+            {
+                DateTime dt = (DateTime)metadata.Model;
+                if (dt != DateTime.MinValue)
+                    value = dt.ToString(GopherConfiguration.DateTimeFormat);
+            }
+            else if (Nullable.GetUnderlyingType(metadata.ModelType) == typeof(DateTime))
+            {
+                DateTime? dt = (DateTime?)metadata.Model;
+                if (dt != null)
+                    value = dt.Value.ToString(GopherConfiguration.DateTimeFormat);
+            }
+            tb.Attributes["value"] = value;
+            return new MvcHtmlString(tb.ToString(TagRenderMode.SelfClosing));
         }
     }
 }

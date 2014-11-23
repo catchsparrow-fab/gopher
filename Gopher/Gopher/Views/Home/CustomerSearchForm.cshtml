@@ -1,4 +1,5 @@
 ﻿@using Gopher.ImportExport.Domain
+@using Gopher.Tools
 @model Gopher.Models.CustomerSearchViewModel
 <table>
     <tr>
@@ -112,6 +113,14 @@
     </tr>
     <tr>
         <td class="td-gray">
+            @Html.Translation("Generic_DateOfBirth")
+        </td>
+        <td colspan="3">
+            @Html.DatePicker(m => m.Filter.DateOfBirth.Min) ~ @Html.DatePicker(m => m.Filter.DateOfBirth.Max)
+        </td>
+    </tr>
+    <tr>
+        <td class="td-gray">
             @Html.Translation("Generic_Email")
         </td>
         <td colspan="3">@Html.TextBoxFor(m => m.Filter.Email)</td>
@@ -133,6 +142,38 @@
             @Html.Translation("Generic_TimesPurchased")
         </td>
         <td colspan="3">@Html.TextBoxFor(m => m.Filter.TimesPurchased.Min) ~ @Html.TextBoxFor(m => m.Filter.TimesPurchased.Max)</td>
+    </tr>
+    <tr>
+        <td class="td-gray">
+            @Html.Translation("Generic_DateRegistered")
+        </td>
+        <td colspan="3">
+            @Html.DatePicker(m => m.Filter.DateRegistered.Min) ~ @Html.DatePicker(m => m.Filter.DateRegistered.Max)
+        </td>
+    </tr>
+    <tr>
+        <td class="td-gray">
+            @Html.Translation("Generic_DateUpdated")
+        </td>
+        <td colspan="3">
+            @Html.DatePicker(m => m.Filter.DateUpdated.Min) ~ @Html.DatePicker(m => m.Filter.DateUpdated.Max)
+        </td>
+    </tr>
+    <tr>
+        <td class="td-gray">
+            @Html.Translation("Generic_DateFirstPurchased")
+        </td>
+        <td colspan="3">
+            @Html.DatePicker(m => m.Filter.DateFirstPurchased.Min) ~ @Html.DatePicker(m => m.Filter.DateFirstPurchased.Max)
+        </td>
+    </tr>
+    <tr>
+        <td class="td-gray">
+            @Html.Translation("Generic_DateLastPurchased")
+        </td>
+        <td colspan="3">
+            @Html.DatePicker(m => m.Filter.DateLastPurchased.Min) ~ @Html.DatePicker(m => m.Filter.DateLastPurchased.Max)
+        </td>
     </tr>
     <tr>
         <td class="td-gray">
@@ -203,3 +244,10 @@
 <div id="search-button-wrapper">
     <input type="submit" value="@Html.Translation("Generic_Search")" name="search" id="search" />
 </div>
+<script>
+    $(function () {
+        $(".date-picker").datepicker({
+            dateFormat: "yy-mm-dd"
+        });
+    });
+</script>
