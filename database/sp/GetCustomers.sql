@@ -41,7 +41,8 @@ CREATE PROCEDURE GetCustomers
 	@dateFirstPurchasedMin datetime = NULL,
 	@dateFirstPurchasedMax datetime = NULL,
 	@dateLastPurchasedMin datetime = NULL,
-	@dateLastPurchasedMax datetime = NULL
+	@dateLastPurchasedMax datetime = NULL,
+	@extractPattern int = NULL
 AS
 BEGIN
 	IF @count = -1 BEGIN
@@ -74,6 +75,7 @@ BEGIN
 			AND (@ecEmailTarget IS NULL OR @ecEmailTarget = c.EC_EmailTarget)
 			AND (@ecSubscriptionType IS NULL OR @ecSubscriptionType = c.EC_SubscriptionType)
 			AND (@tvEmailAccept IS NULL OR @tvEmailAccept = c.TV_EmailAccept)
+			AND (@extractPattern IS NULL OR @extractPattern = 1 AND c.Email IS NOT NULL OR @extractPattern = 2 AND c.EmailMobile IS NOT NULL OR @extractPattern = 3 AND c.Address IS NOT NULL)
 		ORDER BY CustomerId
 
 	END ELSE BEGIN
@@ -105,6 +107,7 @@ BEGIN
 			AND (@ecEmailTarget IS NULL OR @ecEmailTarget = c.EC_EmailTarget)
 			AND (@ecSubscriptionType IS NULL OR @ecSubscriptionType = c.EC_SubscriptionType)
 			AND (@tvEmailAccept IS NULL OR @tvEmailAccept = c.TV_EmailAccept)
+			AND (@extractPattern IS NULL OR @extractPattern = 1 AND c.Email IS NOT NULL OR @extractPattern = 2 AND c.EmailMobile IS NOT NULL OR @extractPattern = 3 AND c.Address IS NOT NULL)
 		ORDER BY CustomerId
 		OFFSET @start ROWS FETCH NEXT @count ROWS ONLY
 	END
@@ -136,6 +139,7 @@ BEGIN
 			AND (@ecEmailTarget IS NULL OR @ecEmailTarget = c.EC_EmailTarget)
 			AND (@ecSubscriptionType IS NULL OR @ecSubscriptionType = c.EC_SubscriptionType)
 			AND (@tvEmailAccept IS NULL OR @tvEmailAccept = c.TV_EmailAccept)
+			AND (@extractPattern IS NULL OR @extractPattern = 1 AND c.Email IS NOT NULL OR @extractPattern = 2 AND c.EmailMobile IS NOT NULL OR @extractPattern = 3 AND c.Address IS NOT NULL)
 END
 
 GO

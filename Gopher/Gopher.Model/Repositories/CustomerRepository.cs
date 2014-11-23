@@ -66,6 +66,7 @@ namespace Gopher.Model.Repositories
                 new DbParameter("ecSubscriptionType", filter.EC_SubscriptionType),
                 new DbParameter("ecEmailTarget", filter.EC_EmailTarget),
                 new DbParameter("tvEmailAccept", filter.TV_EmailAccept),
+                new DbParameter("extractPattern", filter.ExtractPattern),
             };
         }
 

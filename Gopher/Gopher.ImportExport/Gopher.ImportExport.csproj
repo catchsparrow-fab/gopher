@@ -48,6 +48,7 @@
     <Compile Include="Domain\EccubeData.cs" />
     <Compile Include="Domain\EccubeEmailTarget.cs" />
     <Compile Include="Domain\EccubeSubscriptionType.cs" />
+    <Compile Include="Domain\ExtractPattern.cs" />
     <Compile Include="Domain\Range.cs" />
     <Compile Include="Domain\Shop.cs" />
     <Compile Include="Domain\ShopRepository.cs" />

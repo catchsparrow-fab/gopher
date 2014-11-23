@@ -240,6 +240,21 @@
             <label for="rb-tv-email-target-5">@Html.Translation("Generic_SendBoth")</label>
         </td>
     </tr>
+    <tr>
+        <td class="td-gray">
+            @Html.Translation("Generic_ExtractPattern")
+        </td>
+        <td colspan="3" class="radio-button-group">
+            <input id="rb-extract-pattern-1" type="radio" name="Filter.ExtractPattern" value="" @(Model.Filter == null || Model.Filter.ExtractPattern == null ? "checked" : string.Empty) />
+            <label for="rb-extract-pattern-1">@Html.Translation("Generic_All")</label>
+            <input id="rb-extract-pattern-2" type="radio" name="Filter.ExtractPattern" value="1" @(Model.Filter != null && Model.Filter.ExtractPattern == ExtractPattern.WithEmail ? "checked" : string.Empty) />
+            <label for="rb-extract-pattern-2">@Html.Translation("Generic_PcEmail")</label>
+            <input id="rb-extract-pattern-3" type="radio" name="Filter.ExtractPattern" value="2" @(Model.Filter != null && Model.Filter.ExtractPattern == ExtractPattern.WithMobileEmail ? "checked" : string.Empty) />
+            <label for="rb-extract-pattern-3">@Html.Translation("Generic_MobileEmail")</label>
+            <input id="rb-extract-pattern-4" type="radio" name="Filter.ExtractPattern" value="3" @(Model.Filter != null && Model.Filter.ExtractPattern == ExtractPattern.WithAddress ? "checked" : string.Empty) />
+            <label for="rb-extract-pattern-4">@Html.Translation("Generic_Address")</label>
+        </td>
+    </tr>
 </table>
 <div id="search-button-wrapper">
     <input type="submit" value="@Html.Translation("Generic_Search")" name="search" id="search" />

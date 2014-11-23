@@ -30,6 +30,7 @@ namespace Gopher.ImportExport.Domain
         public int? ShopId { get; set; }
         public int Count { get; set; }
         public EccubeSubscriptionType? EC_SubscriptionType { get; set; }
+        public ExtractPattern? ExtractPattern { get; set; }
 
         public CustomerFilter()
         {
