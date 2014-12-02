@@ -1,263 +1,269 @@
 ﻿@using Gopher.ImportExport.Domain
 @using Gopher.Tools
 @model Gopher.Models.CustomerSearchViewModel
-<table>
-    <tr>
-        <td class="td-gray">
-            @Html.Translation("Generic_CustomerId")
-        </td>
-        <td colspan="3">
-            @Html.TextBoxFor(m => m.Filter.CustomerId)
-        </td>
-    </tr>
-    <tr>
-        <td class="td-gray">
-            @Html.Translation("Generic_Shop")
-        </td>
-        <td>
-            <select name="Filter.ShopId" id="shops">
-                <option value="">-</option>
-                @foreach (var shop in Model.Shops)
+<div id="customer-search-form-wrapper">
+    <table>
+        <tr>
+            <td class="td-gray">
+                @Html.Translation("Generic_CustomerId")
+            </td>
+            <td colspan="3">
+                @Html.TextBoxFor(m => m.Filter.CustomerId)
+            </td>
+        </tr>
+        <tr>
+            <td class="td-gray">
+                @Html.Translation("Generic_Shop")
+            </td>
+            <td>
+                <select name="Filter.ShopId" id="shops">
+                    <option value="">-</option>
+                    @foreach (var shop in Model.Shops)
+                    {
+                        <option value="@shop.Id">@shop.Name</option>
+                    }
+                </select>
+                @if (Model.Filter != null && Model.Filter.ShopId != null)
                 {
-                    <option value="@shop.Id">@shop.Name</option>
+                    <script>
+                        $(function () {
+                            $("#shops").val(@Model.Filter.ShopId);
+                        });
+                    </script>
                 }
-            </select>
-            @if (Model.Filter != null && Model.Filter.ShopId != null)
-            {
-                <script>
-                    $(function () {
-                        $("#shops").val(@Model.Filter.ShopId);
-                    });
-                </script>
-            }
-        </td>
-        <td class="td-gray">
-            @Html.Translation("Generic_Prefecture")
-        </td>
-        <td>
-            <select id="Filter_Prefecture" name="Filter.Prefecture">
-                <option value="">-</option>
-                @foreach (var pref in Model.Prefectures)
+            </td>
+            <td class="td-gray">
+                @Html.Translation("Generic_Prefecture")
+            </td>
+            <td>
+                <select id="Filter_Prefecture" name="Filter.Prefecture">
+                    <option value="">-</option>
+                    @foreach (var pref in Model.Prefectures)
+                    {
+                        <option value="@pref">@pref</option>
+                    }
+                </select>
+                @if (Model.Filter != null && !string.IsNullOrEmpty(Model.Filter.Prefecture))
                 {
-                    <option value="@pref">@pref</option>
+                    <script>
+                        $(function () {
+                            $("#Filter_Prefecture").val("@Model.Filter.Prefecture");
+                        });
+                    </script>
                 }
-            </select>
-            @if (Model.Filter != null && !string.IsNullOrEmpty(Model.Filter.Prefecture))
-            {
-                <script>
-                    $(function () {
-                        $("#Filter_Prefecture").val("@Model.Filter.Prefecture");
-                    });
-                </script>
-            }
-        </td>
-    </tr>
-    <tr>
-        <td class="td-gray">
-            @Html.Translation("Generic_Name")
-        </td>
-        <td>
-            @Html.TextBoxFor(m => m.Filter.NameKanji)
-        </td>
-        <td class="td-gray">
-            @Html.Translation("Generic_Name") (@Html.Translation("Generic_Kana"))
-        </td>
-        <td>
-            @Html.TextBoxFor(m => m.Filter.NameKana)
-        </td>
-    </tr>
-    <tr>
-        <td class="td-gray">
-            @Html.Translation("Generic_Sex")
-        </td>
-        <td>
-            @if (Model.Filter == null || Model.Filter.Sex.Contains(Sex.Male))
-            {
-                <input type="checkbox" id="sex-male" name="Filter.Sex" value="1" checked="checked" />
-            }
-            else
-            {
-                <input type="checkbox" id="sex-male" name="Filter.Sex" value="1" />
-            }
-            <label style="font-weight:normal;" for="sex-male">@Html.Translation("Generic_Male")</label>
-            @if (Model.Filter == null || Model.Filter.Sex.Contains(Sex.Female))
-            {
-                <input type="checkbox" id="sex-female" name="Filter.Sex" value="2" checked="checked" />
-            }
-            else
-            {
-                <input type="checkbox" id="sex-female" name="Filter.Sex" value="2" />
-            }
-            <label style="font-weight:normal;" for="sex-female">@Html.Translation("Generic_Female")</label>
-        </td>
-        <td class="td-gray">
-            @Html.Translation("Generic_MonthOfBirth")
-        </td>
-        <td>
-            <select id="mob" name="Filter.MonthOfBirth">
-                <option value="">-</option>
-                @for (int i = 1; i <= 12; i++)
+            </td>
+        </tr>
+        <tr>
+            <td class="td-gray">
+                @Html.Translation("Generic_Name")
+            </td>
+            <td>
+                @Html.TextBoxFor(m => m.Filter.NameKanji)
+            </td>
+            <td class="td-gray">
+                @Html.Translation("Generic_Name") (@Html.Translation("Generic_Kana"))
+            </td>
+            <td>
+                @Html.TextBoxFor(m => m.Filter.NameKana)
+            </td>
+        </tr>
+        <tr>
+            <td class="td-gray">
+                @Html.Translation("Generic_Sex")
+            </td>
+            <td>
+                @if (Model.Filter == null || Model.Filter.Sex.Contains(Sex.Male))
                 {
-                    <option value="@i">@i</option>
+                    <input type="checkbox" id="sex-male" name="Filter.Sex" value="1" checked="checked" />
                 }
-            </select>
-            @if (Model.Filter != null && Model.Filter.MonthOfBirth != null)
-            {
-                <script>
-                    $(function () {
-                        $("#mob").val(@Model.Filter.MonthOfBirth);
-                    });
-                </script>
-            }
-        </td>
-    </tr>
-    <tr>
-        <td class="td-gray">
-            @Html.Translation("Generic_DateOfBirth")
-        </td>
-        <td colspan="3">
-            @Html.DatePicker(m => m.Filter.DateOfBirth.Min) ~ @Html.DatePicker(m => m.Filter.DateOfBirth.Max)
-        </td>
-    </tr>
-    <tr>
-        <td class="td-gray">
-            @Html.Translation("Generic_Email")
-        </td>
-        <td colspan="3">@Html.TextBoxFor(m => m.Filter.Email)</td>
-    </tr>
-    <tr>
-        <td class="td-gray">
-            @Html.Translation("Generic_EmailMobile")
-        </td>
-        <td colspan="3">@Html.TextBoxFor(m => m.Filter.EmailMobile)</td>
-    </tr>
-    <tr>
-        <td class="td-gray">
-            @Html.Translation("Generic_Phone")
-        </td>
-        <td colspan="3">@Html.TextBoxFor(m => m.Filter.Phone)</td>
-    </tr>
-    <tr>
-        <td class="td-gray">
-            @Html.Translation("Generic_TimesPurchased")
-        </td>
-        <td colspan="3">@Html.TextBoxFor(m => m.Filter.TimesPurchased.Min) ~ @Html.TextBoxFor(m => m.Filter.TimesPurchased.Max)</td>
-    </tr>
-    <tr>
-        <td class="td-gray">
-            @Html.Translation("Generic_DateRegistered")
-        </td>
-        <td colspan="3">
-            @Html.DatePicker(m => m.Filter.DateRegistered.Min) ~ @Html.DatePicker(m => m.Filter.DateRegistered.Max)
-        </td>
-    </tr>
-    <tr>
-        <td class="td-gray">
-            @Html.Translation("Generic_DateUpdated")
-        </td>
-        <td colspan="3">
-            @Html.DatePicker(m => m.Filter.DateUpdated.Min) ~ @Html.DatePicker(m => m.Filter.DateUpdated.Max)
-        </td>
-    </tr>
-    <tr>
-        <td class="td-gray">
-            @Html.Translation("Generic_DateFirstPurchased")
-        </td>
-        <td colspan="3">
-            @Html.DatePicker(m => m.Filter.DateFirstPurchased.Min) ~ @Html.DatePicker(m => m.Filter.DateFirstPurchased.Max)
-        </td>
-    </tr>
-    <tr>
-        <td class="td-gray">
-            @Html.Translation("Generic_DateLastPurchased")
-        </td>
-        <td colspan="3">
-            @Html.DatePicker(m => m.Filter.DateLastPurchased.Min) ~ @Html.DatePicker(m => m.Filter.DateLastPurchased.Max)
-        </td>
-    </tr>
-    <tr>
-        <td class="td-gray">
-            @Html.Translation("Generic_ProductWarrantySerial")
-        </td>
-        <td colspan="3">@Html.TextBoxFor(m => m.Filter.ProductWarranty)</td>
-    </tr>
-    <tr>
-        <td class="td-gray">
-            @Html.Translation("Generic_SubscriptionType")
-        </td>
-        <td colspan="3" class="radio-button-group">
-            <input id="rb-ec-subscription-type-1" type="radio" name="Filter.EC_SubscriptionType" value="" @(Model.Filter == null || Model.Filter.EC_SubscriptionType == null ? "checked" : string.Empty) />
-            <label for="rb-ec-subscription-type-1">@Html.Translation("Generic_All")</label>
-            <input id="rb-ec-subscription-type-2" type="radio" name="Filter.EC_SubscriptionType" value="2" @(Model.Filter != null && Model.Filter.EC_SubscriptionType == EccubeSubscriptionType.Html ? "checked" : string.Empty)  />
-            <label for="rb-ec-subscription-type-2">@Html.Translation("Generic_Html")</label>
-            <input id="rb-ec-subscription-type-3" type="radio" name="Filter.EC_SubscriptionType" value="1" @(Model.Filter != null && Model.Filter.EC_SubscriptionType == EccubeSubscriptionType.PlainText ? "checked" : string.Empty)   />
-            <label for="rb-ec-subscription-type-3">@Html.Translation("Generic_PlainText")</label>
-            <input id="rb-ec-subscription-type-4" type="radio" name="Filter.EC_SubscriptionType" value="0" @(Model.Filter != null && Model.Filter.EC_SubscriptionType == EccubeSubscriptionType.None ? "checked" : string.Empty)   />
-            <label for="rb-ec-subscription-type-4">@Html.Translation("Generic_NotSubscribed")</label>
-        </td>
-    </tr>
-    <tr>
-        <td class="td-gray">
-            @Html.Translation("Generic_EmailTargetECCUBE")
-        </td>
-        <td colspan="3">
-            <div>
-                <input id="rb-ec-email-target-1" type="radio" name="Filter.EC_EmailTarget" value="" @(Model.Filter == null || Model.Filter.EC_EmailTarget == null ? "checked" : string.Empty) />
-                <label for="rb-ec-email-target-1">@Html.Translation("Generic_All")</label>
-            </div>
-            <div>
-                <input id="rb-ec-email-target-2" type="radio" name="Filter.EC_EmailTarget" value="1" @(Model.Filter != null && Model.Filter.EC_EmailTarget == EccubeEmailTarget.PcEmail ? "checked" : string.Empty) />
-                <label for="rb-ec-email-target-2">@Html.Translation("Generic_PcEmail")</label>
-            </div>
-            <div>
-                <input id="rb-ec-email-target-3" type="radio" name="Filter.EC_EmailTarget" value="2" @(Model.Filter != null && Model.Filter.EC_EmailTarget == EccubeEmailTarget.MobileEmail ? "checked" : string.Empty) />
-                <label for="rb-ec-email-target-3">@Html.Translation("Generic_MobileEmail")</label>
-            </div>
-            <div>
-                <input id="rb-ec-email-target-4" type="radio" name="Filter.EC_EmailTarget" value="3" @(Model.Filter != null && Model.Filter.EC_EmailTarget == EccubeEmailTarget.PcEmailOnly ? "checked" : string.Empty) />
-                <label for="rb-ec-email-target-4">@Html.Translation("Generic_PcEmailOnly")</label>
-            </div>
-            <div>
-                <input id="rb-ec-email-target-5" type="radio" name="Filter.EC_EmailTarget" value="4" @(Model.Filter != null && Model.Filter.EC_EmailTarget == EccubeEmailTarget.MobileEmailOnly ? "checked" : string.Empty) />
-                <label for="rb-ec-email-target-5">@Html.Translation("Generic_MobileEmailOnly")</label>
-            </div>
-        </td>
-    </tr>
-    <tr>
-        <td class="td-gray">
-            @Html.Translation("Generic_EmailTargetTempoVisor")
-        </td>
-        <td colspan="3" class="radio-button-group">
-            <input id="rb-tv-email-target-1" type="radio" name="Filter.TV_EmailAccept" value="" @(Model.Filter == null || Model.Filter.TV_EmailAccept == null ? "checked" : string.Empty) />
-            <label for="rb-tv-email-target-1">@Html.Translation("Generic_All")</label>
-            <input id="rb-tv-email-target-2" type="radio" name="Filter.TV_EmailAccept" value="0" @(Model.Filter != null && Model.Filter.TV_EmailAccept == TempoVisorEmailAccept.DoNotSend ? "checked" : string.Empty) />
-            <label for="rb-tv-email-target-2">@Html.Translation("Generic_DoNotSend")</label>
-            <input id="rb-tv-email-target-3" type="radio" name="Filter.TV_EmailAccept" value="1" @(Model.Filter != null && Model.Filter.TV_EmailAccept == TempoVisorEmailAccept.SendToEmail1 ? "checked" : string.Empty) />
-            <label for="rb-tv-email-target-3">@Html.Translation("Generic_SendToEmail1")</label>
-            <input id="rb-tv-email-target-4" type="radio" name="Filter.TV_EmailAccept" value="2" @(Model.Filter != null && Model.Filter.TV_EmailAccept == TempoVisorEmailAccept.SendToEmail2 ? "checked" : string.Empty) />
-            <label for="rb-tv-email-target-4">@Html.Translation("Generic_SendToEmail2")</label>
-            <input id="rb-tv-email-target-5" type="radio" name="Filter.TV_EmailAccept" value="3" @(Model.Filter != null && Model.Filter.TV_EmailAccept == TempoVisorEmailAccept.SendBoth ? "checked" : string.Empty) />
-            <label for="rb-tv-email-target-5">@Html.Translation("Generic_SendBoth")</label>
-        </td>
-    </tr>
-    <tr>
-        <td class="td-gray">
-            @Html.Translation("Generic_ExtractPattern")
-        </td>
-        <td colspan="3" class="radio-button-group">
-            <input id="rb-extract-pattern-1" type="radio" name="Filter.ExtractPattern" value="" @(Model.Filter == null || Model.Filter.ExtractPattern == null ? "checked" : string.Empty) />
-            <label for="rb-extract-pattern-1">@Html.Translation("Generic_All")</label>
-            <input id="rb-extract-pattern-2" type="radio" name="Filter.ExtractPattern" value="1" @(Model.Filter != null && Model.Filter.ExtractPattern == ExtractPattern.WithEmail ? "checked" : string.Empty) />
-            <label for="rb-extract-pattern-2">@Html.Translation("Generic_PcEmail")</label>
-            <input id="rb-extract-pattern-3" type="radio" name="Filter.ExtractPattern" value="2" @(Model.Filter != null && Model.Filter.ExtractPattern == ExtractPattern.WithMobileEmail ? "checked" : string.Empty) />
-            <label for="rb-extract-pattern-3">@Html.Translation("Generic_MobileEmail")</label>
-            <input id="rb-extract-pattern-4" type="radio" name="Filter.ExtractPattern" value="3" @(Model.Filter != null && Model.Filter.ExtractPattern == ExtractPattern.WithAddress ? "checked" : string.Empty) />
-            <label for="rb-extract-pattern-4">@Html.Translation("Generic_Address")</label>
-        </td>
-    </tr>
-</table>
-<div id="search-button-wrapper">
-    <input type="submit" value="@Html.Translation("Generic_Search")" name="search" id="search" />
+                else
+                {
+                    <input type="checkbox" id="sex-male" name="Filter.Sex" value="1" />
+                }
+                <label style="font-weight:normal;" for="sex-male">@Html.Translation("Generic_Male")</label>
+                @if (Model.Filter == null || Model.Filter.Sex.Contains(Sex.Female))
+                {
+                    <input type="checkbox" id="sex-female" name="Filter.Sex" value="2" checked="checked" />
+                }
+                else
+                {
+                    <input type="checkbox" id="sex-female" name="Filter.Sex" value="2" />
+                }
+                <label style="font-weight:normal;" for="sex-female">@Html.Translation("Generic_Female")</label>
+            </td>
+            <td class="td-gray">
+                @Html.Translation("Generic_MonthOfBirth")
+            </td>
+            <td>
+                <select id="mob" name="Filter.MonthOfBirth">
+                    <option value="">-</option>
+                    @for (int i = 1; i <= 12; i++)
+                    {
+                        <option value="@i">@i</option>
+                    }
+                </select>
+                @if (Model.Filter != null && Model.Filter.MonthOfBirth != null)
+                {
+                    <script>
+                        $(function () {
+                            $("#mob").val(@Model.Filter.MonthOfBirth);
+                        });
+                    </script>
+                }
+            </td>
+        </tr>
+        <tr>
+            <td class="td-gray">
+                @Html.Translation("Generic_DateOfBirth")
+            </td>
+            <td colspan="3">
+                @Html.DatePicker(m => m.Filter.DateOfBirth.Min) ~ @Html.DatePicker(m => m.Filter.DateOfBirth.Max)
+            </td>
+        </tr>
+        <tr>
+            <td class="td-gray">
+                @Html.Translation("Generic_Email")
+            </td>
+            <td colspan="3">@Html.TextBoxFor(m => m.Filter.Email)</td>
+        </tr>
+        <tr>
+            <td class="td-gray">
+                @Html.Translation("Generic_EmailMobile")
+            </td>
+            <td colspan="3">@Html.TextBoxFor(m => m.Filter.EmailMobile)</td>
+        </tr>
+        <tr>
+            <td class="td-gray">
+                @Html.Translation("Generic_Phone")
+            </td>
+            <td colspan="3">@Html.TextBoxFor(m => m.Filter.Phone)</td>
+        </tr>
+        <tr>
+            <td class="td-gray">
+                @Html.Translation("Generic_TimesPurchased")
+            </td>
+            <td colspan="3">@Html.TextBoxFor(m => m.Filter.TimesPurchased.Min) ~ @Html.TextBoxFor(m => m.Filter.TimesPurchased.Max)</td>
+        </tr>
+        <tr>
+            <td class="td-gray">
+                @Html.Translation("Generic_DateRegistered")
+            </td>
+            <td colspan="3">
+                @Html.DatePicker(m => m.Filter.DateRegistered.Min) ~ @Html.DatePicker(m => m.Filter.DateRegistered.Max)
+            </td>
+        </tr>
+        <tr>
+            <td class="td-gray">
+                @Html.Translation("Generic_DateUpdated")
+            </td>
+            <td colspan="3">
+                @Html.DatePicker(m => m.Filter.DateUpdated.Min) ~ @Html.DatePicker(m => m.Filter.DateUpdated.Max)
+            </td>
+        </tr>
+        <tr>
+            <td class="td-gray">
+                @Html.Translation("Generic_DateFirstPurchased")
+            </td>
+            <td colspan="3">
+                @Html.DatePicker(m => m.Filter.DateFirstPurchased.Min) ~ @Html.DatePicker(m => m.Filter.DateFirstPurchased.Max)
+            </td>
+        </tr>
+        <tr>
+            <td class="td-gray">
+                @Html.Translation("Generic_DateLastPurchased")
+            </td>
+            <td colspan="3">
+                @Html.DatePicker(m => m.Filter.DateLastPurchased.Min) ~ @Html.DatePicker(m => m.Filter.DateLastPurchased.Max)
+            </td>
+        </tr>
+        <tr>
+            <td class="td-gray">
+                @Html.Translation("Generic_ProductWarrantySerial")
+            </td>
+            <td colspan="3">@Html.TextBoxFor(m => m.Filter.ProductWarranty)</td>
+        </tr>
+        <tr>
+            <td class="td-gray">
+                @Html.Translation("Generic_SubscriptionType")
+            </td>
+            <td colspan="3" class="radio-button-group">
+                <input id="rb-ec-subscription-type-1" type="radio" name="Filter.EC_SubscriptionType" value="" @(Model.Filter == null || Model.Filter.EC_SubscriptionType == null ? "checked" : string.Empty) />
+                <label for="rb-ec-subscription-type-1">@Html.Translation("Generic_All")</label>
+                <input id="rb-ec-subscription-type-2" type="radio" name="Filter.EC_SubscriptionType" value="2" @(Model.Filter != null && Model.Filter.EC_SubscriptionType == EccubeSubscriptionType.Html ? "checked" : string.Empty)  />
+                <label for="rb-ec-subscription-type-2">@Html.Translation("Generic_Html")</label>
+                <input id="rb-ec-subscription-type-3" type="radio" name="Filter.EC_SubscriptionType" value="1" @(Model.Filter != null && Model.Filter.EC_SubscriptionType == EccubeSubscriptionType.PlainText ? "checked" : string.Empty)   />
+                <label for="rb-ec-subscription-type-3">@Html.Translation("Generic_PlainText")</label>
+                <input id="rb-ec-subscription-type-4" type="radio" name="Filter.EC_SubscriptionType" value="0" @(Model.Filter != null && Model.Filter.EC_SubscriptionType == EccubeSubscriptionType.None ? "checked" : string.Empty)   />
+                <label for="rb-ec-subscription-type-4">@Html.Translation("Generic_NotSubscribed")</label>
+            </td>
+        </tr>
+        <tr>
+            <td class="td-gray">
+                @Html.Translation("Generic_EmailTargetECCUBE")
+            </td>
+            <td colspan="3">
+                <div>
+                    <input id="rb-ec-email-target-1" type="radio" name="Filter.EC_EmailTarget" value="" @(Model.Filter == null || Model.Filter.EC_EmailTarget == null ? "checked" : string.Empty) />
+                    <label for="rb-ec-email-target-1">@Html.Translation("Generic_All")</label>
+                </div>
+                <div>
+                    <input id="rb-ec-email-target-2" type="radio" name="Filter.EC_EmailTarget" value="1" @(Model.Filter != null && Model.Filter.EC_EmailTarget == EccubeEmailTarget.PcEmail ? "checked" : string.Empty) />
+                    <label for="rb-ec-email-target-2">@Html.Translation("Generic_PcEmail")</label>
+                </div>
+                <div>
+                    <input id="rb-ec-email-target-3" type="radio" name="Filter.EC_EmailTarget" value="2" @(Model.Filter != null && Model.Filter.EC_EmailTarget == EccubeEmailTarget.MobileEmail ? "checked" : string.Empty) />
+                    <label for="rb-ec-email-target-3">@Html.Translation("Generic_MobileEmail")</label>
+                </div>
+                <div>
+                    <input id="rb-ec-email-target-4" type="radio" name="Filter.EC_EmailTarget" value="3" @(Model.Filter != null && Model.Filter.EC_EmailTarget == EccubeEmailTarget.PcEmailOnly ? "checked" : string.Empty) />
+                    <label for="rb-ec-email-target-4">@Html.Translation("Generic_PcEmailOnly")</label>
+                </div>
+                <div>
+                    <input id="rb-ec-email-target-5" type="radio" name="Filter.EC_EmailTarget" value="4" @(Model.Filter != null && Model.Filter.EC_EmailTarget == EccubeEmailTarget.MobileEmailOnly ? "checked" : string.Empty) />
+                    <label for="rb-ec-email-target-5">@Html.Translation("Generic_MobileEmailOnly")</label>
+                </div>
+            </td>
+        </tr>
+        <tr>
+            <td class="td-gray">
+                @Html.Translation("Generic_EmailTargetTempoVisor")
+            </td>
+            <td colspan="3" class="radio-button-group">
+                <input id="rb-tv-email-target-1" type="radio" name="Filter.TV_EmailAccept" value="" @(Model.Filter == null || Model.Filter.TV_EmailAccept == null ? "checked" : string.Empty) />
+                <label for="rb-tv-email-target-1">@Html.Translation("Generic_All")</label>
+                <input id="rb-tv-email-target-2" type="radio" name="Filter.TV_EmailAccept" value="0" @(Model.Filter != null && Model.Filter.TV_EmailAccept == TempoVisorEmailAccept.DoNotSend ? "checked" : string.Empty) />
+                <label for="rb-tv-email-target-2">@Html.Translation("Generic_DoNotSend")</label>
+                <input id="rb-tv-email-target-3" type="radio" name="Filter.TV_EmailAccept" value="1" @(Model.Filter != null && Model.Filter.TV_EmailAccept == TempoVisorEmailAccept.SendToEmail1 ? "checked" : string.Empty) />
+                <label for="rb-tv-email-target-3">@Html.Translation("Generic_SendToEmail1")</label>
+                <input id="rb-tv-email-target-4" type="radio" name="Filter.TV_EmailAccept" value="2" @(Model.Filter != null && Model.Filter.TV_EmailAccept == TempoVisorEmailAccept.SendToEmail2 ? "checked" : string.Empty) />
+                <label for="rb-tv-email-target-4">@Html.Translation("Generic_SendToEmail2")</label>
+                <input id="rb-tv-email-target-5" type="radio" name="Filter.TV_EmailAccept" value="3" @(Model.Filter != null && Model.Filter.TV_EmailAccept == TempoVisorEmailAccept.SendBoth ? "checked" : string.Empty) />
+                <label for="rb-tv-email-target-5">@Html.Translation("Generic_SendBoth")</label>
+            </td>
+        </tr>
+        <tr>
+            <td class="td-gray">
+                @Html.Translation("Generic_ExtractPattern")
+            </td>
+            <td colspan="3" class="radio-button-group">
+                <input id="rb-extract-pattern-1" type="radio" name="Filter.ExtractPattern" value="" @(Model.Filter == null || Model.Filter.ExtractPattern == null ? "checked" : string.Empty) />
+                <label for="rb-extract-pattern-1">@Html.Translation("Generic_All")</label>
+                <input id="rb-extract-pattern-2" type="radio" name="Filter.ExtractPattern" value="1" @(Model.Filter != null && Model.Filter.ExtractPattern == ExtractPattern.WithEmail ? "checked" : string.Empty) />
+                <label for="rb-extract-pattern-2">@Html.Translation("Generic_PcEmail")</label>
+                <input id="rb-extract-pattern-3" type="radio" name="Filter.ExtractPattern" value="2" @(Model.Filter != null && Model.Filter.ExtractPattern == ExtractPattern.WithMobileEmail ? "checked" : string.Empty) />
+                <label for="rb-extract-pattern-3">@Html.Translation("Generic_MobileEmail")</label>
+                <input id="rb-extract-pattern-4" type="radio" name="Filter.ExtractPattern" value="3" @(Model.Filter != null && Model.Filter.ExtractPattern == ExtractPattern.WithAddress ? "checked" : string.Empty) />
+                <label for="rb-extract-pattern-4">@Html.Translation("Generic_Address")</label>
+            </td>
+        </tr>
+        <tr>
+            <td colspan="4" class="search-button-td">
+                <input type="submit" value="@Html.Translation("Generic_Search")" name="search" id="search" />
+            </td>
+        </tr>
+    </table>
+    <div id="search-button-wrapper">
+    </div>
 </div>
 <script>
     $(function () {

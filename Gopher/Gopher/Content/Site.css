@@ -154,6 +154,16 @@ body {
     margin-top: 12px;
 }
 
+td.search-button-td {
+    padding-top: 20px;
+    border:0px;
+    text-align:center;
+}
+
+.gopher-footer {
+    margin-top:120px;
+}
+
 .search-result-header {
     margin-top: 12px;
     padding-top: 12px;

@@ -29,7 +29,7 @@ namespace Gopher.ImportExport.Parsers
                 NameKana = KanaHelper.ToFullKana(Format.MergeIntoString(array, 3, 2)),
                 Zip = Format.MergeIntoString(array, 6, 2),
                 Prefecture = array[8],
-                Address = Format.MergeIntoString(array, 8, 3),
+                Address = Format.MergeIntoString(array, 8, 3, string.Empty),
                 Email = array[11],
                 Phone = Format.MergeIntoString(array, 12, 3, string.Empty),
                 Sex = GetSex(array[18]),

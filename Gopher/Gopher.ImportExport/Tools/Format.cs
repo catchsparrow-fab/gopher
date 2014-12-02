@@ -12,8 +12,13 @@ namespace Gopher.ImportExport.Tools
     public class Format
     {
         private const string DELIMITER = "\t";
-        private const string EXPORT_DELIMITER = "\t";
+        private const string EXPORT_DELIMITER = ",";
         private static readonly CultureInfo japaneseCulture = new CultureInfo("ja-JP");
+
+        private static string StringInQuotes(string s)
+        {
+            return string.Format("\"{0}\"", s);
+        }
 
         /// <summary>
         /// To be used in export (generating csv file).
@@ -26,9 +31,9 @@ namespace Gopher.ImportExport.Tools
                 (int)customer.ImportedFrom,
                 customer.Id,
                 customer.ShopName,
-                customer.Prefecture,
-                customer.NameKanji,
-                customer.NameKana,
+                StringInQuotes(customer.Prefecture),
+                StringInQuotes(customer.NameKanji),
+                StringInQuotes(customer.NameKana),
                 (int?)customer.Sex,
                 DtToString(customer.DateOfBirth),
                 customer.Email,
@@ -39,7 +44,7 @@ namespace Gopher.ImportExport.Tools
                 customer.Zip,
                 customer.CellPhone,
                 customer.Note,
-                customer.Address,
+                StringInQuotes(customer.Address),
                 customer.PointBalance,
                 // TEMPO-VISOR DATA
                 customer.TempoVisorData.CompanyCode,
