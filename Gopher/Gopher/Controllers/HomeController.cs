@@ -98,7 +98,7 @@ namespace Gopher.Controllers
             string header = string.Join(",", Format.GetHeaders());
             var stream = new MemoryStream();
 
-            using (var writer = new StreamWriter(stream, Encoding.UTF8, 1024, true))
+            using (var writer = new StreamWriter(stream, ShiftJis.Encoding, 1024, true))
             {
                 writer.WriteLine(header);
                 foreach (var customer in data.Customers)

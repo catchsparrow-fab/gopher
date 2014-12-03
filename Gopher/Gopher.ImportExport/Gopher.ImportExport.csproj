@@ -66,6 +66,7 @@
     <Compile Include="Parsers\StandardParser.cs" />
     <Compile Include="Tools\ErrorMessage.cs" />
     <Compile Include="Tools\Format.cs" />
+    <Compile Include="Tools\ShiftJis.cs" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\Gopher.Tools\Gopher.Tools.csproj">

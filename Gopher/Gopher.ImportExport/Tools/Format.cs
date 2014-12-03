@@ -164,6 +164,7 @@ namespace Gopher.ImportExport.Tools
                 "tv_company_code",
                 "tv_area",
                 "tv_black",
+                "tv_member_rank",
                 "tv_status",
                 "tv_member_number",
                 "tv_direct_mail_flag",
