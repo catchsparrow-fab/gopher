@@ -232,8 +232,10 @@ namespace Gopher.ImportExport.Tools
         public static DateTime? GetDateTime(string s)
         {
             DateTime dt;
-            if (DateTime.TryParse(s, japaneseCulture, DateTimeStyles.None, out dt))
+            if (DateTime.TryParse(s, japaneseCulture, DateTimeStyles.None, out dt) && dt.Year > 1753)
+            {
                 return dt;
+            }
             return null;
         }
 
