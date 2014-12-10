@@ -27,7 +27,7 @@ namespace Gopher.ImportExport.Parsers
                 ShopId = EccubeShopId,
                 NameKanji = Format.MergeIntoString(array, 1, 2),
                 NameKana = KanaHelper.ToFullKana(Format.MergeIntoString(array, 3, 2)),
-                Zip = Format.MergeIntoString(array, 6, 2),
+                Zip = Format.MergeIntoString(array, 6, 2, string.Empty),
                 Prefecture = array[8],
                 Address = Format.MergeIntoString(array, 8, 3, string.Empty),
                 Email = array[11],
