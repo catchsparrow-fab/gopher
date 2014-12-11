@@ -107,3 +107,6 @@ exec AddTranslation 'Generic_SendBoth', 'Send both'
 exec AddTranslation 'Generic_DateOfBirth', 'Date of birth'
 exec AddTranslation 'Generic_ExtractPattern', 'Only customers with'
 exec AddTranslation 'Generic_Address', 'Address'
+
+-- both option in subscription type
+exec AddTranslation 'Generic_HtmlOrText', 'HTML or plain text'

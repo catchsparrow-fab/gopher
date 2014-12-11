@@ -73,7 +73,7 @@ BEGIN
 			AND (@dateLastPurchasedMin IS NULL OR @dateLastPurchasedMin < c.EC_DateLastPurchased)
 			AND (@dateLastPurchasedMax IS NULL OR @dateLastPurchasedMax > c.EC_DateLastPurchased)
 			AND (@ecEmailTarget IS NULL OR @ecEmailTarget = c.EC_EmailTarget)
-			AND (@ecSubscriptionType IS NULL OR @ecSubscriptionType = c.EC_SubscriptionType)
+			AND (@ecSubscriptionType IS NULL OR (@ecSubscriptionType = 3 AND (c.EC_SubscriptionType = 1 OR c.EC_SubscriptionType = 2)) OR @ecSubscriptionType = c.EC_SubscriptionType)
 			AND (@tvEmailAccept IS NULL OR @tvEmailAccept = c.TV_EmailAccept)
 			AND (@extractPattern IS NULL OR @extractPattern = 1 AND c.Email IS NOT NULL OR @extractPattern = 2 AND c.EmailMobile IS NOT NULL OR @extractPattern = 3 AND c.Address IS NOT NULL)
 		ORDER BY CustomerId
@@ -105,7 +105,7 @@ BEGIN
 			AND (@dateLastPurchasedMin IS NULL OR @dateLastPurchasedMin <= c.EC_DateLastPurchased)
 			AND (@dateLastPurchasedMax IS NULL OR @dateLastPurchasedMax >= c.EC_DateLastPurchased)
 			AND (@ecEmailTarget IS NULL OR @ecEmailTarget = c.EC_EmailTarget)
-			AND (@ecSubscriptionType IS NULL OR @ecSubscriptionType = c.EC_SubscriptionType)
+			AND (@ecSubscriptionType IS NULL OR (@ecSubscriptionType = 3 AND (c.EC_SubscriptionType = 1 OR c.EC_SubscriptionType = 2)) OR @ecSubscriptionType = c.EC_SubscriptionType)
 			AND (@tvEmailAccept IS NULL OR @tvEmailAccept = c.TV_EmailAccept)
 			AND (@extractPattern IS NULL OR @extractPattern = 1 AND c.Email IS NOT NULL OR @extractPattern = 2 AND c.EmailMobile IS NOT NULL OR @extractPattern = 3 AND c.Address IS NOT NULL)
 		ORDER BY CustomerId
@@ -137,7 +137,7 @@ BEGIN
 			AND (@dateLastPurchasedMin IS NULL OR @dateLastPurchasedMin < c.EC_DateLastPurchased)
 			AND (@dateLastPurchasedMax IS NULL OR @dateLastPurchasedMax > c.EC_DateLastPurchased)
 			AND (@ecEmailTarget IS NULL OR @ecEmailTarget = c.EC_EmailTarget)
-			AND (@ecSubscriptionType IS NULL OR @ecSubscriptionType = c.EC_SubscriptionType)
+			AND (@ecSubscriptionType IS NULL OR (@ecSubscriptionType = 3 AND (c.EC_SubscriptionType = 1 OR c.EC_SubscriptionType = 2)) OR @ecSubscriptionType = c.EC_SubscriptionType)
 			AND (@tvEmailAccept IS NULL OR @tvEmailAccept = c.TV_EmailAccept)
 			AND (@extractPattern IS NULL OR @extractPattern = 1 AND c.Email IS NOT NULL OR @extractPattern = 2 AND c.EmailMobile IS NOT NULL OR @extractPattern = 3 AND c.Address IS NOT NULL)
 END

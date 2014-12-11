@@ -10,7 +10,8 @@ namespace Gopher.ImportExport.Domain
     {
         None = 0,
         PlainText = 1,
-        Html = 2
+        Html = 2,
+        HtmlOrText = 3
     }
 
     public static class EccubeSubscriptionTypeHelper

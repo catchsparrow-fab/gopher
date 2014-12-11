@@ -189,6 +189,8 @@
             <td colspan="3" class="radio-button-group">
                 <input id="rb-ec-subscription-type-1" type="radio" name="Filter.EC_SubscriptionType" value="" @(Model.Filter == null || Model.Filter.EC_SubscriptionType == null ? "checked" : string.Empty) />
                 <label for="rb-ec-subscription-type-1">@Html.Translation("Generic_All")</label>
+                <input id="rb-ec-subscription-type-5" type="radio" name="Filter.EC_SubscriptionType" value="3" @(Model.Filter != null && Model.Filter.EC_SubscriptionType == EccubeSubscriptionType.HtmlOrText ? "checked" : string.Empty)  />
+                <label for="rb-ec-subscription-type-5">@Html.Translation("Generic_HtmlOrText")</label>
                 <input id="rb-ec-subscription-type-2" type="radio" name="Filter.EC_SubscriptionType" value="2" @(Model.Filter != null && Model.Filter.EC_SubscriptionType == EccubeSubscriptionType.Html ? "checked" : string.Empty)  />
                 <label for="rb-ec-subscription-type-2">@Html.Translation("Generic_Html")</label>
                 <input id="rb-ec-subscription-type-3" type="radio" name="Filter.EC_SubscriptionType" value="1" @(Model.Filter != null && Model.Filter.EC_SubscriptionType == EccubeSubscriptionType.PlainText ? "checked" : string.Empty)   />
