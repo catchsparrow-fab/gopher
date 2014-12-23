@@ -27,7 +27,7 @@ namespace Gopher.ImportExport.Domain
         public TempoVisorEmailAccept? TV_EmailAccept { get; set; }
         public EccubeEmailTarget? EC_EmailTarget { get; set; }
         public string Prefecture { get; set; }
-        public int? ShopId { get; set; }
+        public string Shops { get; set; }
         public int Count { get; set; }
         public EccubeSubscriptionType? EC_SubscriptionType { get; set; }
         public ExtractPattern? ExtractPattern { get; set; }

@@ -22,6 +22,23 @@ namespace Gopher.Models
         }
     }
 
+    public class ShopViewModel
+    {
+        public string Id { get; set; }
+        public string Name { get; set; }
+
+        public ShopViewModel()
+        {
+            
+        }
+
+        public ShopViewModel(string name, string id)
+        {
+            Name = name;
+            Id = id;
+        }
+    }
+
     public class CustomerSearchViewModel
     {
         public IEnumerable<CustomerViewModel> Customers { get; set; }
@@ -29,7 +46,7 @@ namespace Gopher.Models
         public PaginationViewModel PaginationViewModel { get; set; }
         public int TotalCount { get; set; }
         public IEnumerable<string> Prefectures { get; set; }
-        public IEnumerable<Shop> Shops { get; set; }
+        public IEnumerable<ShopViewModel> AllShops { get; set; }
 
         public CustomerSearchViewModel()
         {

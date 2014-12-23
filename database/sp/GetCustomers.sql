@@ -30,7 +30,7 @@ CREATE PROCEDURE GetCustomers
 	@phone nvarchar(250) = NULL,
 	@productWarranty nvarchar(250) = NULL,
 	@prefecture nvarchar(250) = NULL,
-	@shopId int = NULL,
+	@shops [dbo].[ShopsFilter] READONLY,
 	@ecSubscriptionType int = NULL,
 	@ecEmailTarget int = NULL,
 	@tvEmailAccept int = NULL,
@@ -45,6 +45,11 @@ CREATE PROCEDURE GetCustomers
 	@extractPattern int = NULL
 AS
 BEGIN
+	DECLARE @shopFilter bit
+	SET @shopFilter = 0
+	IF EXISTS(SELECT * FROM @shops) 
+		SET @shopFilter = 1
+
 	IF @count = -1 BEGIN
 
 		SELECT c.*, s.FullName as ShopName FROM Customers c
@@ -63,7 +68,7 @@ BEGIN
 			AND (@phone IS NULL OR c.Phone LIKE '%' + @phone + '%')
 			AND (@productWarranty IS NULL OR c.EC_ProductWarranty LIKE '%' + @productWarranty + '%')
 			AND (@prefecture IS NULL OR c.Prefecture = @prefecture)
-			AND (@shopId IS NULL OR c.ShopId = @shopId)
+			AND (@shopFilter = 0 OR c.ShopId IN (SELECT c FROM @shops))
 			AND (@dateRegisteredMin IS NULL OR @dateRegisteredMin < c.DateRegistered)
 			AND (@dateRegisteredMax IS NULL OR @dateRegisteredMax > c.DateRegistered)
 			AND (@dateUpdatedMin IS NULL OR @dateUpdatedMin < c.DateUpdated)
@@ -95,7 +100,7 @@ BEGIN
 			AND (@phone IS NULL OR c.Phone LIKE '%' + @phone + '%')
 			AND (@productWarranty IS NULL OR c.EC_ProductWarranty LIKE '%' + @productWarranty + '%')
 			AND (@prefecture IS NULL OR c.Prefecture = @prefecture)
-			AND (@shopId IS NULL OR c.ShopId = @shopId)
+			AND (@shopFilter = 0 OR c.ShopId IN (SELECT c FROM @shops))
 			AND (@dateRegisteredMin IS NULL OR @dateRegisteredMin <= c.DateRegistered)
 			AND (@dateRegisteredMax IS NULL OR @dateRegisteredMax >= c.DateRegistered)
 			AND (@dateUpdatedMin IS NULL OR @dateUpdatedMin <= c.DateUpdated)
@@ -127,7 +132,7 @@ BEGIN
 			AND (@phone IS NULL OR c.Phone LIKE '%' + @phone + '%')
 			AND (@productWarranty IS NULL OR c.EC_ProductWarranty LIKE '%' + @productWarranty + '%')
 			AND (@prefecture IS NULL OR c.Prefecture = @prefecture)
-			AND (@shopId IS NULL OR c.ShopId = @shopId)
+			AND (@shopFilter = 0 OR c.ShopId IN (SELECT c FROM @shops))
 			AND (@dateRegisteredMin IS NULL OR @dateRegisteredMin < c.DateRegistered)
 			AND (@dateRegisteredMax IS NULL OR @dateRegisteredMax > c.DateRegistered)
 			AND (@dateUpdatedMin IS NULL OR @dateUpdatedMin < c.DateUpdated)

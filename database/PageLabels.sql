@@ -110,3 +110,6 @@ exec AddTranslation 'Generic_Address', 'Address'
 
 -- both option in subscription type
 exec AddTranslation 'Generic_HtmlOrText', 'HTML or plain text'
+
+-- all tempo-visor shops 
+exec AddTranslation 'Generic_AllTempoVisorShops', 'All Tempo-Visor shops'

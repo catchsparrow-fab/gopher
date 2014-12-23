@@ -16,18 +16,18 @@
                 @Html.Translation("Generic_Shop")
             </td>
             <td>
-                <select name="Filter.ShopId" id="shops">
+                <select name="Filter.Shops" id="shops">
                     <option value="">-</option>
-                    @foreach (var shop in Model.Shops)
+                    @foreach (var shop in Model.AllShops)
                     {
                         <option value="@shop.Id">@shop.Name</option>
                     }
                 </select>
-                @if (Model.Filter != null && Model.Filter.ShopId != null)
+                @if (Model.Filter != null && Model.Filter.Shops != null)
                 {
                     <script>
                         $(function () {
-                            $("#shops").val(@Model.Filter.ShopId);
+                            $("#shops").val("@Model.Filter.Shops");
                         });
                     </script>
                 }
@@ -189,13 +189,13 @@
             <td colspan="3" class="radio-button-group">
                 <input id="rb-ec-subscription-type-1" type="radio" name="Filter.EC_SubscriptionType" value="" @(Model.Filter == null || Model.Filter.EC_SubscriptionType == null ? "checked" : string.Empty) />
                 <label for="rb-ec-subscription-type-1">@Html.Translation("Generic_All")</label>
-                <input id="rb-ec-subscription-type-5" type="radio" name="Filter.EC_SubscriptionType" value="3" @(Model.Filter != null && Model.Filter.EC_SubscriptionType == EccubeSubscriptionType.HtmlOrText ? "checked" : string.Empty)  />
+                <input id="rb-ec-subscription-type-5" type="radio" name="Filter.EC_SubscriptionType" value="3" @(Model.Filter != null && Model.Filter.EC_SubscriptionType == EccubeSubscriptionType.HtmlOrText ? "checked" : string.Empty) />
                 <label for="rb-ec-subscription-type-5">@Html.Translation("Generic_HtmlOrText")</label>
-                <input id="rb-ec-subscription-type-2" type="radio" name="Filter.EC_SubscriptionType" value="2" @(Model.Filter != null && Model.Filter.EC_SubscriptionType == EccubeSubscriptionType.Html ? "checked" : string.Empty)  />
+                <input id="rb-ec-subscription-type-2" type="radio" name="Filter.EC_SubscriptionType" value="2" @(Model.Filter != null && Model.Filter.EC_SubscriptionType == EccubeSubscriptionType.Html ? "checked" : string.Empty) />
                 <label for="rb-ec-subscription-type-2">@Html.Translation("Generic_Html")</label>
-                <input id="rb-ec-subscription-type-3" type="radio" name="Filter.EC_SubscriptionType" value="1" @(Model.Filter != null && Model.Filter.EC_SubscriptionType == EccubeSubscriptionType.PlainText ? "checked" : string.Empty)   />
+                <input id="rb-ec-subscription-type-3" type="radio" name="Filter.EC_SubscriptionType" value="1" @(Model.Filter != null && Model.Filter.EC_SubscriptionType == EccubeSubscriptionType.PlainText ? "checked" : string.Empty) />
                 <label for="rb-ec-subscription-type-3">@Html.Translation("Generic_PlainText")</label>
-                <input id="rb-ec-subscription-type-4" type="radio" name="Filter.EC_SubscriptionType" value="0" @(Model.Filter != null && Model.Filter.EC_SubscriptionType == EccubeSubscriptionType.None ? "checked" : string.Empty)   />
+                <input id="rb-ec-subscription-type-4" type="radio" name="Filter.EC_SubscriptionType" value="0" @(Model.Filter != null && Model.Filter.EC_SubscriptionType == EccubeSubscriptionType.None ? "checked" : string.Empty) />
                 <label for="rb-ec-subscription-type-4">@Html.Translation("Generic_NotSubscribed")</label>
             </td>
         </tr>

@@ -10,6 +10,7 @@ using Gopher.ImportExport.Tools;
 using Gopher.Model.Abstractions;
 using Gopher.Model.Domain;
 using Gopher.Model.Repositories;
+using Gopher.Model.Tools;
 using Gopher.Models;
 using Microsoft.AspNet.Identity;
 using Microsoft.AspNet.Identity.EntityFramework;
@@ -82,8 +83,28 @@ namespace Gopher.Controllers
             return new CustomerSearchViewModel
             {
                 Prefectures = prefectureRepository.GetAll(),
-                Shops = shopRepository.GetAll()
+                AllShops = GetShops()
             };
+        }
+
+        private IEnumerable<ShopViewModel> GetShops()
+        {
+            var shops = shopRepository.GetAll().ToList();
+ 
+            // first add EC, then ALL Tempo-Visor shops option, then all tempo-visor shops one by one
+
+            var ecShop = shops.Single(i => i.ImportedId == 0);
+            var tempoVisorShops = shops.Where(i => i.ImportedId != 0).ToList();
+
+            var allTempoVisorOptionValue = string.Join(",", from t in tempoVisorShops select t.Id);
+
+            var list = new List<ShopViewModel>();
+
+            list.Add(new ShopViewModel(ecShop.Name, ecShop.Id.ToString()));
+            list.Add(new ShopViewModel(TranslationHelper.Get("Generic_AllTempoVisorShops"), allTempoVisorOptionValue));
+            list.AddRange(from s in tempoVisorShops select new ShopViewModel(s.Name, s.Id.ToString()));
+
+            return list;
         }
 
         public ActionResult Index()
