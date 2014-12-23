@@ -74,7 +74,7 @@ namespace Gopher.ImportExport.Tools
                 DtToString(customer.EccubeData.DateLastPurchased),
                 customer.EccubeData.TimesPurchased,
                 customer.EccubeData.ProductWarranty,
-                customer.EccubeData.Deleted,
+                BoolToString(customer.EccubeData.Deleted),
                 (int?)customer.EccubeData.SubscriptionType,
                 (int?)customer.EccubeData.EmailTarget
             });
@@ -134,10 +134,16 @@ namespace Gopher.ImportExport.Tools
                 DtToString(customer.EccubeData.DateLastPurchased),
                 customer.EccubeData.TimesPurchased,
                 customer.EccubeData.ProductWarranty,
-                customer.EccubeData.Deleted,
+                BoolToString(customer.EccubeData.Deleted),
                 (int?)customer.EccubeData.SubscriptionType,
                 (int?)customer.EccubeData.EmailTarget
             });
+        }
+
+        private static string BoolToString(bool? b)
+        {
+            if (b == null) return string.Empty;
+            return Convert.ToInt32(b.Value).ToString();
         }
 
         public static string[] GetHeaders()
@@ -210,9 +216,8 @@ namespace Gopher.ImportExport.Tools
 
         public static bool? GetBoolean(string s)
         {
-            bool value;
-            if (bool.TryParse(s, out value))
-                return value;
+            if (s.Trim().Equals("1")) return true;
+            if (s.Trim().Equals("0")) return false;
             return null;
         }
 
